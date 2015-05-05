@@ -47,4 +47,21 @@ public class ArticleTest {
 
 		assertThat(art3.getCounter()).isEqualTo(3);
 	}
+	
+	@Test
+	public void testGettersAndSetters1() {
+		Article art = new Article(4, null, 9.0, "d");
+		
+		art.setName("test");
+		
+		assertThat(art.getName()).isEqualTo("test");
+	}
+	
+	@Test
+	public void testGettersAndSetters2() {
+		Article art = new Article(4, "test", 9.0, "d");
+		
+		assertThat(art.getPrice()).isEqualTo(9.0);
+	}
+
 }

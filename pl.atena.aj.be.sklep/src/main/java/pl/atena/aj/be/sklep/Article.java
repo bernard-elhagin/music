@@ -23,11 +23,17 @@ public class Article {
         Article.counter++;
     }
 	
+    private void printChange() {
+    	System.out.println("Zmieniono wartoœæ pola.");
+    }
+    
 	public int getID() {
         return id;
     }
     public void setID(int id) {
         this.id = id;
+        
+        printChange();
     }
 
     public String getName() {
@@ -36,6 +42,8 @@ public class Article {
 
     public void setName(String name) {
         this.name = name;
+        
+        printChange();
     }
 
     public double getPrice() {
@@ -44,6 +52,8 @@ public class Article {
 
     public void setPrice(double price) {
         this.price = price;
+        
+        printChange();
     }
 
     public String getDescription() {
@@ -52,6 +62,8 @@ public class Article {
     
     public void setDescription(String desc) {
     	this.description = desc;
+    	
+    	printChange();
     }
 
     public static void resetCounter() {
