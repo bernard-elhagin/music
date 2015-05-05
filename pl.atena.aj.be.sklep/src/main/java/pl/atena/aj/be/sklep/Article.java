@@ -23,7 +23,7 @@ public class Article {
         Article.counter++;
     }
 	
-    private void printChange() {
+    protected void printChange() {
     	System.out.println("Zmieniono wartoœæ pola.");
     }
     
