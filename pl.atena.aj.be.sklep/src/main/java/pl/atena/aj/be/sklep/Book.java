@@ -10,6 +10,13 @@ public class Book extends Article {
 		super();
 	}
 
+    public Book(int ID, String name, double price, String description, String author, int pubYear) {
+        super(ID, name, price, description);
+
+        this.author = author;
+        this.pubYear = pubYear;
+    }
+
 	public String getAuthor() {
 		return author;
 	}
