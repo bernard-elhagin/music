@@ -35,4 +35,16 @@ public class ArticleTest {
 		
 		assertThat(art.getPrice()).isEqualTo(0.0);
 	}
+	
+	@Test
+	public void testCounter1() {
+		Article.resetCounter(); // Konieczne by siê uniezale¿niæ od poprzednich testów,
+								// po których Article.counter == 3.
+		
+		Article art1 = new Article();
+		Article art2 = new Article();
+		Article art3 = new Article(4, "d", 9.0, "d");
+
+		assertThat(art3.getCounter()).isEqualTo(3);
+	}
 }
