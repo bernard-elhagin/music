@@ -3,20 +3,13 @@ package pl.atena.aj.be.sklep;
 public class Main {
 
 	public static void main(String[] args) {
-
-//		Article art = new Book();
-//		
-//		System.out.println(art.toString()); //toString() z Book
+		Shop shop = new Shop();
 		
-//		Book book = new Article(); // B³ad
+		Article rower = new Article(3, "Rower", 799.00, "Fajny rower");
 		
-//		Article art = new Article();
-//		Book book = (Book) art; // ClassCastException
+		Shop.Order order = shop.new Order(5, rower);
+		order.accept();
 		
-		Book book = new Book();
-		Article art = new Article();
-		
-		art = (Article) book; // Poprawnie.
-		System.out.println(book.toString());
+		System.out.println(shop.toString());
 	}
 }

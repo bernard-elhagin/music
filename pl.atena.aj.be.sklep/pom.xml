@@ -17,10 +17,6 @@
 			<version>1.7.0</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>pl.atena.aj.be</groupId>
-			<artifactId>utils</artifactId>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
