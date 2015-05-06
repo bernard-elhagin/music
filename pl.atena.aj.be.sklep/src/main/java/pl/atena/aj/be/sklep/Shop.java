@@ -4,8 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import pl.atena.aj.be.utils.Downloadable;
+import pl.atena.aj.be.utils.FileType;
+
 public class Shop {
     private List<Article> inventory = new ArrayList<Article>();
+
+    private DownloadableObject downObject;
     
     public class Order {
 
@@ -48,6 +53,24 @@ public class Shop {
 		}
     }
 
+    public DownloadableObject getDownObject() {
+    	return downObject;
+    }
+
+    Downloadable r = new Downloadable() {
+		public double getFileSize() {
+			return 0;
+		}
+
+		public FileType getFileType() {
+			return null;
+		}
+    };    
+    
+    public void setDownObject(DownloadableObject dob) {
+    	this.downObject = dob;
+    }
+    
     public List<Article> getInventory() {
         return inventory;
     }
