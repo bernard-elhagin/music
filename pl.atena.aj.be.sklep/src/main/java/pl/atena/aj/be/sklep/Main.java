@@ -1,38 +1,31 @@
 package pl.atena.aj.be.sklep;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class Main {
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
+		String input = "";
+		try {
+			input = readConsoleLine();
+		} catch (IOException e) {
+			System.out.println("Ups.");
+		}
+		
+		System.out.println(input);
+	}
+//	public static void main(String[] args) throws IOException {
+//		String input = readConsoleLine();
+//		
+//		System.out.println("Wpisales: " + input);
+//	}
 
-    	
-    	/* 
-    	 * Bez obslugi wyjatkow.
-    	 */
-    	
-//    	System.out.println("Dzielenie przez zero: " + 1 / 0);
-//    	
-//    	int[] tab = {9, 298};
-//    	
-//    	System.out.println("Pierwszy element: " + tab[0]);
-//    	System.out.println("Drugi element: " + tab[1]);
-//    	System.out.println("Trzeci element: " + tab[2]);
-    	
-    	/*
-    	 * Z obsluga wyjatklw.
-    	 */
-    	
-    	try {
-    		int x = 1 / 0;
-    	} catch (ArithmeticException e) {
-    		System.out.println(e.getMessage());
-    	}
-    	
-    	int[] tab = {8, 36};
-    	
-    	try {
-    		int x = tab[2];
-    	} catch (IndexOutOfBoundsException e) {
-    		System.out.println(e.getMessage());
-    	}
-    }
+	public static String readConsoleLine() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		System.out.print("Enter String");
+		
+		return br.readLine();
+	}
 }
