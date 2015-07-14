@@ -13,4 +13,11 @@ public class Album {
 	public void removeItem(Auction auction) {
 		this.album.remove(auction);
 	}
+	
+	public void displayContents() {
+		for (Auction auction : this.album) {
+			System.out.println(auction.toString());
+			System.out.println("-------------------");
+		}
+	}
 }

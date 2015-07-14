@@ -11,6 +11,14 @@ public class Auction {
 	
 	private double endPrice;
 
+	public Auction(int number, String description, Date endDate, double endPrice) {
+		super();
+		this.number = number;
+		this.description = description;
+		this.endDate = endDate;
+		this.endPrice = endPrice;
+	}
+
 	public int getNumber() {
 		return number;
 	}
@@ -41,6 +49,12 @@ public class Auction {
 
 	public void setEndPrice(double endPrice) {
 		this.endPrice = endPrice;
+	}
+
+	@Override
+	public String toString() {
+		return "Auction [number=" + number + ", description=" + description
+				+ ", endDate=" + endDate + ", endPrice=" + endPrice + "]";
 	}
 
 	@Override
