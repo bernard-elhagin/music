@@ -12,14 +12,7 @@ public class MainEbay {
 		
 		album.addItem(a1);
 		album.addItem(a2);
-		
-		System.out.println("Po wstawieniu:");
-		album.displayContents();
-		
-		album.removeItem(a1);
-		
-		System.out.println("Po usuniêciu:");
-		album.displayContents();
+
 	}
 
 }

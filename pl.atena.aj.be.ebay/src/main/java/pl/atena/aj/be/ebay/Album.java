@@ -3,6 +3,8 @@ package pl.atena.aj.be.ebay;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.atena.aj.be.ebay.dao.AuctionSearchCriteria;
+
 public class Album {
 	private List<Auction> album = new ArrayList<Auction>();
 	
@@ -12,6 +14,11 @@ public class Album {
 	
 	public void removeItem(Auction auction) {
 		this.album.remove(auction);
+	}
+	
+	public List<Album> searchAlbum(AuctionSearchCriteria crit) {
+		return null;
+		
 	}
 	
 	public void displayContents() {
