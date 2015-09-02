@@ -1,0 +1,98 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>pl.atena.aj</groupId>
+        <artifactId>mvn-common</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <!-- ponieważ daje tu inne groupId dziedziczenie niektórych elementów prestaje działać -->
+    <groupId>pl.atena.aj.be</groupId>
+    <artifactId>mvn-common-be</artifactId>
+    <version>0.0.3-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <!-- to się dziedziczy, ale raczej wypada nadpisać -->
+    <name>Akademia javy maven default dla projektów Bernarda</name>
+    <!-- to się dziedziczy, ale raczej wypada nadpisać -->
+    <description>Wspólne ustawienia mavenowe projektów Bernarda</description>
+    <!-- to się dziedziczy, ale raczej wypada nadpisać -->
+    <!-- Początek projektu -->
+    <inceptionYear>2015</inceptionYear>
+
+    <!-- to się dziedziczy, ale raczej wypada nadpisać linkiem do waszego dedykowanego repozytorium -->
+    <!-- gdzie są kody źródłowe tego projektu -->
+    <scm>
+        <connection>scm:git:http://atenadevresg4bum.cloudapp.net/stash/scm/aj/akademia-java.git</connection>
+        <developerConnection>scm:git:http://atenadevresg4bum.cloudapp.net/stash/scm/aj/akademia-java.git</developerConnection>
+        <url>http://atenadevresg4bum.cloudapp.net/stash/projects/AJ/repos/akademia-java/browse/${project.groupId}.${project.artifactId}</url>        
+    </scm>
+    <!-- to się dziedziczy, ale raczej wypada nadpisać linkiem do waszego projektu czyli zmienić dwie ostatnie literki -->
+    <!-- link do bug-trackera -->
+    <issueManagement>
+        <system>Jira</system>
+        <url>http://atenadevresg4bum.cloudapp.net/jira/projects/BE</url>
+    </issueManagement>
+
+
+    <!-- jak bedzie bambo to jakies buildy 1 na cale defaults -->
+    <!-- tego narazie nie mamy -->
+    <!-- <ciManagement> </ciManagement> -->
+
+    <!-- to się dziedziczy, ale raczej wypada nadpisać -->
+    <!-- gdzie dostarczyc nasze dzieła -->
+    <distributionManagement>
+        <site>
+            <id>sites-srv</id>
+            <url>dav:http://atenadevresg4bum.cloudapp.net/sites/aj/${project.groupId}.${project.artifactId}</url>
+        </site>        
+    </distributionManagement>
+
+    <!-- to się dziedziczy, ale raczej wypada nadpisać wpiszcie tu siebie -->
+    <!-- kto pracuje/pracował nad tym projektem -->
+    <developers>
+        <developer>
+            <id>belhagin</id>
+            <name>Bernard</name>
+            <email>bernard.elhagin@gmail.com</email>
+            <organization>Atena</organization>
+            <organizationUrl>http://atena.pl</organizationUrl>
+            <timezone>+1</timezone>
+            <roles>
+                <!-- tu możemy wpisać co nam się podoba ;) -->
+                <role>mavenizator, coding-ninja</role>
+            </roles>
+            <properties>
+                <picUrl></picUrl>
+                <twitter></twitter>
+            </properties>
+        </developer>
+    </developers>
+    <!-- to się NIE dziedziczy, ale raczej wypada wpisac tu mnie ;) -->
+    <contributors>
+        <contributor>
+            <name>Krzysztof Kozioł</name>
+            <email>k.koziol@sages.com.pl</email>
+            <organization>Sages</organization>
+            <organizationUrl>http://www.sages.com.pl</organizationUrl>
+            <timezone>+1</timezone>
+            <roles>
+                <role>tester</role>
+                <role>quality control</role>
+            </roles>
+            <properties>
+                <picUrl>http://0.gravatar.com/avatar/c0eef6a3371b35bd35f36aa99bbb7d57</picUrl>
+                <twitter>@hippvs</twitter>
+            </properties>
+        </contributor>
+    </contributors>
+
+    <!-- to się NIE dziedziczy, ale wpiszmy tu naszą grupę dyskusyjną-->
+    <mailingLists>
+        <mailingList>
+            <name>AkademiaAtena</name>
+            <post>akademia-javy@googlegroups.com</post>
+            <archive>https://groups.google.com/forum/#!forum/akademia-javy</archive>
+        </mailingList>
+    </mailingLists>
+</project>
