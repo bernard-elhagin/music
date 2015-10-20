@@ -45,5 +45,4 @@ public class Camera {
 	public double getFinalPrice() {    
 		return finalPrice;
 	}
-
 }
