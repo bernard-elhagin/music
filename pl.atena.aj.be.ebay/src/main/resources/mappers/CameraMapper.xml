@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="mappers">
+ 
+ 	<resultMap type="Camera" id="CameraResult">
+		<id property="cameraId" column="camera_id" />
+		<result property="cameraMake" column="camera_make" />
+		<result property="cameraModel" column="camera_model" />
+		<result property="finalPrice" column="final_price" />
+	</resultMap>
+
+	<sql id="cameraColumns">
+		c.camera_id    as camera_id,
+		c.camera_make  as camera_make,
+		c.camera_model as camera_model,
+		c.final_price  as final_price
+	</sql>
+
+	<select id="getCamera" parameterType="int" resultType="Camera">
+		SELECT
+			<include refid="cameraColumns" />
+		FROM camera c
+		WHERE c.camera_id = #{id}
+	</select>
+
+	<select id="getAllCamera" resultMap="CameraResult">
+		SELECT 
+			<include refid="cameraColumns" />
+		FROM camera c
+	</select>
+
+	<insert id="createCamera" parameterType="Camera" useGeneratedKeys="true" keyColumn="cameraId">
+		INSERT INTO
+			camera(camera_make,
+			       camera_model,
+			       final_price)
+		VALUES(
+				#{cameraMake},
+				#{cameraModel},
+				#{finalPrice})
+	</insert>
+
+	<update id="updateCamera" parameterType="Camera">
+		UPDATE camera
+		SET	camera_make  = #{cameraMake},
+		    camera_model = #{cameraModel},
+			final_price  = #{finalPrice}
+		WHERE camera_id  = #{id}
+	</update>
+
+	<delete id="deleteCamera" parameterType="int">
+		DELETE
+		FROM camera
+		WHERE camera_id = #{id}
+	</delete>
+ 
+</mapper>

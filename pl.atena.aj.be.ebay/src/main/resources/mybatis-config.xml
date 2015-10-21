@@ -7,7 +7,7 @@
 	<properties resource='jdbc.properties' />
 	
 	<typeAliases>
-		<typeAlias type='pl.atena.aj.be.ebay.Camera' alias='Camera' />
+		<typeAlias type='pl.atena.aj.be.ebay.domain.Camera' alias='Camera' />
 	</typeAliases>
 	
 	<environments default='development'>
@@ -23,7 +23,7 @@
 	</environments>
 	
 	<mappers>
-		<mapper resource='com/sivalabs/mybatisdemo/mappers/CameraMapper.xml' />
+		<mapper resource='mappers/CameraMapper.xml' />
 	</mappers>
 	
 </configuration>

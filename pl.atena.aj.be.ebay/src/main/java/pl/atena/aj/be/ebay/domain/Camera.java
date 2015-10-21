@@ -7,12 +7,14 @@ public class Camera {
 	private String cameraModel;
 	private double finalPrice;
 
-    public Camera(int cameraId, String cameraMake, String cameraModel, double finalPrice) { 
-		this.cameraId = cameraId;
+    public Camera(String cameraMake, String cameraModel, double finalPrice) { 
 		this.cameraMake = cameraMake;
 		this.cameraModel = cameraModel;
 		this.finalPrice = finalPrice;
     }
+
+	public Camera() {
+	}
 
 	public void setCameraId(int cameraId) {
     	this.cameraId = cameraId;
@@ -44,5 +46,11 @@ public class Camera {
 
 	public double getFinalPrice() {    
 		return finalPrice;
+	}
+
+	@Override
+	public String toString() {
+		return "Camera [cameraId=" + cameraId + ", cameraMake=" + cameraMake + ", cameraModel=" + cameraModel
+				+ ", finalPrice=" + finalPrice + "]";
 	}
 }
