@@ -18,7 +18,7 @@
 		c.final_price  as final_price
 	</sql>
 
-	<select id="getCamera" parameterType="int" resultType="Camera">
+	<select id="getCamera" parameterType="int" resultType="Camera" resultMap="CameraResult">
 		SELECT
 			<include refid="cameraColumns" />
 		FROM camera c

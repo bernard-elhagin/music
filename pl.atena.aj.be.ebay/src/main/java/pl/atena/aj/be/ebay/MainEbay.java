@@ -34,6 +34,10 @@ public class MainEbay {
 		cams = cameraDao.getAll();
 		
 		System.out.println(cams.toString());
+		
+		cam = cameraDao.get(1);
+		
+		System.out.println(cam.toString());
 
 	}
 	
