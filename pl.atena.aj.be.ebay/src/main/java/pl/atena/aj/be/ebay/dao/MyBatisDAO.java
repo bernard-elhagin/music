@@ -30,8 +30,10 @@ public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
     public MyBatisDAO(Class<T> type,SqlSessionFactory sqlFactory) {
         this.type = type;
         this.sqlFactory = sqlFactory;
-        if(sqlFactory==null)
-			log.error("Error: Could not instantiate MyBatisDAO. Loading myBatis sessionFactory failed.");		
+        
+        if(sqlFactory == null) {
+			log.error("Error: Could not instantiate MyBatisDAO. Loading myBatis sessionFactory failed.");
+        }
     }
     
     /* Fabryka sesji SQL dla dziedzicz¹cych DAO */
@@ -54,12 +56,12 @@ public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
     	T obj = null;
 		
     	try
-		{
+    	{
 			String query = NAMESPACE + "." + PREFIX_SELECT_QUERY + this.type.getSimpleName();
 			obj = (T)session.selectOne(query,id);
 		}
-		finally
-		{
+    	finally
+    	{
 			session.close();
 		}
 		return obj;

@@ -8,6 +8,7 @@
 	
 	<typeAliases>
 		<typeAlias type='pl.atena.aj.be.ebay.domain.Camera' alias='Camera' />
+		<typeAlias type='pl.atena.aj.be.ebay.domain.Auction' alias='Auction' />
 	</typeAliases>
 	
 	<environments default='development'>
@@ -24,6 +25,7 @@
 	
 	<mappers>
 		<mapper resource='mappers/CameraMapper.xml' />
+		<mapper resource='mappers/AuctionMapper.xml' />
 	</mappers>
 	
 </configuration>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="mappers">
+ 
+ 	<resultMap type="Auction" id="AuctionResult">
+		<id property="auctionId" column="auc_auction_id" />
+		<result property="name" column="auc_name" />
+		<result property="description" column="auc_description" />
+		<result property="endDate" column="auc_end_date" />
+		<result property="finalPrice" column="auc_final_price" />
+	</resultMap>
+
+	<sql id="auctionColumns">
+		auc.auctionId   as auc_auction_id,
+		auc.name        as auc_name,
+		auc.description as auc_description,
+		auc.endDate     as auc_end_date,
+		auc.finalPrice  as auc_final_price
+	</sql>
+
+	<sql id="auctionFrom">
+		FROM auction auc
+	</sql>
+
+	<select id="getAuction" parameterType="int" resultType="Auction" resultMap="AuctionResult">
+		SELECT
+			<include refid="auctionColumns" />
+			<include refid="auctionFrom" />
+		WHERE auc.auction_id = #{id}
+	</select>
+
+	<select id="getAllAuction" resultMap="AuctionResult">
+		SELECT 
+			<include refid="auctionColumns" />
+			<include refid="auctionFrom" />
+	</select>
+
+	<insert id="createAuction" parameterType="Auction" useGeneratedKeys="true" keyColumn="auctionId">
+		INSERT INTO
+			auction(name,
+			        description,
+			        end_date,
+			        final_price)
+		VALUES(
+				#{name},
+				#{description},
+				#{endDate},
+				#{finalPrice})
+	</insert>
+
+	<update id="updateAuction" parameterType="Auction">
+		UPDATE auction
+		SET	name        = #{name},
+		    description = #{description},
+			end_date    = #{endDate},
+			final_price = #{finalPrice}
+		WHERE auction_id = #{auctionId}
+	</update>
+
+	<delete id="deleteAuction" parameterType="int">
+		DELETE
+			<include refid="auctionFrom" />
+		WHERE auction_id = #{id}
+	</delete>
+ 
+</mapper>

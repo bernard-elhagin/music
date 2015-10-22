@@ -5,30 +5,34 @@
 <mapper namespace="mappers">
  
  	<resultMap type="Camera" id="CameraResult">
-		<id property="cameraId" column="camera_id" />
-		<result property="cameraMake" column="camera_make" />
-		<result property="cameraModel" column="camera_model" />
-		<result property="finalPrice" column="final_price" />
+		<id property="cameraId" column="cam_camera_id" />
+		<result property="cameraMake" column="cam_camera_make" />
+		<result property="cameraModel" column="cam_camera_model" />
+		<result property="finalPrice" column="cam_final_price" />
 	</resultMap>
 
 	<sql id="cameraColumns">
-		c.camera_id    as camera_id,
-		c.camera_make  as camera_make,
-		c.camera_model as camera_model,
-		c.final_price  as final_price
+		cam.camera_id    as cam_camera_id,
+		cam.camera_make  as cam_camera_make,
+		cam.camera_model as cam_camera_model,
+		cam.final_price  as cam_final_price
+	</sql>
+
+	<sql id="cameraFrom">
+		FROM camera cam
 	</sql>
 
 	<select id="getCamera" parameterType="int" resultType="Camera" resultMap="CameraResult">
 		SELECT
 			<include refid="cameraColumns" />
-		FROM camera c
-		WHERE c.camera_id = #{id}
+			<include refid="cameraFrom" />
+		WHERE cam.camera_id = #{id}
 	</select>
 
 	<select id="getAllCamera" resultMap="CameraResult">
 		SELECT 
 			<include refid="cameraColumns" />
-		FROM camera c
+			<include refid="cameraFrom" />
 	</select>
 
 	<insert id="createCamera" parameterType="Camera" useGeneratedKeys="true" keyColumn="cameraId">
@@ -47,13 +51,13 @@
 		SET	camera_make  = #{cameraMake},
 		    camera_model = #{cameraModel},
 			final_price  = #{finalPrice}
-		WHERE camera_id  = #{id}
+		WHERE camera_id  = #{cameraId}
 	</update>
 
 	<delete id="deleteCamera" parameterType="int">
 		DELETE
-		FROM camera
-		WHERE camera_id = #{id}
+			<include refid="cameraFrom" />
+		WHERE cam.camera_id = #{id}
 	</delete>
  
 </mapper>
