@@ -29,13 +29,13 @@ public class MainEbay {
 		
 		Camera cam = new Camera("Nikon", "D3x", 12555.0);
 		
-		cameraDao.create(cam);
+//		cameraDao.create(cam);
 		
 		cams = cameraDao.getAll();
 		
 		System.out.println(cams.toString());
 		
-		cam = cameraDao.get(1);
+		cam = cameraDao.get(2);
 		
 		System.out.println(cam.toString());
 

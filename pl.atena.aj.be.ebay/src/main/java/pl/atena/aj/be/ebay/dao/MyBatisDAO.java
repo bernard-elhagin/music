@@ -11,9 +11,9 @@ import org.slf4j.LoggerFactory;
 public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
 	
 	private static Logger log = LoggerFactory.getLogger(MyBatisDAO.class);
-	
-	private static final String NAMESPACE = "mappers"; 
 
+	private String NAMESPACE;
+	
 	private SqlSessionFactory sqlFactory;
 	private Class<T> type;
 	
@@ -30,6 +30,9 @@ public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
     public MyBatisDAO(Class<T> type,SqlSessionFactory sqlFactory) {
         this.type = type;
         this.sqlFactory = sqlFactory;
+
+    	String simpleName = this.type.getSimpleName();
+    	NAMESPACE = "pl.atena.aj.be.ebay.mappers." + simpleName;
         
         if(sqlFactory == null) {
 			log.error("Error: Could not instantiate MyBatisDAO. Loading myBatis sessionFactory failed.");
@@ -94,7 +97,7 @@ public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
     }
 	
     /** 
-     *  Metoda zwraca pierwszy obiekt, którego pole XXX, np. "name"
+     *  Metoda zwraca pierwszy obiekt, którego pole xxxx, np. "name"
      *  pasuje do podanego na wejœciu. To, czym jest "name" zale¿y
      *  od obiektu i sytuacji.
      *  
