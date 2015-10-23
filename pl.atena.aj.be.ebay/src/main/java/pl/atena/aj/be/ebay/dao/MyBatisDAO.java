@@ -27,7 +27,7 @@ public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
 	public static final String PREFIX_DELETE_QUERY = "delete";
 	
 	/** Domyœlny konstruktor */
-    public MyBatisDAO(Class<T> type,SqlSessionFactory sqlFactory) {
+    public MyBatisDAO(Class<T> type, SqlSessionFactory sqlFactory) {
         this.type = type;
         this.sqlFactory = sqlFactory;
 
@@ -61,7 +61,8 @@ public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
     	try
     	{
 			String query = NAMESPACE + "." + PREFIX_SELECT_QUERY + this.type.getSimpleName();
-			obj = (T)session.selectOne(query,id);
+			
+			obj = (T) session.selectOne(query, id);
 		}
     	finally
     	{
@@ -87,6 +88,7 @@ public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
 		try
 		{
 			String query = NAMESPACE + "." + PREFIX_SELECT_QUERY + "All" + this.type.getSimpleName();
+			
 			list = (ArrayList<T>) session.selectList(query);
 		}
 		finally
@@ -121,7 +123,8 @@ public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
     	try
 		{	
 			String query = NAMESPACE + "." + PREFIX_SELECT_QUERY + this.type.getSimpleName() + "ByName";
-			obj = (T)session.selectOne(query,name);
+			
+			obj = (T) session.selectOne(query, name);
 		}
 		finally
 		{
@@ -146,7 +149,8 @@ public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
     	try
 		{			
     		String query = NAMESPACE + "." + PREFIX_INSERT_QUERY + o.getClass().getSimpleName();
-			status = (Integer) session.insert(query,o);
+			
+    		status = (Integer) session.insert(query, o);
 			session.commit();			
 		}
 		finally
@@ -172,7 +176,8 @@ public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
     	try
 		{			
 			String query = NAMESPACE + "." + PREFIX_UPDATE_QUERY + o.getClass().getSimpleName();
-    		status = session.update(query,o);
+    		
+			status = session.update(query, o);
 			session.commit();
 			
 		}
@@ -199,7 +204,8 @@ public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
 		try
 		{			
 			String query = NAMESPACE + "." + PREFIX_DELETE_QUERY + this.type.getSimpleName();
-			status = session.delete(query,id);
+			
+			status = session.delete(query, id);
 			session.commit();
 		}	
 		finally
