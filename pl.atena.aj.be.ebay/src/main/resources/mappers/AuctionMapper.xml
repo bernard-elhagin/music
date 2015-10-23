@@ -37,15 +37,13 @@
 			<include refid="auctionFrom" />
 	</select>
 
-	<insert id="createAuction" parameterType="Auction" useGeneratedKeys="true" keyColumn="auctionId">
+	<insert id="createAuction" parameterType="Auction" useGeneratedKeys="true" keyProperty="auctionId">
 		INSERT INTO
-			auction(auction_id,
-					name,
+			auction(name,
 			        description,
 			        end_date,
 			        final_price)
 		VALUES(
-				#{auctionId},
 				#{name},
 				#{description},
 				#{endDate},

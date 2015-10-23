@@ -35,14 +35,12 @@
 			<include refid="cameraFrom" />
 	</select>
 
-	<insert id="createCamera" parameterType="Camera" useGeneratedKeys="true" keyColumn="cameraId">
+	<insert id="createCamera" parameterType="Camera" useGeneratedKeys="true" keyProperty="cameraId">
 		INSERT INTO
-			camera(camera_id,
-				   camera_make,
+			camera(camera_make,
 			       camera_model,
 			       final_price)
 		VALUES(
-				#{cameraId},
 				#{cameraMake},
 				#{cameraModel},
 				#{finalPrice})

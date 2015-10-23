@@ -1,5 +1,5 @@
 CREATE TABLE `auction` (
-  `auction_id` int(10)                        NOT NULL COMMENT 'ID aukcji',
+  `auction_id` int(10)  unsigned            NOT NULL AUTO_INCREMENT COMMENT 'ID aukcji',
   `name`             varchar(256)         DEFAULT NULL COMMENT 'Nazwa aukcji',
   `description`      varchar(512)         DEFAULT NULL COMMENT 'Opis aukcji',
   `end_date`         date                 DEFAULT NULL COMMENT 'Data koñca aukcji',
