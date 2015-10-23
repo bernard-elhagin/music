@@ -40,4 +40,10 @@ public class Auction {
 	public void setFinalPrice(double finalPrice) {
 		this.finalPrice = finalPrice;
 	}
+
+	@Override
+	public String toString() {
+		return "Auction [auctionId=" + auctionId + ", name=" + name + ", description=" + description + ", endDate="
+				+ endDate + ", finalPrice=" + finalPrice + "]";
+	}
 }

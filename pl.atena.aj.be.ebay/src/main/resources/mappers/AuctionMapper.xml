@@ -13,11 +13,11 @@
 	</resultMap>
 
 	<sql id="auctionColumns">
-		auc.auctionId   as auc_auction_id,
-		auc.name        as auc_name,
-		auc.description as auc_description,
-		auc.endDate     as auc_end_date,
-		auc.finalPrice  as auc_final_price
+		auc.auction_id   as auc_auction_id,
+		auc.name         as auc_name,
+		auc.description  as auc_description,
+		auc.end_date     as auc_end_date,
+		auc.final_price  as auc_final_price
 	</sql>
 
 	<sql id="auctionFrom">
@@ -39,11 +39,13 @@
 
 	<insert id="createAuction" parameterType="Auction" useGeneratedKeys="true" keyColumn="auctionId">
 		INSERT INTO
-			auction(name,
+			auction(auction_id,
+					name,
 			        description,
 			        end_date,
 			        final_price)
 		VALUES(
+				#{auctionId},
 				#{name},
 				#{description},
 				#{endDate},
