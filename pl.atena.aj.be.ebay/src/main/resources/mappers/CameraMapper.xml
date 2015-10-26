@@ -2,40 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-<mapper namespace="pl.atena.aj.be.ebay.mappers.Camera">
+<mapper namespace="pl.atena.aj.be.ebay.mappers.CameraDTO">
  
- 	<resultMap type="Camera" id="CameraResult">
+ 	<resultMap type="CameraDTO" id="CameraDTOResult">
 		<id property="cameraId" column="cam_camera_id" />
 		<result property="cameraMake" column="cam_camera_make" />
 		<result property="cameraModel" column="cam_camera_model" />
 		<result property="finalPrice" column="cam_final_price" />
 	</resultMap>
 
-	<sql id="cameraColumns">
+	<sql id="cameraDTOColumns">
 		cam.camera_id    as cam_camera_id,
 		cam.camera_make  as cam_camera_make,
 		cam.camera_model as cam_camera_model,
 		cam.final_price  as cam_final_price
 	</sql>
 
-	<sql id="cameraFrom">
+	<sql id="cameraDTOFrom">
 		FROM camera cam
 	</sql>
 
-	<select id="getCamera" parameterType="int" resultType="Camera" resultMap="CameraResult">
+	<select id="getCameraDTO" parameterType="int" resultType="CameraDTO" resultMap="CameraDTOResult">
 		SELECT
 			<include refid="cameraColumns" />
 			<include refid="cameraFrom" />
 		WHERE cam.camera_id = #{id}
 	</select>
 
-	<select id="getAllCamera" resultMap="CameraResult">
+	<select id="getAllCameraDTO" resultMap="CameraDTOResult">
 		SELECT 
 			<include refid="cameraColumns" />
 			<include refid="cameraFrom" />
 	</select>
 
-	<insert id="createCamera" parameterType="Camera" useGeneratedKeys="true" keyProperty="cameraId">
+	<insert id="createCameraDTO" parameterType="CameraDTO" useGeneratedKeys="true" keyProperty="cameraId">
 		INSERT INTO
 			camera(camera_make,
 			       camera_model,
@@ -46,7 +46,7 @@
 				#{finalPrice})
 	</insert>
 
-	<update id="updateCamera" parameterType="Camera">
+	<update id="updateCameraDTO" parameterType="CameraDTO">
 		UPDATE camera
 		SET	camera_make  = #{cameraMake},
 		    camera_model = #{cameraModel},
@@ -54,7 +54,7 @@
 		WHERE camera_id  = #{cameraId}
 	</update>
 
-	<delete id="deleteCamera" parameterType="int">
+	<delete id="deleteCameraDTO" parameterType="int">
 		DELETE
 			<include refid="cameraFrom" />
 		WHERE cam.camera_id = #{id}

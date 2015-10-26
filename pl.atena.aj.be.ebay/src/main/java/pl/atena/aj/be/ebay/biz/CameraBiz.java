@@ -1,7 +1,7 @@
 package pl.atena.aj.be.ebay.biz;
 
-import pl.atena.aj.be.ebay.domain.Camera;
+import pl.atena.aj.be.ebay.domain.CameraDTO;
 
 public interface CameraBiz {
-	Camera getById(int id);
+	CameraDTO getById(int id);
 }

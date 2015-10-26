@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import pl.atena.aj.be.ebay.dao.CameraDAO;
-import pl.atena.aj.be.ebay.domain.Camera;
+import pl.atena.aj.be.ebay.domain.CameraDTO;
 import pl.atena.aj.be.ebay.utils.MyBatisSQLSessionFactory;
 
 public class MainEbay {
@@ -15,9 +15,9 @@ public class MainEbay {
 	public static void main(String[] args) throws Exception {
 		SqlSessionFactory sf = MyBatisSQLSessionFactory.getSqlSessionFactory();
 		
-		CameraDAO cd = new CameraDAO(Camera.class, sf);
+		CameraDAO cd = new CameraDAO(CameraDTO.class, sf);
 		
-		Camera c = new Camera("Nikon", "D7000", 2799.99);
+		CameraDTO c = new CameraDTO("Nikon", "D7000", 2799.99);
 		
 		cd.create(c);
 		

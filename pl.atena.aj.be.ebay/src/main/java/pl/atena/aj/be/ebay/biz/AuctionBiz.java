@@ -1,7 +1,7 @@
 package pl.atena.aj.be.ebay.biz;
 
-import pl.atena.aj.be.ebay.domain.Auction;
+import pl.atena.aj.be.ebay.domain.AuctionDTO;
 
 public interface AuctionBiz {
-	Auction getById(int id);
+	AuctionDTO getById(int id);
 }

@@ -1,19 +1,30 @@
 package pl.atena.aj.be.ebay.domain;
 
-public class Camera {
+import java.io.Serializable;
 
+public class CameraDTO implements Serializable {
+
+	private static final long serialVersionUID = 4546300624947746982L;
+	
+	/* ID aparatu w bazie */
 	private int cameraId;
+	
+	/* Marka aparatu */
 	private String cameraMake;
+	
+	/* Model aparatu */
 	private String cameraModel;
+	
+	/* Cena aparatu */
 	private double finalPrice;
 
-    public Camera(String cameraMake, String cameraModel, double finalPrice) { 
+    public CameraDTO(String cameraMake, String cameraModel, double finalPrice) { 
 		this.cameraMake = cameraMake;
 		this.cameraModel = cameraModel;
 		this.finalPrice = finalPrice;
     }
 
-	public Camera() {
+	public CameraDTO() {
 	}
 
 	public void setCameraId(int cameraId) {

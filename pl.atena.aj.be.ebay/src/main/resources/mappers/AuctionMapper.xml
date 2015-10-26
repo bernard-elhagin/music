@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-<mapper namespace="pl.atena.aj.be.ebay.mappers.Auction">
+<mapper namespace="pl.atena.aj.be.ebay.mappers.AuctionDTO">
  
- 	<resultMap type="Auction" id="AuctionResult">
+ 	<resultMap type="AuctionDTO" id="AuctionDTOResult">
 		<id property="auctionId" column="auc_auction_id" />
 		<result property="name" column="auc_name" />
 		<result property="description" column="auc_description" />
@@ -12,7 +12,7 @@
 		<result property="finalPrice" column="auc_final_price" />
 	</resultMap>
 
-	<sql id="auctionColumns">
+	<sql id="auctionDTOColumns">
 		auc.auction_id   as auc_auction_id,
 		auc.name         as auc_name,
 		auc.description  as auc_description,
@@ -20,24 +20,24 @@
 		auc.final_price  as auc_final_price
 	</sql>
 
-	<sql id="auctionFrom">
+	<sql id="auctionDTOFrom">
 		FROM auction auc
 	</sql>
 
-	<select id="getAuction" parameterType="int" resultType="Auction" resultMap="AuctionResult">
+	<select id="getAuctionDTO" parameterType="int" resultType="AuctionDTO" resultMap="AuctionDTOResult">
 		SELECT
 			<include refid="auctionColumns" />
 			<include refid="auctionFrom" />
 		WHERE auc.auction_id = #{id}
 	</select>
 
-	<select id="getAllAuction" resultMap="AuctionResult">
+	<select id="getAllAuctionDTO" resultMap="AuctionDTOResult">
 		SELECT 
 			<include refid="auctionColumns" />
 			<include refid="auctionFrom" />
 	</select>
 
-	<insert id="createAuction" parameterType="Auction" useGeneratedKeys="true" keyProperty="auctionId">
+	<insert id="createAuctionDTO" parameterType="AuctionDTO" useGeneratedKeys="true" keyProperty="auctionId">
 		INSERT INTO
 			auction(name,
 			        description,
@@ -50,7 +50,7 @@
 				#{finalPrice})
 	</insert>
 
-	<update id="updateAuction" parameterType="Auction">
+	<update id="updateAuctionDTO" parameterType="AuctionDTO">
 		UPDATE auction
 		SET	name        = #{name},
 		    description = #{description},
@@ -59,7 +59,7 @@
 		WHERE auction_id = #{auctionId}
 	</update>
 
-	<delete id="deleteAuction" parameterType="int">
+	<delete id="deleteAuctionDTO" parameterType="int">
 		DELETE
 			<include refid="auctionFrom" />
 		WHERE auction_id = #{id}

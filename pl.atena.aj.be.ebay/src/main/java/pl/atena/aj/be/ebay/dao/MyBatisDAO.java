@@ -123,7 +123,6 @@ public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
     	try
 		{	
 			String query = NAMESPACE + "." + PREFIX_SELECT_QUERY + this.type.getSimpleName() + "ByName";
-			
 			obj = (T) session.selectOne(query, name);
 		}
 		finally
@@ -173,7 +172,8 @@ public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
         
     	SqlSession session = sqlFactory.openSession();
 		Integer status = null;
-    	try
+    	
+		try
 		{			
 			String query = NAMESPACE + "." + PREFIX_UPDATE_QUERY + o.getClass().getSimpleName();
     		
@@ -213,6 +213,5 @@ public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
 			session.close();
 		}	
 		return status;
-		
     }
 }

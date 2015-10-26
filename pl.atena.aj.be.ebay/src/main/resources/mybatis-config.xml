@@ -7,8 +7,8 @@
 	<properties resource='jdbc.properties' />
 	
 	<typeAliases>
-		<typeAlias type='pl.atena.aj.be.ebay.domain.Camera' alias='Camera' />
-		<typeAlias type='pl.atena.aj.be.ebay.domain.Auction' alias='Auction' />
+		<typeAlias type='pl.atena.aj.be.ebay.domain.CameraDTO' alias='CameraDTO' />
+		<typeAlias type='pl.atena.aj.be.ebay.domain.AuctionDTO' alias='AuctionDTO' />
 	</typeAliases>
 	
 	<environments default='development'>
