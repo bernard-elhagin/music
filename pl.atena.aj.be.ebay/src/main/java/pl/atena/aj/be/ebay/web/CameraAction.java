@@ -9,8 +9,6 @@ import pl.atena.aj.be.ebay.dao.CameraDAO;
 import pl.atena.aj.be.ebay.domain.CameraDTO;
 import pl.atena.aj.be.ebay.utils.MyBatisSQLSessionFactory;
 
-@ManagedBean(name="cameraActionBean")
-@SessionScoped
 public class CameraAction {
 	
 	private CameraDTO camera = new CameraDTO();
