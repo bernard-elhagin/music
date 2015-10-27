@@ -22,17 +22,29 @@
 		FROM camera cam
 	</sql>
 
+	<sql id="cameraDTOFilter">
+		<if test="cameraMake != null">
+			AND cam.camera_make = #{cameraMake}
+		</if>
+		<if test="cameraModel != null">
+			AND cam.camera_model = #{cameraModel}
+		</if>
+		<if test="finalPrice != null">
+			AND cam.final_price = #{finalPrice}
+		</if>
+	</sql>
+
 	<select id="getCameraDTO" parameterType="int" resultType="CameraDTO" resultMap="CameraDTOResult">
 		SELECT
-			<include refid="cameraColumns" />
-			<include refid="cameraFrom" />
+			<include refid="cameraDTOColumns" />
+			<include refid="cameraDTOFrom" />
 		WHERE cam.camera_id = #{id}
 	</select>
 
 	<select id="getAllCameraDTO" resultMap="CameraDTOResult">
 		SELECT 
-			<include refid="cameraColumns" />
-			<include refid="cameraFrom" />
+			<include refid="cameraDTOColumns" />
+			<include refid="cameraDTOFrom" />
 	</select>
 
 	<insert id="createCameraDTO" parameterType="CameraDTO" useGeneratedKeys="true" keyProperty="cameraId">
@@ -56,7 +68,7 @@
 
 	<delete id="deleteCameraDTO" parameterType="int">
 		DELETE
-			<include refid="cameraFrom" />
+			<include refid="cameraDTOFrom" />
 		WHERE cam.camera_id = #{id}
 	</delete>
  

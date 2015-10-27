@@ -26,15 +26,15 @@
 
 	<select id="getAuctionDTO" parameterType="int" resultType="AuctionDTO" resultMap="AuctionDTOResult">
 		SELECT
-			<include refid="auctionColumns" />
-			<include refid="auctionFrom" />
+			<include refid="auctionDTOColumns" />
+			<include refid="auctionDTOFrom" />
 		WHERE auc.auction_id = #{id}
 	</select>
 
 	<select id="getAllAuctionDTO" resultMap="AuctionDTOResult">
 		SELECT 
-			<include refid="auctionColumns" />
-			<include refid="auctionFrom" />
+			<include refid="auctionDTOColumns" />
+			<include refid="auctionDTOFrom" />
 	</select>
 
 	<insert id="createAuctionDTO" parameterType="AuctionDTO" useGeneratedKeys="true" keyProperty="auctionId">
@@ -61,7 +61,7 @@
 
 	<delete id="deleteAuctionDTO" parameterType="int">
 		DELETE
-			<include refid="auctionFrom" />
+			<include refid="auctionDTOFrom" />
 		WHERE auction_id = #{id}
 	</delete>
  

@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
 	
-	private static Logger log = LoggerFactory.getLogger(MyBatisDAO.class);
+//	private static Logger log = LoggerFactory.getLogger(MyBatisDAO.class);
 
 	private String NAMESPACE;
 	
@@ -35,7 +35,7 @@ public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
     	NAMESPACE = "pl.atena.aj.be.ebay.mappers." + simpleName;
         
         if(sqlFactory == null) {
-			log.error("Error: Could not instantiate MyBatisDAO. Loading myBatis sessionFactory failed.");
+//			log.error("Error: Could not instantiate MyBatisDAO. Loading myBatis sessionFactory failed.");
         }
     }
     
