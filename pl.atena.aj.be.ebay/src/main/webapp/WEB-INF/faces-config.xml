@@ -1,40 +1,14 @@
-<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
-<!--
-	<navigation-rule>
-        <from-view-id>/secure/*</from-view-id>
-        <navigation-case>
-            <if>#{request.getUserPrincipal()==null}</if>
-            <to-view-id>/index.jsf</to-view-id>
-            <redirect />
-        </navigation-case>
-    </navigation-rule>
-    
-    <factory>
-        <exception-handler-factory>org.omnifaces.exceptionhandler.FullAjaxExceptionHandlerFactory</exception-handler-factory>
-    </factory>
+<?xml version="1.0"?>
+<faces-config version="2.0"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+	
+	<managed-bean>
+		<managed-bean-name>cameraActionBean</managed-bean-name>
+		<managed-bean-class>pl.atena.aj.be.ebay.web.CameraAction</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
 
-    <managed-bean>
-        <managed-bean-name>dbBean</managed-bean-name>
-        <managed-bean-class>pl.atena.aj.kk.pf5.DbBean</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-        <managed-property>
-            <property-name>locale</property-name>
-            <value>PL_pl</value>
-        </managed-property>
-    </managed-bean>
-
-    <application>
-        <view-handler>pl.atena.aj.kk.pf5.jsf.NoExpiredMessageViewHandler</view-handler>
-        <message-bundle>pl.atena.aj.kk.pf5.jsf.messages</message-bundle>
-        <resource-bundle>
-            <base-name>pl.atena.aj.kk.pf5.jsf.messages</base-name>
-            <var>msgs</var>
-        </resource-bundle>
-        <locale-config>
-            <default-locale>en</default-locale>
-            <supported-locale>pl</supported-locale>
-        </locale-config>
-    </application>
- -->
 </faces-config>
