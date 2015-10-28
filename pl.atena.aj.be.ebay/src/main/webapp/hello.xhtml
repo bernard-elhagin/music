@@ -10,10 +10,19 @@
     <h:body>
 
     	<h:form>
-    	   <h:inputText value="#{cameraActionBean.camera.cameraMake}"></h:inputText>
-    	   <h:inputText value="#{cameraActionBean.camera.cameraModel}"></h:inputText>
-    	   <h:inputText value="#{cameraActionBean.camera.finalPrice}"></h:inputText>
-    	   <h:commandButton value="Marka Aparatu" action="welcome"></h:commandButton>
+    	   Marka: 
+    	   <h:inputText label="Marka" value="#{cameraActionBean.camera.cameraMake}"
+    	   				required="true"/><br/>
+    	   Model:
+    	   <h:inputText label="Model"
+    	   				value="#{cameraActionBean.camera.cameraModel}"
+    	   				required="true"/><br/>
+    	   Cena:
+    	   <h:inputText label="Cena"
+    	   				value="#{cameraActionBean.camera.finalPrice}"
+						required="true"/><br/>
+
+    	   <h:commandButton value="Zapisz" action="welcome"></h:commandButton>
     	</h:form>
 
     </h:body>
