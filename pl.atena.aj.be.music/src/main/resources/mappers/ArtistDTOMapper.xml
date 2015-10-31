@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="pl.atena.aj.be.music.mappers.ArtistDTO">
+ 
+ 	<resultMap type="ArtistDTO" id="ArtistDTOResult">
+		<id property="artistId" column="art_id" />
+		<result property="name" column="art_name" />
+	</resultMap>
+
+	<sql id="artistDTOColumns">
+		art.id    as art_id,
+		art.name  as art_name,
+	</sql>
+
+	<sql id="artistDTOFrom">
+		FROM artists art
+	</sql>
+
+	<sql id="artistDTOFilter">
+		<if test="artistMake != null">
+			AND art.name = #{name}
+		</if>
+	</sql>
+
+	<select id="getArtistDTO" parameterType="int" resultType="ArtistDTO" resultMap="ArtistDTOResult">
+		SELECT
+			<include refid="artistDTOColumns" />
+			<include refid="artistDTOFrom" />
+		WHERE art.id = #{id}
+	</select>
+
+	<select id="getAllArtistDTO" resultMap="ArtistDTOResult">
+		SELECT 
+			<include refid="artistDTOColumns" />
+			<include refid="artistDTOFrom" />
+	</select>
+
+	<insert id="createArtistDTO" parameterType="ArtistDTO" useGeneratedKeys="true" keyProperty="artistId">
+		INSERT INTO	artists (name)
+		VALUES (#{name})
+	</insert>
+
+	<update id="updateArtistDTO" parameterType="ArtistDTO">
+		UPDATE artists
+		SET	name = #{name}
+		WHERE id = #{artistId}
+	</update>
+
+	<delete id="deleteArtistDTO" parameterType="int">
+		DELETE
+			<include refid="artistDTOFrom" />
+		WHERE art.id = #{id}
+	</delete>
+ 
+</mapper>

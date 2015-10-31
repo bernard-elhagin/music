@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="pl.atena.aj.be.music.mappers.AlbumDTO">
+ 
+ 	<resultMap type="AlbumDTO" id="AlbumDTOResult">
+		<id          property="albumId" column="alb_id" />
+		<result      property="title"   column="alb_title" />
+		<association property="artist"  resultMap="pl.atena.aj.be.music.mappers.ArtistDTO.ArtistDTOResult" />
+		<association property="genre"   resultMap="pl.atena.aj.be.music.mappers.GenreDTO.GenreDTOResult" />
+		<collection  property="tracks"  resultMap="pl.atena.aj.be.music.mappers.TrackDTO.TrackDTOResult" />
+	</resultMap>
+
+	<sql id="albumDTOColumns">
+		alb.id          as alb_id,
+		alb.title       as alb_title,
+	</sql>
+
+	<sql id="albumDTOFrom">
+		FROM albums alb
+	</sql>
+
+	<sql id="artistJoin">
+		LEFT JOIN artists art ON art.id = alb.artist_id
+	</sql>
+
+	<sql id="genreJoin">
+		LEFT JOIN genres gen ON gen.id = alb.genre_id
+	</sql>
+
+	<sql id="tracksJoin">
+		LEFT OUTER JOIN tracks trk ON trk.album_id = alb.id
+	</sql>
+
+	<sql id="allColumns">
+		<include refid="albumDTOColumns" />
+		<include refid="pl.atena.aj.be.music.mappers.ArtistDTO.artistDTOColumns" />
+		<include refid="pl.atena.aj.be.music.mappers.GenreDTO.genreDTOColumns" />
+		<trim suffixOverrides=",">
+			<include refid="pl.atena.aj.be.music.mappers.TrackDTO.trackDTOColumns" />
+		</trim>
+	</sql>
+	
+	<sql id="allColumnsAndJoins">
+		<include refid="allColumns" />
+		<include refid="albumDTOFrom" />
+		<include refid="artistJoin" />
+		<include refid="genreJoin" />
+		<include refid="tracksJoin" />		
+	</sql>
+
+	<select id="getAlbumDTO" parameterType="int" resultType="AlbumDTO" resultMap="AlbumDTOResult">
+		SELECT
+			<include refid="allColumnsAndJoins" />
+		WHERE alb.id = #{id}
+	</select>
+
+	<select id="getAllAlbumDTO" resultMap="AlbumDTOResult">
+		SELECT
+			<include refid="allColumnsAndJoins" />
+	</select>
+
+	<insert id="createAlbumDTO" parameterType="AlbumDTO" useGeneratedKeys="true" keyProperty="albumId">
+		INSERT INTO albums (title, artist_id, genre_id)
+		VALUES (
+				 #{title},
+				 #{artist.artistId},
+				 #{genre.genreId}
+			   )
+	</insert>
+
+	<update id="updateAlbumDTO" parameterType="AlbumDTO">
+		UPDATE albums
+		SET	  title = #{title}
+		WHERE id    = #{albumId}
+	</update>
+
+	<delete id="deleteAlbumDTO" parameterType="int">
+		DELETE
+		<trim suffixOverrides=",">
+			<include refid="albumDTOFrom" />
+		</trim>
+		WHERE album_id = #{id}
+	</delete>
+ 
+</mapper>

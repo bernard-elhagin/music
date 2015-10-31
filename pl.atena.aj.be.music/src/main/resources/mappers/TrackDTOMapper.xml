@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="pl.atena.aj.be.music.mappers.TrackDTO">
+ 
+ 	<resultMap type="TrackDTO" id="TrackDTOResult">
+		<id          property="trackId"     column="trk_id" />
+		<result      property="title"       column="trk_title" />
+		<result      property="trackNumber" column="trk_track_no" />
+		<result      property="length"      column="trk_length" />
+		<result      property="albumId"     column="trk_album_id" />
+	</resultMap>
+
+	<sql id="trackDTOColumns">
+		trk.id       as trk_id,
+		trk.title    as trk_title,
+		trk.track_no as trk_track_no,
+		trk.length   as trk_length,
+		trk.album_id as trk_album_id,
+	</sql>
+
+	<sql id="trackDTOFrom">
+		FROM tracks trk
+	</sql>
+
+	<select id="getTrackDTO" parameterType="int" resultType="TrackDTO" resultMap="TrackDTOResult">
+		SELECT
+			<include refid="trackDTOColumns" />
+			<include refid="trackDTOFrom" />
+		WHERE trk.id = #{id}
+	</select>
+
+	<select id="getAllTrackDTO" resultMap="TrackDTOResult">
+		SELECT 
+			<include refid="trackDTOColumns" />
+			<include refid="trackDTOFrom" />
+	</select>
+
+	<insert id="createTrackDTO" parameterType="AlbumDTO" useGeneratedKeys="true" keyProperty="trackId">
+		INSERT INTO tracks (title, track_no, length, album_id)
+		VALUES
+		<foreach item="track" index="index" collection="tracks"
+				 open="(" separator="),(" close=")"> 
+				#{track.title}, #{track.trackNumber}, #{track.length}, #{albumId}
+		</foreach>
+	</insert>
+
+	<update id="updateTrackDTO" parameterType="TrackDTO">
+		UPDATE tracks
+		SET	title    = #{title},
+			track_no = #{trackNumber},
+		    length   = #{length},
+		    album_id = #{albumId}
+		WHERE id = #{trackId}
+	</update>
+
+	<delete id="deleteTrackDTO" parameterType="int">
+		DELETE
+			<include refid="trackDTOFrom" />
+		WHERE id = #{id}
+	</delete>
+ 
+</mapper>
