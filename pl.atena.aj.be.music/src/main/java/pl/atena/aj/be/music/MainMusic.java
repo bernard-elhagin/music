@@ -19,10 +19,7 @@ public class MainMusic {
 		SqlSessionFactory sqlFactory = MyBatisSQLSessionFactory.getSqlSessionFactory();
 		
 		AlbumDAO albumDao = new AlbumDAO(AlbumDTO.class, sqlFactory);
-		
-		for (AlbumDTO album : albumDao.getAll()) {
-			System.out.println(album.toString());
-			System.out.println("----------------------");
-		}
+
+		System.out.println(albumDao.getAll().toString());
 	}
 }

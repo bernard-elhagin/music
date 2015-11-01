@@ -61,14 +61,14 @@
 		VALUES (
 				 #{title},
 				 #{artist.artistId},
-				 #{genre.code}
+				 #{genre}
 			   )
 	</insert>
 
 	<update id="updateAlbumDTO" parameterType="AlbumDTO">
 		UPDATE albums
 		SET	   title    = #{title},
-			   genre_id = #{genre.code} 
+			   genre_id = #{genre} 
 	    WHERE  id       = #{albumId}
 	</update>
 
