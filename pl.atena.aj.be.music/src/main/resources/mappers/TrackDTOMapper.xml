@@ -37,13 +37,9 @@
 			<include refid="trackDTOFrom" />
 	</select>
 
-	<insert id="createTrackDTO" parameterType="AlbumDTO" useGeneratedKeys="true" keyProperty="trackId">
+	<insert id="createTrackDTO" parameterType="TrackDTO" useGeneratedKeys="true" keyProperty="trackId">
 		INSERT INTO tracks (title, track_no, length, album_id)
-		VALUES
-		<foreach item="track" index="index" collection="tracks"
-				 open="(" separator="),(" close=")"> 
-				#{track.title}, #{track.trackNumber}, #{track.length}, #{albumId}
-		</foreach>
+		VALUES (#{title}, #{trackNumber}, #{length}, #{albumId})
 	</insert>
 
 	<update id="updateTrackDTO" parameterType="TrackDTO">

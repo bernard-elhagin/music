@@ -14,7 +14,7 @@ public class AlbumAction {
 	
 	private AlbumDAO albumDao = new AlbumDAO(AlbumDTO.class, sf);
 	
-	public void createCamera() {
+	public void createAlbum() {
 		albumDao.create(album);
 	}
 	
@@ -22,7 +22,7 @@ public class AlbumAction {
 		return album;
 	}
 
-	public void setCamera(AlbumDTO album) {
+	public void setAlbum(AlbumDTO album) {
 		this.album = album;
 	}
 }

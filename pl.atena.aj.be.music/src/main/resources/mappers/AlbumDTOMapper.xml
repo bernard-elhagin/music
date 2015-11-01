@@ -72,8 +72,8 @@
 
 	<update id="updateAlbumDTO" parameterType="AlbumDTO">
 		UPDATE albums
-		SET	  title = #{title}
-		WHERE id    = #{albumId}
+		SET	   title  = #{title}
+	    WHERE  id     = #{albumId}
 	</update>
 
 	<delete id="deleteAlbumDTO" parameterType="int">
