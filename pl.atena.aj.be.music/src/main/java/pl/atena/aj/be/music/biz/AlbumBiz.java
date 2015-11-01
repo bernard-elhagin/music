@@ -2,6 +2,6 @@ package pl.atena.aj.be.music.biz;
 
 import pl.atena.aj.be.music.domain.AlbumDTO;
 
-public interface CameraBiz {
+public interface AlbumBiz {
 	AlbumDTO getById(int id);
 }

@@ -3,11 +3,11 @@ package pl.atena.aj.be.music.biz;
 import pl.atena.aj.be.music.dao.AlbumDAO;
 import pl.atena.aj.be.music.domain.AlbumDTO;
 
-public class CameraBizBean implements CameraBiz {
+public class AlbumBizBean implements AlbumBiz {
 
-	private AlbumDAO cameraDAO;
+	private AlbumDAO albumDAO;
 
 	public AlbumDTO getById(int id) {
-		return cameraDAO.get(id);
+		return albumDAO.get(id);
 	}
 }

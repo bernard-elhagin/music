@@ -3,11 +3,11 @@ package pl.atena.aj.be.music.biz;
 import pl.atena.aj.be.music.dao.ArtistDAO;
 import pl.atena.aj.be.music.domain.ArtistDTO;
 
-public class AuctionBizBean implements AuctionBiz {
+public class ArtistBizBean implements ArtistBiz {
 
-	private ArtistDAO auctionDAO;
+	private ArtistDAO artistDAO;
 
 	public ArtistDTO getById(int id) {
-		return auctionDAO.get(id);
+		return artistDAO.get(id);
 	}
 }
