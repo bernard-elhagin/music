@@ -66,7 +66,7 @@ public class AlbumDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "AlbumDTO [albumId=" + albumId + ", title=" + title + ", artist=" + artist + ", genre=" + genre.getName()
-				+ ", tracks=" + tracks + "]";
+		return "AlbumDTO [albumId=" + albumId + ",\ntitle=" + title + ",\n artist=" + artist + ",\n genre=" + genre.getName()
+				+ ",\ntracks=" + tracks + "]";
 	}
 }

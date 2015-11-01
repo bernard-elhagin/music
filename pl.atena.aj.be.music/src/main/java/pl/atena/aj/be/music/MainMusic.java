@@ -19,22 +19,10 @@ public class MainMusic {
 		SqlSessionFactory sqlFactory = MyBatisSQLSessionFactory.getSqlSessionFactory();
 		
 		AlbumDAO albumDao = new AlbumDAO(AlbumDTO.class, sqlFactory);
-		TrackDAO trackDao = new TrackDAO(TrackDTO.class, sqlFactory);
-		ArtistDAO artistDao = new ArtistDAO(ArtistDTO.class, sqlFactory);
 		
-		AlbumDTO a = new AlbumDTO();
-		
-		ArtistDTO artist = new ArtistDTO();
-		artist.setName("Led Zeppelin");
-		
-		artistDao.create(artist);
-		
-		a.setArtist(artist);
-		a.setGenre(Genre.ROCK);
-		a.setTitle("Led Zeppelin III");
-
-		albumDao.create(a);
-		
-		System.out.println(a.toString());
+		for (AlbumDTO album : albumDao.getAll()) {
+			System.out.println(album.toString());
+			System.out.println("----------------------");
+		}
 	}
 }

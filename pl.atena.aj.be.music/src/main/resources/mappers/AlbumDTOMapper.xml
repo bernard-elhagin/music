@@ -15,7 +15,7 @@
 	<sql id="albumDTOColumns">
 		alb.id          as alb_id,
 		alb.title       as alb_title,
-		alb.genre_id    as alb_genre_id
+		alb.genre_id    as alb_genre_id,
 	</sql>
 
 	<sql id="albumDTOFrom">
@@ -69,7 +69,7 @@
 		UPDATE albums
 		SET	   title    = #{title},
 			   genre_id = #{genre.code} 
-	    WHERE  id     = #{albumId}
+	    WHERE  id       = #{albumId}
 	</update>
 
 	<delete id="deleteAlbumDTO" parameterType="int">
