@@ -7,14 +7,15 @@
  	<resultMap type="AlbumDTO" id="AlbumDTOResult">
 		<id          property="albumId" column="alb_id" />
 		<result      property="title"   column="alb_title" />
+		<result      property="genre"   column="alb_genre_id" />
 		<association property="artist"  resultMap="pl.atena.aj.be.music.mappers.ArtistDTO.ArtistDTOResult" />
-		<association property="genre"   resultMap="pl.atena.aj.be.music.mappers.GenreDTO.GenreDTOResult" />
 		<collection  property="tracks"  resultMap="pl.atena.aj.be.music.mappers.TrackDTO.TrackDTOResult" />
 	</resultMap>
 
 	<sql id="albumDTOColumns">
 		alb.id          as alb_id,
 		alb.title       as alb_title,
+		alb.genre_id    as alb_genre_id
 	</sql>
 
 	<sql id="albumDTOFrom">
@@ -25,10 +26,6 @@
 		LEFT JOIN artists art ON art.id = alb.artist_id
 	</sql>
 
-	<sql id="genreJoin">
-		LEFT JOIN genres gen ON gen.id = alb.genre_id
-	</sql>
-
 	<sql id="tracksJoin">
 		LEFT OUTER JOIN tracks trk ON trk.album_id = alb.id
 	</sql>
@@ -36,7 +33,6 @@
 	<sql id="allColumns">
 		<include refid="albumDTOColumns" />
 		<include refid="pl.atena.aj.be.music.mappers.ArtistDTO.artistDTOColumns" />
-		<include refid="pl.atena.aj.be.music.mappers.GenreDTO.genreDTOColumns" />
 		<trim suffixOverrides=",">
 			<include refid="pl.atena.aj.be.music.mappers.TrackDTO.trackDTOColumns" />
 		</trim>
@@ -46,7 +42,6 @@
 		<include refid="allColumns" />
 		<include refid="albumDTOFrom" />
 		<include refid="artistJoin" />
-		<include refid="genreJoin" />
 		<include refid="tracksJoin" />		
 	</sql>
 
@@ -66,13 +61,14 @@
 		VALUES (
 				 #{title},
 				 #{artist.artistId},
-				 #{genre.genreId}
+				 #{genre.code}
 			   )
 	</insert>
 
 	<update id="updateAlbumDTO" parameterType="AlbumDTO">
 		UPDATE albums
-		SET	   title  = #{title}
+		SET	   title    = #{title},
+			   genre_id = #{genre.code} 
 	    WHERE  id     = #{albumId}
 	</update>
 
