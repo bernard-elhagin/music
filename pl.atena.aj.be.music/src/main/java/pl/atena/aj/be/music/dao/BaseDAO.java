@@ -6,10 +6,10 @@ import org.apache.ibatis.exceptions.PersistenceException;
 
 public interface BaseDAO<T, PK> {
 
-	/** Pobierz obiekt po g³ównym ID */
+	/** Pobierz obiekt po gÅ‚Ã³wnym ID */
 	public T get(PK id) throws PersistenceException;
 
-	/** Pobierz obiekt po polu 'name' jeœli istnieje */
+	/** Pobierz obiekt po polu 'name' jeÅ›li istnieje */
 	public T getByName(String name) throws PersistenceException;
 
 	/** Pobierz wszystkie obiekty typu T */
@@ -21,6 +21,6 @@ public interface BaseDAO<T, PK> {
 	/** Update obiektu typu T */
 	int update(T transientObject) throws PersistenceException;
 
-	/** Usuniêcie obiektu typu T */
+	/** UsuniÄ™cie obiektu typu T */
 	int delete(PK id) throws PersistenceException;
 }

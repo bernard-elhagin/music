@@ -7,7 +7,7 @@ import java.util.List;
 import javax.faces.model.SelectItem;
 
 /**
- * Oficjalna lista gatunków dla standardu ID3 v2.3.0.
+ * Oficjalna lista gatunkÃ³w dla standardu ID3 v2.3.0.
  * 
  * http://id3.org/id3v2.3.0
  * 

@@ -14,15 +14,15 @@ public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
 	private Class<T> type;
 
 	/**
-	 * Prefiksy dla nazw akcji CRUDowych do stosowania miêdzy XMLami MyBatisa
-	 * a obiektami DAO.
+	 * Prefiksy dla nazw akcji CRUDowych do stosowania miÄ™dzy XMLami MyBatisa a
+	 * obiektami DAO.
 	 */
 	public static final String PREFIX_SELECT_QUERY = "get"; 
 	public static final String PREFIX_INSERT_QUERY = "create";
 	public static final String PREFIX_UPDATE_QUERY = "update";
 	public static final String PREFIX_DELETE_QUERY = "delete";
 
-	/** Domyœlny konstruktor */
+	/** DomyÅ›lny konstruktor */
     public MyBatisDAO(Class<T> type, SqlSessionFactory sqlFactory) {
         this.type = type;
         this.sqlFactory = sqlFactory;
@@ -34,19 +34,19 @@ public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
         }
     }
 
-    /* Fabryka sesji SQL dla dziedzicz¹cych DAO */
+	/* Fabryka sesji SQL dla dziedziczÄ…cych DAO */
     protected SqlSessionFactory getSessionFactory() {
 		return sqlFactory;
 	}
 
-    /** 
-     *  Podstawowy select po id. 
+    /**
+	 * Podstawowy select po id.
 	 *
-	 *	Przyk³adowe query:
+	 * PrzykÅ‚adowe query:
 	 *
-	 *  Dla obiektu DAO AddressInfo.java query
-	 *  w mapperze ma mieæ ID &lt;select id="getAddressInfo" ...  
-     */
+	 * Dla obiektu DAO AddressInfo.java query w mapperze ma mieÄ‡ ID &lt;select
+	 * id="getAddressInfo" ...
+	 */
     @SuppressWarnings("unchecked")
 	public T get(PK id) throws PersistenceException {
         
@@ -66,14 +66,14 @@ public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
 		return obj;
     }
 
-    /** 
-     *  Pobranie wszystkich rekordów danego typu. 
+    /**
+	 * Pobranie wszystkich rekordÃ³w danego typu.
 	 *
-	 *	Przyk³adowe query:
+	 * PrzykÅ‚adowe query:
 	 *
-	 *  Dla obiektu DAO AddressInfo.java query
-	 *  w mapperze ma mieæ ID &lt;select id="getAllAddressInfo" ...  
-     */
+	 * Dla obiektu DAO AddressInfo.java query w mapperze ma mieÄ‡ ID &lt;select
+	 * id="getAllAddressInfo" ...
+	 */
 	@SuppressWarnings("unchecked")
 	public ArrayList<T> getAll() throws PersistenceException {
         
@@ -93,22 +93,22 @@ public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
 		return list;
     }
 
-    /** 
-     *  Metoda zwraca pierwszy obiekt, którego pole xxxx, np. "name"
-     *  pasuje do podanego na wejœciu. To, czym jest "name" zale¿y
-     *  od obiektu i sytuacji.
-     *  
-     *  No ogó³ powinna byæ przeci¹¿ona.
-
-     *  Przyk³ad:
-     *
-     *  Dla DAO CarInfo.java, query id bêdzie &lt;select id="getCarInfoByName" ...  
-     *
-     *  Wykonany select to:
-     *  
-     *  select * from [tablename] where NAME = ?
-     *  
-     */
+    /**
+	 * Metoda zwraca pierwszy obiekt, ktÃ³rego pole xxxx, np. "name" pasuje do
+	 * podanego na wejÅ›ciu. To, czym jest "name" zaleÅ¼y od obiektu i sytuacji.
+	 * 
+	 * No ogÃ³Å‚ powinna byÄ‡ przeciÄ…Å¼ona.
+	 * 
+	 * PrzykÅ‚ad:
+	 *
+	 * Dla DAO CarInfo.java, query id bï¿½dzie &lt;select id="getCarInfoByName"
+	 * ...
+	 *
+	 * Wykonany select to:
+	 * 
+	 * select * from [tablename] where NAME = ?
+	 * 
+	 */
     @SuppressWarnings("unchecked")
 	public T getByName(String name) throws PersistenceException {
         

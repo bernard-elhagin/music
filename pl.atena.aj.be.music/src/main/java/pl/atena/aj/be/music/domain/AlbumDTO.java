@@ -10,7 +10,7 @@ public class AlbumDTO implements Serializable {
 	/* ID albumu w bazie */
 	private int albumId;
 	
-	/* Tytu≥ albumu */
+	/* Tytu≈Ç albumu */
 	private String title;
 	
 	/* Wykonawca */

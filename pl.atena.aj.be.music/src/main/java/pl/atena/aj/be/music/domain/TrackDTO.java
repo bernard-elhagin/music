@@ -9,16 +9,16 @@ public class TrackDTO implements Serializable {
 	/* ID utworu w bazie */
 	private int trackId;
 	
-	/* Tytu³ utworu */
+	/* TytuÅ‚ utworu */
 	private String title;
 
 	/* Numer utworu na albumie */
 	private int trackNumber;
 	
-	/* D³ugoœæ trwania utworu w sekundach */
+	/* DÅ‚ugoÅ›Ä‡ trwania utworu w sekundach */
 	private int length;
 
-	/* ID albumu, na którym znajduje siê utwór */
+	/* ID albumu, na ktÃ³rym znajduje siÄ™ utwÃ³r */
 	private int albumId;
 	
 	public TrackDTO() {	}
