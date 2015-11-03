@@ -7,7 +7,7 @@
 	
 	<managed-bean>
 		<managed-bean-name>albumActionBean</managed-bean-name>
-		<managed-bean-class>pl.atena.aj.be.ebay.web.AlbumAction</managed-bean-class>
+		<managed-bean-class>pl.atena.aj.be.music.web.AlbumAction</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 

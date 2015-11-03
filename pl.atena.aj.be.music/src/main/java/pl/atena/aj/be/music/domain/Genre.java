@@ -1,6 +1,10 @@
 package pl.atena.aj.be.music.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.faces.model.SelectItem;
 
 /**
  * Oficjalna lista gatunków dla standardu ID3 v2.3.0.
@@ -145,5 +149,13 @@ public enum Genre implements Serializable {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public List<SelectItem> getValues() {
+		List<SelectItem> values = new ArrayList<>();
+		
+//		Genre.A_CAPELLA.name
+		
+		return values;
 	}
 }

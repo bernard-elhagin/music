@@ -2,7 +2,6 @@ package pl.atena.aj.be.music.dao;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import pl.atena.aj.be.music.domain.ArtistDTO;
 import pl.atena.aj.be.music.domain.TrackDTO;
 
 public class TrackDAO extends MyBatisDAO<TrackDTO, Integer> {
