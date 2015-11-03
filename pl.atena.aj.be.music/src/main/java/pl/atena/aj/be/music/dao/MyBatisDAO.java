@@ -5,12 +5,8 @@ import java.util.ArrayList;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
-
-	private static Logger log = LoggerFactory.getLogger(MyBatisDAO.class);
 
 	private String NAMESPACE;
 
@@ -35,7 +31,6 @@ public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
     	NAMESPACE = "pl.atena.aj.be.music.mappers." + simpleName;
         
         if(sqlFactory == null) {
-			log.error("Error: Could not instantiate MyBatisDAO. Loading myBatis sessionFactory failed.");
         }
     }
 
