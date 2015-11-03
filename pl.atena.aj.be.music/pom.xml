@@ -93,7 +93,6 @@
 			</plugin>
 
 			<!-- Wildfly plugin for command line deployment -->
-
 			<plugin>
 				<groupId>org.wildfly.plugins</groupId>
 				<artifactId>wildfly-maven-plugin</artifactId>

@@ -10,17 +10,10 @@
     <h:body>
 
     	<h:form>
-
-    	   Model:
-    	   <h:inputText label="Model"
-    	   				value="#{cameraActionBean.camera.cameraModel}"
+    	   <h:inputText label="Tytuł albumu: " value="#{albumActionBean.album.title}"
     	   				required="true"/><br/>
-    	   Cena:
-    	   <h:inputText label="Cena"
-    	   				value="#{cameraActionBean.camera.finalPrice}"
-						required="true"/><br/>
 
-    	   <h:commandButton value="Zapisz" action="welcome"></h:commandButton>
+    	   <h:commandButton value="Dalej" action="welcome"></h:commandButton>
     	</h:form>
 
     </h:body>
