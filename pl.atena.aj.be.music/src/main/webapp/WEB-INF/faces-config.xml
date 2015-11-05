@@ -4,6 +4,20 @@
 	xmlns:xi="http://www.w3.org/2001/XInclude"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+	<application>
+		<message-bundle>pl.atena.aj.be.music.web.Messages</message-bundle>
+		
+		<resource-bundle>
+			<base-name>pl.atena.aj.be.music.web.Messages</base-name>
+			<var>messages</var>
+		</resource-bundle>
+
+		<locale-config>
+			<default-locale>pl_PL</default-locale>
+			<supported-locale>en_US</supported-locale>
+		</locale-config>
+	</application>	
 	
 	<managed-bean>
 		<managed-bean-name>albumActionBean</managed-bean-name>

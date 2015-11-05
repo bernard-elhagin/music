@@ -25,7 +25,7 @@ public enum Genre implements Serializable {
 	AVANTGARDE("Avantgarde"),
 	BALLAD("Ballad"),
 	BASS("Bass"),
-	BEBOB("Bebob"),
+	BEBOP("Be bop"),
 	BIG_BAND("Big Band"),
 	BLUEGRASS("Bluegrass"),
 	BLUES("Blues"),
@@ -143,6 +143,9 @@ public enum Genre implements Serializable {
 
 	private String name;
 	
+	/* Na potrzeby JSF-owej listy rozwijanej */
+	private static List<SelectItem> allValues = fillValues();
+
 	private Genre(String name) {
 		this.name = name;
 	}
@@ -150,12 +153,25 @@ public enum Genre implements Serializable {
 	public String getName() {
 		return name;
 	}
-	
-	public List<SelectItem> getValues() {
-		List<SelectItem> values = new ArrayList<>();
-		
-//		Genre.A_CAPELLA.name
-		
-		return values;
+
+	public static List<SelectItem> getAllValues() {
+		return allValues;
+	}
+
+	public static List<SelectItem> fillValues() {
+
+		/* Tworzymy listę tylko raz */
+		if (allValues == null) {
+
+			allValues = new ArrayList<>();
+
+			for (Genre genre : Genre.values()) {
+				SelectItem si = new SelectItem(genre, genre.name);
+
+				allValues.add(si);
+			}
+		}
+
+		return allValues;
 	}
 }

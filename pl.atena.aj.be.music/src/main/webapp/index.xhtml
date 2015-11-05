@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<body>
+	<ui:composition template="/WEB-INF/templates/template.xhtml">
+		<ui:define name="title">#{messages.menu_app_title}</ui:define>
+		<ui:define name="body">
+			<h:panelGrid columns="4">
+				<h:panelGrid rows="3">
+					<h1>#{messages.menu_app_title}</h1>
+				</h:panelGrid>
+			</h:panelGrid>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

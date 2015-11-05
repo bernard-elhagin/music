@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:composition>
+		<h:form>
+	
+			<h:outputText value="Music Collection" />
+			<h:outputText value="#{messages.menu_app_title}" />
+	
+			<!-- Album -->
+			<f:facet name="label">
+				<h:panelGroup>
+					<h:outputText value="#{messages.menu_album}" />
+				</h:panelGroup>
+			</f:facet>
+	
+			<h:outputLink value="index.html">
+				<h:outputText value="#{messages.album}" />
+			</h:outputLink>
+			<h:outputText value="#{messages.album}" />
+		</h:form>
+	</ui:composition>
+
+</html>
