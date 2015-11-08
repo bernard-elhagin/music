@@ -5,16 +5,35 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-<body>
-	<ui:composition template="/WEB-INF/templates/template.xhtml">
-		<ui:define name="title">#{messages.menu_app_title}</ui:define>
-		<ui:define name="body">
-			<h:panelGrid columns="4">
-				<h:panelGrid rows="3">
-					<h1>#{messages.menu_app_title}</h1>
-				</h:panelGrid>
-			</h:panelGrid>
-		</ui:define>
-	</ui:composition>
-</body>
+	<h:head/>
+	
+	<body>
+	<h:form>
+		<p:growl id="message"></p:growl>
+
+		<p:dock id="tabMenu" activeIndex="#{albumAction.index}">
+			<p:menuitem value="Artist" outcome="searchByArtist" icon="resources/img/video.png">
+				<f:param name="index" value="0" />
+			</p:menuitem>
+
+			<p:menuitem value="Title" outcome="searchByTitle" icon="resources/img/home.gif">
+				<f:param name="index" value="1" action="#{albumAction.doSomeWork()}"
+					update="tabMenu message" />
+			</p:menuitem>
+
+			<p:menuitem value="Genre" outcome="searchByGenre" icon="resources/img/home.pgn">
+				<f:param name="index" value="2" />
+			</p:menuitem>
+
+			<p:menuitem value="Year" outcome="searchByYear" icon="resources/img/home.pgn">
+				<f:param name="index" value="3" />
+			</p:menuitem>
+
+			<p:menuitem value="Spotify" outcome="searchSpotify" icon="resources/img/home.pgn">
+				<f:param name="index" value="4" />
+			</p:menuitem>
+		</p:dock>
+	</h:form>
+	</body>
+
 </html>

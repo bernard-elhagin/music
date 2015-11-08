@@ -19,6 +19,9 @@ public class AlbumDTO implements Serializable {
 	/* Gatunek albumu */
 	private Genre genre;
 	
+	/* Rok wydania */
+	private int year;
+	
 	/* Utwory */
 	private List<TrackDTO> tracks;
 	
@@ -64,9 +67,17 @@ public class AlbumDTO implements Serializable {
 		this.genre = genre;
 	}
 
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
 	@Override
 	public String toString() {
-		return "AlbumDTO [albumId=" + albumId + ",\ntitle=" + title + ",\n artist=" + artist + ",\n genre=" + genre.getName()
-				+ ",\ntracks=" + tracks + "]";
+		return "AlbumDTO [albumId=" + albumId + ", title=" + title + ", artist=" + artist + ", genre=" + genre
+				+ ", year=" + year + ", tracks=" + tracks + "]";
 	}
 }
