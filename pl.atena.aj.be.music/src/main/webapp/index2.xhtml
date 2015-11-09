@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head />
+
+<h:body>
+
+	<h:form id="form">
+		<p:dataTable var="car" value="#{albumLazyView.lazyModel}"
+			paginator="true" rows="10"
+			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+			rowsPerPageTemplate="5,10,15" selectionMode="single"
+			selection="#{albumLazyView.selectedAlbum}" id="albumTable" lazy="true">
+			
+			<p:ajax event="rowSelect" listener="#{albumLazyView.onRowSelect}"
+				update=":form:albumDetail" oncomplete="PF('albumDialog').show()" />
+
+			<p:column headerText="Id" sortBy="#{album.id}" filterBy="#{album.id}">
+				<h:outputText value="#{album.id}" />
+			</p:column>
+
+			<p:column headerText="Year" sortBy="#{album.year}"
+				filterBy="#{album.year}">
+				<h:outputText value="#{album.year}" />
+			</p:column>
+
+			<p:column headerText="Title" sortBy="#{album.title}"
+				filterBy="#{album.title}">
+				<h:outputText value="#{album.title}" />
+			</p:column>
+
+			<p:column headerText="Artist" sortBy="#{album.artist}"
+				filterBy="#{album.artist}">
+				<h:outputText value="#{album.artist}" />
+			</p:column>
+		</p:dataTable>
+
+		<p:dialog header="Album Detail" widgetVar="albumDialog" modal="true"
+			showEffect="fade" hideEffect="fade" resizable="false">
+			<p:outputPanel id="albumDetail" style="text-align:center;">
+				<p:panelGrid columns="2"
+					rendered="#{not empty albumLazyView.selectedAlbum}"
+					columnClasses="label,value">
+<!-- 					<f:facet name="header"> -->
+<!-- 						<p:graphicImage -->
+<!-- 							name="demo/images/car/#{dtLazyView.selectedCar.brand}-big.gif" /> -->
+<!-- 					</f:facet> -->
+
+					<h:outputText value="Id:" />
+					<h:outputText value="#{albumLazyView.selectedAlbum.albumId}" />
+
+					<h:outputText value="Year" />
+					<h:outputText value="#{albumLazyView.selectedAlbum.year}" />
+
+					<h:outputText value="Title:" />
+					<h:outputText value="#{albumLazyView.selectedAlbum.title}" />
+
+					<h:outputText value="Artist:" />
+					<h:outputText value="#{albumLazyView.selectedAlbum.artist}" />
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
+	</h:form>
+</h:body>
+
+</html>

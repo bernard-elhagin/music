@@ -34,6 +34,10 @@ public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
         }
     }
 
+	public MyBatisDAO() {
+		
+	}
+
 	/* Fabryka sesji SQL dla dziedziczących DAO */
     protected SqlSessionFactory getSessionFactory() {
 		return sqlFactory;
