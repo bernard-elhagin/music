@@ -11,6 +11,15 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+	<repositories>
+		<repository>
+	  		<id>prime-repo</id>
+	  		<name>PrimeFaces Maven Repository</name>
+	  		<url>http://repository.primefaces.org</url>
+	  		<layout>default</layout>
+		</repository>
+	</repositories>
+	
 	<dependencies>
 
 		<dependency>
@@ -71,6 +80,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+
+		<dependency>
 			<groupId>se.michaelthelin.spotify</groupId>
 			<artifactId>spotify-web-api-java</artifactId>
 			<version>1.5.0</version>
@@ -81,6 +96,12 @@
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>5.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.primefaces.themes</groupId>
+            <artifactId>all-themes</artifactId>
+            <version>1.0.10</version>
         </dependency>
         
         <dependency>

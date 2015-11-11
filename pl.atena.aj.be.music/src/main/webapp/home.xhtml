@@ -42,8 +42,10 @@
 
 		</p:dataTable>
 
-		<m:optionDock>
-		</m:optionDock>
+		<p:themeSwitcher style="width:165px" effect="fade">
+			<f:selectItem itemLabel="Choose Theme" itemValue="" />
+			<f:selectItems value="#{userSettingsBean.themes}" />
+		</p:themeSwitcher>
 
 		<p:dialog header="Album Detail" widgetVar="albumDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 			
