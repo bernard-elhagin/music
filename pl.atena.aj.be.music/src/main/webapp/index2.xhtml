@@ -10,45 +10,46 @@
 <h:body>
 
 	<h:form id="form">
-		<p:dataTable var="car" value="#{albumLazyView.lazyModel}"
-			paginator="true" rows="10"
+		<p:dataTable var="album" value="#{albumLazyView.lazyModel}"
+			paginator="true" rows="25"
 			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-			rowsPerPageTemplate="5,10,15" selectionMode="single"
+			rowsPerPageTemplate="5, 10, 15, 20, 25" selectionMode="single"
 			selection="#{albumLazyView.selectedAlbum}" id="albumTable" lazy="true">
 			
 			<p:ajax event="rowSelect" listener="#{albumLazyView.onRowSelect}"
 				update=":form:albumDetail" oncomplete="PF('albumDialog').show()" />
 
-			<p:column headerText="Id" sortBy="#{album.id}" filterBy="#{album.id}">
-				<h:outputText value="#{album.id}" />
+			<p:column headerText="Id" sortBy="#{album.albumId}" filterBy="#{album.albumId}">
+				<h:outputText value="#{album.albumId}" />
 			</p:column>
 
-			<p:column headerText="Year" sortBy="#{album.year}"
-				filterBy="#{album.year}">
-				<h:outputText value="#{album.year}" />
+			<p:column headerText="Artist" sortBy="#{album.artist.name}"	filterBy="#{album.artist}">
+				<h:outputText value="#{album.artist.name}" />
 			</p:column>
 
-			<p:column headerText="Title" sortBy="#{album.title}"
-				filterBy="#{album.title}">
+			<p:column headerText="Title" sortBy="#{album.title}" filterBy="#{album.title}">
 				<h:outputText value="#{album.title}" />
 			</p:column>
 
-			<p:column headerText="Artist" sortBy="#{album.artist}"
-				filterBy="#{album.artist}">
-				<h:outputText value="#{album.artist}" />
+			<p:column headerText="Genre" sortBy="#{album.genre.name}" filterBy="#{album.genre.name}">
+				<h:outputText value="#{album.genre.name}" />
 			</p:column>
+		
+			<p:column headerText="Year" sortBy="#{album.year}" filterBy="#{album.year}">
+				<h:outputText value="#{album.year}" />
+			</p:column>
+
 		</p:dataTable>
 
-		<p:dialog header="Album Detail" widgetVar="albumDialog" modal="true"
-			showEffect="fade" hideEffect="fade" resizable="false">
+		<p:dialog header="Album Detail" widgetVar="albumDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			
 			<p:outputPanel id="albumDetail" style="text-align:center;">
-				<p:panelGrid columns="2"
-					rendered="#{not empty albumLazyView.selectedAlbum}"
-					columnClasses="label,value">
-<!-- 					<f:facet name="header"> -->
-<!-- 						<p:graphicImage -->
-<!-- 							name="demo/images/car/#{dtLazyView.selectedCar.brand}-big.gif" /> -->
-<!-- 					</f:facet> -->
+
+				<p:panelGrid columns="2" rendered="#{not empty albumLazyView.selectedAlbum}" columnClasses="label,value">
+
+					<f:facet name="header">
+						<p:graphicImage	name="img/album_covers/#{albumLazyView.selectedAlbum.albumId}.jpg" />
+					</f:facet>
 
 					<h:outputText value="Id:" />
 					<h:outputText value="#{albumLazyView.selectedAlbum.albumId}" />
@@ -60,9 +61,15 @@
 					<h:outputText value="#{albumLazyView.selectedAlbum.title}" />
 
 					<h:outputText value="Artist:" />
-					<h:outputText value="#{albumLazyView.selectedAlbum.artist}" />
+					<h:outputText value="#{albumLazyView.selectedAlbum.artist.name}" />
+					
+					<h:outputText value="Genre:" />
+					<h:outputText value="#{albumLazyView.selectedAlbum.genre.name}" />
+
 				</p:panelGrid>
+
 			</p:outputPanel>
+
 		</p:dialog>
 	</h:form>
 </h:body>

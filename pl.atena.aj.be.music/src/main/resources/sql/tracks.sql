@@ -1,8 +1,8 @@
 CREATE TABLE `tracks` (
   `id`        int(10)   unsigned        NOT     NULL AUTO_INCREMENT COMMENT 'ID utworu',
-  `title`               varchar(256)    DEFAULT NULL                COMMENT 'Tytu³ utworu',
-  `length`    int(10)   unsigned        DEFAULT NULL                COMMENT 'D³ugoœæ utworu w sekundach',
+  `title`               varchar(256)    DEFAULT NULL                COMMENT 'TytuÅ‚ utworu',
+  `length`    int(10)   unsigned        DEFAULT NULL                COMMENT 'DÅ‚ugoÅ›Ä‡ utworu w sekundach',
   `track_no`  int(10)   unsigned        DEFAULT NULL                COMMENT 'Numer utworu na albumie',
-  `album_id`  int(10)   unsigned        NOT     NULL                COMMENT 'ID albumu, na którym znajduje siê utwór',
+  `album_id`  int(10)   unsigned        NOT     NULL                COMMENT 'ID albumu, na ktÃ³rym znajduje siÄ™ utwÃ³r',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

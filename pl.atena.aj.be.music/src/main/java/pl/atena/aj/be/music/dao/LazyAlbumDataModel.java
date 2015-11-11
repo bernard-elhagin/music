@@ -1,5 +1,6 @@
 package pl.atena.aj.be.music.dao;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -20,20 +21,21 @@ public class LazyAlbumDataModel extends LazyDataModel<AlbumDTO> {
 		this.datasource = datasource;
 	}
 
-	public AlbumDTO getRowData(int rowKey) {
-		for (AlbumDTO album : datasource) {
-			if (album.getAlbumId() == rowKey) {
-				return album;
-			}
-		}
-
-		return null;
-	}
+	@Override
+    public Object getRowKey(AlbumDTO album) {
+        return album.getAlbumId();
+    }
 
 	@Override
-	public Object getRowKey(AlbumDTO album) {
-		return album.getAlbumId();
-	}
+	public AlbumDTO getRowData(String rowKey) {
+        for (AlbumDTO album : datasource) {
+            if (album.getAlbumId() == Integer.parseInt(rowKey)) {
+                return album;
+            }
+        }
+
+        return null;
+    }
 
 	@Override
 	public List<AlbumDTO> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
@@ -48,8 +50,13 @@ public class LazyAlbumDataModel extends LazyDataModel<AlbumDTO> {
 				for (Iterator<String> it = filters.keySet().iterator(); it.hasNext();) {
 					try {
 						String filterProperty = it.next();
+						
 						Object filterValue = filters.get(filterProperty);
-						String fieldValue = String.valueOf(album.getClass().getField(filterProperty).get(album));
+						
+						Field field = album.getClass().getDeclaredField(filterProperty);
+						field.setAccessible(true);
+						
+						String fieldValue = String.valueOf(field.get(album));
 
 						if (filterValue == null || fieldValue.startsWith(filterValue.toString())) {
 							match = true;
@@ -70,7 +77,7 @@ public class LazyAlbumDataModel extends LazyDataModel<AlbumDTO> {
 
 		// rowCount
 		int dataSize = data.size();
-		this.setRowCount(dataSize);
+		setRowCount(dataSize);
 
 		// paginate
 		if (dataSize > pageSize) {

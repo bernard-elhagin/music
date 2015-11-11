@@ -8,6 +8,7 @@
 		<id          property="albumId" column="alb_id" />
 		<result      property="title"   column="alb_title" />
 		<result      property="genre"   column="alb_genre_id" />
+		<result      property="year"   column="alb_year" />
 		<association property="artist"  resultMap="pl.atena.aj.be.music.mappers.ArtistDTO.ArtistDTOResult" />
 		<collection  property="tracks"  resultMap="pl.atena.aj.be.music.mappers.TrackDTO.TrackDTOResult" />
 	</resultMap>
@@ -16,6 +17,7 @@
 		alb.id          as alb_id,
 		alb.title       as alb_title,
 		alb.genre_id    as alb_genre_id,
+		alb.year        as alb_year,
 	</sql>
 
 	<sql id="albumDTOFrom">
@@ -57,18 +59,20 @@
 	</select>
 
 	<insert id="createAlbumDTO" parameterType="AlbumDTO" useGeneratedKeys="true" keyProperty="albumId">
-		INSERT INTO albums (title, artist_id, genre_id)
+		INSERT INTO albums (title, artist_id, genre_id, year)
 		VALUES (
 				 #{title},
 				 #{artist.artistId},
-				 #{genre}
+				 #{genre},
+				 #{year}
 			   )
 	</insert>
 
 	<update id="updateAlbumDTO" parameterType="AlbumDTO">
 		UPDATE albums
 		SET	   title    = #{title},
-			   genre_id = #{genre} 
+			   genre_id = #{genre},
+			   year     = #{year} 
 	    WHERE  id       = #{albumId}
 	</update>
 
