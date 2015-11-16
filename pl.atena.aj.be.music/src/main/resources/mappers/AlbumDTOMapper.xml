@@ -77,11 +77,8 @@
 	</update>
 
 	<delete id="deleteAlbumDTO" parameterType="int">
-		DELETE
-		<trim suffixOverrides=",">
-			<include refid="albumDTOFrom" />
-		</trim>
-		WHERE album_id = #{id}
+		DELETE FROM albums
+		WHERE id = #{id}
 	</delete>
  
 </mapper>

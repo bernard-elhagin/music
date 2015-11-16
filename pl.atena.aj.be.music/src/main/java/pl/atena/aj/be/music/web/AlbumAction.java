@@ -4,10 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -30,22 +28,18 @@ public class AlbumAction implements Serializable {
 
 	private int index = 0;
 	
-	@PostConstruct
-	public void init() {
-	}
-	
 	SqlSessionFactory sf = MyBatisSQLSessionFactory.getSqlSessionFactory();
 	
 	private AlbumDAO albumDao = new AlbumDAO(AlbumDTO.class, sf);
-	
-	public String doSomeWork(){
 
-		// Do some work
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Some Work Achieved"));
-        
-        // Change the index that TabMenu refers as activated tab
-        index = 1;
-        return "";
+	@PostConstruct
+	public void init() {
+	}
+
+	public String deleteAlbum(Integer id) {
+		albumDao.delete(id);
+		
+		return "";
     }
 	
 	public List<SelectItem> getGenres() {
