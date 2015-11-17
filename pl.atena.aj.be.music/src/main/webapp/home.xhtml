@@ -52,6 +52,7 @@
 			<p:outputPanel id="albumDetail" style="text-align:center;">
 
 				<p:panelGrid columns="2" rendered="#{not empty albumLazyView.selectedAlbum}" columnClasses="label,value">
+					
 					<f:facet name="header">
 						<p:graphicImage	name="img/album_covers/#{albumLazyView.selectedAlbum.albumId}.jpg" />
 					</f:facet>
@@ -67,11 +68,19 @@
 
 					<h:outputText value="#{messages.album_artist}:" />
 					<h:outputText value="#{albumLazyView.selectedAlbum.artist.name}" />
-					
+
 					<h:outputText value="#{messages.album_genre}:" />
 					<h:outputText value="#{albumLazyView.selectedAlbum.genre.name}" />
 
-					<h:commandButton action="#{albumActionBean.deleteAlbum(albumLazyView.selectedAlbum.albumId)}" value="#{messages.action_delete}" />
+					<p:commandButton action="#{albumActionBean.deleteAlbum(albumLazyView.selectedAlbum.albumId)}" value="#{messages.action_delete}">
+						<p:confirm header="Confirmation" message="#{messages.action_are_you_sure}" icon="ui-icon-alert" />
+					</p:commandButton>
+					
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="No"  type="button" styleClass="ui-confirmdialog-no"  icon="ui-icon-close" />
+					</p:confirmDialog>
+				
 				</p:panelGrid>
 
 			</p:outputPanel>
