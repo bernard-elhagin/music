@@ -8,6 +8,8 @@
 
 <h:head />
 
+<h:outputStylesheet library="font-awesome" name="css/font-awesome.css" />
+
 <h:body>
 
 	<h:form id="form">
@@ -21,7 +23,7 @@
 				update=":form:albumDetail" oncomplete="PF('albumDialog').show()" />
 
 			<p:column headerText="#{messages.album_id}" sortBy="#{album.albumId}" filterBy="#{album.albumId}">
-				<h:outputText value="#{album.albumId}" />
+				<i class="fa fa-music fa-1x" /> <h:outputText value=" #{album.albumId}" />
 			</p:column>
 
 			<p:column headerText="#{messages.album_artist}" sortBy="#{album.artist.name}"	filterBy="#{album.artist}">
