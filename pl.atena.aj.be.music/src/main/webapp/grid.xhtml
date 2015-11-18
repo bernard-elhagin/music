@@ -13,48 +13,31 @@
 <h:body>
 
 	<h:form id="form">
-		<p:dataTable var="album" value="#{albumLazyView.lazyModel}"
-			paginator="true" rows="20"
-			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink} {Actions}"
-			rowsPerPageTemplate="5, 10, 15, 20" selectionMode="single"
-			selection="#{albumLazyView.selectedAlbum}" id="albumTable" lazy="true">
+		<p:dataGrid var="album" value="#{albumLazyView.lazyModel.datasource}" columns="3" layout="grid"
+	        rows="12" paginator="true" id="albums"
+	        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	        rowsPerPageTemplate="6,12,16">
 			
 			<f:facet name="header">
 				#{messages.menu_list_of_albums}
 			</f:facet>
 
-			<f:facet name="{Actions}">
-				<p:commandButton action="albumActionBean.addAlbum()" value="#{messages.action_add_album}"/>
-			</f:facet>
-			
-			<p:ajax event="rowSelect" listener="#{albumLazyView.onRowSelect}"
-				update=":form:albumDetail" oncomplete="PF('albumDialog').show()" />
+			<p:panel header="#{album.albumId}" style="text-align:center">
+				<h:panelGrid columns="1" style="width:100%">
+					<p:graphicImage name="img/album_covers/#{album.albumId}.jpg" />
 
-			<p:column headerText="#{messages.album_id}" sortBy="#{album.albumId}" filterBy="#{album.albumId}">
-				<i class="fa fa-key fa-1x" /> <h:outputText value=" #{album.albumId}" />
-			</p:column>
+					<h:outputText value="#{album.title}" />
 
-			<p:column headerText="#{messages.album_artist}" sortBy="#{album.artist.name}"	filterBy="#{album.artist}">
-				<i class="fa fa-microphone fa-1x" /> <h:outputText value=" #{album.artist.name}" />
-			</p:column>
-
-			<p:column headerText="#{messages.album_title}" sortBy="#{album.title}" filterBy="#{album.title}">
-				<i class="fa fa-music fa-1x" /> <h:outputText value=" #{album.title}" />
-			</p:column>
-
-			<p:column headerText="#{messages.album_genre}" sortBy="#{album.genre.name}" filterBy="#{album.genre.name}">
-				<i class="fa fa-headphones fa-1x" /> <h:outputText value=" #{album.genre.name}" />
-			</p:column>
-		
-			<p:column headerText="#{messages.album_year}" sortBy="#{album.year}" filterBy="#{album.year}">
-				<i class="fa fa-calendar fa-1x" /> <h:outputText value=" #{album.year}" />
-			</p:column>
-
-			<f:facet name="footer">
-				#{messages.menu_count_of_albums} #{albumLazyView.lazyModel.getDatasourceSize()}
-			</f:facet>
-
-		</p:dataTable>
+					<p:commandLink update=":form:albumDetail"
+						oncomplete="PF('albumDialog').show()" title="View Detail">
+						<h:outputText styleClass="ui-icon ui-icon-search"
+							style="margin:0 auto;" />
+						<f:setPropertyActionListener value="#{album}"
+							target="#{albumLazyView.selectedAlbum}" />
+					</p:commandLink>
+				</h:panelGrid>
+			</p:panel>
+		</p:dataGrid>
 
 		<p:themeSwitcher style="width:165px" effect="fade">
 			<f:selectItem itemLabel="#{messages.flow_select_theme}" itemValue="" />

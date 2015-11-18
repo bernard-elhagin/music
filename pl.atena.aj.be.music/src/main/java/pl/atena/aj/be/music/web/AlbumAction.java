@@ -42,6 +42,10 @@ public class AlbumAction implements Serializable {
 		return "";
     }
 	
+	public String addAlbum() {
+		return "";
+	}
+	
 	public List<SelectItem> getGenres() {
 		return Genre.getAllValues();
 	}

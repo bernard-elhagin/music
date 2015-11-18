@@ -37,6 +37,14 @@ public class LazyAlbumDataModel extends LazyDataModel<AlbumDTO> {
         return null;
     }
 
+	public List<AlbumDTO> getDatasource() {
+		return datasource;
+	}
+	
+	public int getDatasourceSize() {
+		return datasource.size();
+	}
+	
 	@Override
 	public List<AlbumDTO> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
 		
