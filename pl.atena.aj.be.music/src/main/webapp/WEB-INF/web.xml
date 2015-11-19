@@ -18,7 +18,7 @@
 
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
-		<param-value>start</param-value>
+		<param-value>afterwork</param-value>
 	</context-param>
 
 	<welcome-file-list>

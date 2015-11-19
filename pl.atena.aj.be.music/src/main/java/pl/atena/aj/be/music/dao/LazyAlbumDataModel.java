@@ -64,9 +64,9 @@ public class LazyAlbumDataModel extends LazyDataModel<AlbumDTO> {
 						Field field = album.getClass().getDeclaredField(filterProperty);
 						field.setAccessible(true);
 						
-						String fieldValue = String.valueOf(field.get(album));
+						String fieldValue = String.valueOf(field.get(album)).toLowerCase();
 
-						if (filterValue == null || fieldValue.startsWith(filterValue.toString())) {
+						if (filterValue == null || fieldValue.startsWith(filterValue.toString().toLowerCase())) {
 							match = true;
 						} else {
 							match = false;

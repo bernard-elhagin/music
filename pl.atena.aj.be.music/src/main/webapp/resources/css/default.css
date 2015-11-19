@@ -1,0 +1,13 @@
+.truncate {
+    max-width: 120 px;
+}
+ 
+.truncate > span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    display: block;
+    position: relative;
+}

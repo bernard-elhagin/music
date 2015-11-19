@@ -9,24 +9,25 @@
 <h:head />
 
 <h:outputStylesheet library="font-awesome" name="css/font-awesome.css" />
+<h:outputStylesheet name="css/default.css" />
 
 <h:body>
 
 	<h:form id="form">
 		<p:dataTable var="album" value="#{albumLazyView.lazyModel}"
-			paginator="true" rows="20"
+			paginator="true" rows="15"
 			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink} {Actions}"
 			rowsPerPageTemplate="5, 10, 15, 20" selectionMode="single"
-			selection="#{albumLazyView.selectedAlbum}" id="albumTable" lazy="true">
-			
+			selection="#{albumLazyView.selectedAlbum}" id="albumTable" lazy="true" style="margin-bottom:20px">
+
+			<f:facet name="{Actions}">
+				<p:commandButton action="addAlbum" value="#{messages.action_add_album}" style="font-size: 89%; float: right;" />
+			</f:facet>
+
 			<f:facet name="header">
 				#{messages.menu_list_of_albums}
 			</f:facet>
 
-			<f:facet name="{Actions}">
-				<p:commandButton action="albumActionBean.addAlbum()" value="#{messages.action_add_album}"/>
-			</f:facet>
-			
 			<p:ajax event="rowSelect" listener="#{albumLazyView.onRowSelect}"
 				update=":form:albumDetail" oncomplete="PF('albumDialog').show()" />
 
@@ -34,8 +35,9 @@
 				<i class="fa fa-key fa-1x" /> <h:outputText value=" #{album.albumId}" />
 			</p:column>
 
-			<p:column headerText="#{messages.album_artist}" sortBy="#{album.artist.name}"	filterBy="#{album.artist}">
-				<i class="fa fa-microphone fa-1x" /> <h:outputText value=" #{album.artist.name}" />
+			<p:column headerText="#{messages.album_artist}" sortBy="#{album.artist.name}" filterBy="#{album.artist}" styleClass="truncate">
+				<h:outputText id="name" value=" #{album.artist.name}" />
+				<p:tooltip for="name" value="#{album.artist.name}" />
 			</p:column>
 
 			<p:column headerText="#{messages.album_title}" sortBy="#{album.title}" filterBy="#{album.title}">
