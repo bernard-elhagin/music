@@ -16,7 +16,7 @@
 	<h:form id="form">
 		
 		<p:dataTable var="album" value="#{albumLazyView.lazyModel}"
-			paginator="true" rows="15"
+			paginator="true" rows="15" first="#{albumLazyView.pageNumber}"
 			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink} {Actions}"
 			rowsPerPageTemplate="5, 10, 15, 20" selectionMode="single"
 			selection="#{albumLazyView.selectedAlbum}" id="albumTable" lazy="true" style="margin-bottom: 20px">
@@ -29,8 +29,10 @@
 				<p:commandButton action="addAlbum" value="#{messages.action_add_album}" style="font-size: 77%; float: right; margin-bottom: 2px;" />
 			</f:facet>
 
+			<p:ajax event="page" listener="#{albumLazyView.onPageChange}" />
+
 			<p:ajax event="rowSelect" listener="#{albumLazyView.onRowSelect}"
-				update=":form:albumDetail" oncomplete="PF('albumDialog').show()" />
+				    update=":form:albumDetail" oncomplete="PF('albumDialog').show()" />
 
 			<p:column headerText="#{messages.album_id}" sortBy="#{album.albumId}" filterBy="#{album.albumId}">
 				<i class="fa fa-key fa-1x" /> <h:outputText value=" #{album.albumId}" />
@@ -65,7 +67,7 @@
 			<f:selectItems value="#{userSettingsBean.themes}" />
 		</p:themeSwitcher>
 
-		<ui:include src="/WEB-INF/dialog.xhtml" />
+		<ui:include src="/WEB-INF/viewDeleteOrUpdateDialog.xhtml" />
 
 	</h:form>
 </h:body>

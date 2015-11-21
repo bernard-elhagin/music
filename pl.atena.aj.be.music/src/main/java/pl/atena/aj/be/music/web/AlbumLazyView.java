@@ -6,10 +6,12 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.component.datatable.DataTable;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.event.data.PageEvent;
 import org.primefaces.model.LazyDataModel;
 
 import pl.atena.aj.be.music.dao.AlbumDAO;
@@ -19,7 +21,7 @@ import pl.atena.aj.be.music.domain.Genre;
 import pl.atena.aj.be.music.utils.MyBatisSQLSessionFactory;
  
 @ManagedBean(name="albumLazyView")
-@ViewScoped
+@SessionScoped
 public class AlbumLazyView implements Serializable {
      
 	private static final long serialVersionUID = -7572869343047925778L;
@@ -27,6 +29,8 @@ public class AlbumLazyView implements Serializable {
 	private LazyDataModel<AlbumDTO> lazyModel;
      
     private AlbumDTO selectedAlbum;
+    
+    private int pageNumber;
     
     @ManagedProperty("#{albumService}")
     private AlbumDAO albumDAO = new AlbumDAO(AlbumDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
@@ -41,6 +45,10 @@ public class AlbumLazyView implements Serializable {
         return lazyModel;
     }
  
+    public void onPageChange(PageEvent event) {
+    	this.setPageNumber(((DataTable) event.getSource()).getFirst());
+    }
+    
     public AlbumDTO getSelectedAlbum() {
         return selectedAlbum;
     }
@@ -68,5 +76,14 @@ public class AlbumLazyView implements Serializable {
 	
 	public Genre[] getGenres() {
 		return Genre.values();
+		
+	}
+
+	public int getPageNumber() {
+		return pageNumber;
+	}
+
+	public void setPageNumber(int pageNumber) {
+		this.pageNumber = pageNumber;
 	}
 }
