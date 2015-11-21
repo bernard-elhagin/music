@@ -15,6 +15,7 @@ import org.primefaces.model.LazyDataModel;
 import pl.atena.aj.be.music.dao.AlbumDAO;
 import pl.atena.aj.be.music.dao.LazyAlbumDataModel;
 import pl.atena.aj.be.music.domain.AlbumDTO;
+import pl.atena.aj.be.music.domain.Genre;
 import pl.atena.aj.be.music.utils.MyBatisSQLSessionFactory;
  
 @ManagedBean(name="albumLazyView")
@@ -63,5 +64,9 @@ public class AlbumLazyView implements Serializable {
 
 	public void setAlbumDAO(AlbumDAO albumDAO) {
 		this.albumDAO = albumDAO;
+	}
+	
+	public Genre[] getGenres() {
+		return Genre.values();
 	}
 }

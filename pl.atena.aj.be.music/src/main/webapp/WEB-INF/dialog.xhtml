@@ -1,0 +1,75 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:m="http://bertold.com/music">
+
+	<p:dialog header="#{messages.album_detail}" widgetVar="albumDialog"
+		      modal="true" showEffect="fade"    hideEffect="explode"
+		      resizable="false" closeOnEscape="true">
+
+		<p:outputPanel id="albumDetail" style="text-align:center;">
+			<p:panelGrid columns="2"
+				rendered="#{not empty albumLazyView.selectedAlbum}"
+				columnClasses="label,value">
+
+				<f:facet name="header">
+					<p:graphicImage
+						name="img/album_covers/#{albumLazyView.selectedAlbum.albumId}.jpg" />
+				</f:facet>
+
+				<h:outputText value="#{messages.album_id}:" />
+				<h:outputText value="#{albumLazyView.selectedAlbum.albumId}" />
+
+				<h:outputText value="#{messages.album_year}" />
+				<p:inplace id="changeYear">
+					<p:inputText value="#{albumLazyView.selectedAlbum.year}" />
+				</p:inplace>
+
+				<h:outputText value="#{messages.album_title}:" />
+				<p:inplace id="changeTitle" styleClass="truncate">
+					<p:inputText value="#{albumLazyView.selectedAlbum.title}" />
+				</p:inplace>
+
+				<h:outputText value="#{messages.album_artist}:" />
+				<p:inplace id="changeArtist">
+					<p:inputText value="#{albumLazyView.selectedAlbum.artist.name}" />
+				</p:inplace>
+
+				<h:outputText value="#{messages.album_genre}:" />
+				<h:selectOneMenu value="#{albumLazyView.selectedAlbum.genre}">
+					<f:selectItems value="#{albumLazyView.genres}" var="genre"
+						itemValue="#{genre}" itemLabel="#{genre.name}" />
+				</h:selectOneMenu>
+
+				<p:commandButton
+					action="#{albumActionBean.deleteAlbum(albumLazyView.selectedAlbum.albumId)}"
+					value="#{messages.action_delete}">
+					<p:confirm header="Confirmation"
+						message="#{messages.action_are_you_sure}" icon="ui-icon-alert" />
+				</p:commandButton>
+
+				<p:commandButton
+					action="#{albumActionBean.editAlbum(albumLazyView.selectedAlbum)}"
+					value="#{messages.action_update}">
+					<p:confirm header="Confirmation"
+						message="#{messages.action_are_you_sure}" icon="ui-icon-alert" />
+				</p:commandButton>
+
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					<p:commandButton value="#{messages.action_yes}" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="#{messages.action_no}" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+
+			</p:panelGrid>
+
+		</p:outputPanel>
+
+		<p:ajax event="close" update="albumTable" />
+
+	</p:dialog>
+
+</ui:composition>

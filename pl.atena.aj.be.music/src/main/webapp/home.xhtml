@@ -14,18 +14,19 @@
 <h:body>
 
 	<h:form id="form">
+		
 		<p:dataTable var="album" value="#{albumLazyView.lazyModel}"
 			paginator="true" rows="15"
 			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink} {Actions}"
 			rowsPerPageTemplate="5, 10, 15, 20" selectionMode="single"
-			selection="#{albumLazyView.selectedAlbum}" id="albumTable" lazy="true" style="margin-bottom:20px">
-
-			<f:facet name="{Actions}">
-				<p:commandButton action="addAlbum" value="#{messages.action_add_album}" style="font-size: 89%; float: right;" />
-			</f:facet>
+			selection="#{albumLazyView.selectedAlbum}" id="albumTable" lazy="true" style="margin-bottom: 20px">
 
 			<f:facet name="header">
 				#{messages.menu_list_of_albums}
+			</f:facet>
+
+			<f:facet name="{Actions}">
+				<p:commandButton action="addAlbum" value="#{messages.action_add_album}" style="font-size: 77%; float: right; margin-bottom: 2px;" />
 			</f:facet>
 
 			<p:ajax event="rowSelect" listener="#{albumLazyView.onRowSelect}"
@@ -36,12 +37,13 @@
 			</p:column>
 
 			<p:column headerText="#{messages.album_artist}" sortBy="#{album.artist.name}" filterBy="#{album.artist}" styleClass="truncate">
-				<h:outputText id="name" value=" #{album.artist.name}" />
-				<p:tooltip for="name" value="#{album.artist.name}" />
+				<i class="fa fa-microphone fa-1x" style="float: left; margin-right: 5px" /> <h:outputText id="artistName" value="#{album.artist.name}" />
+				<p:tooltip for="artistName" value="#{album.artist.name}" />
 			</p:column>
 
-			<p:column headerText="#{messages.album_title}" sortBy="#{album.title}" filterBy="#{album.title}">
-				<i class="fa fa-music fa-1x" /> <h:outputText value=" #{album.title}" />
+			<p:column headerText="#{messages.album_title}" sortBy="#{album.title}" filterBy="#{album.title}" styleClass="truncate">
+				<i class="fa fa-music fa-1x" style="float: left; margin-right: 5px" /> <h:outputText id="albumTitle" value=" #{album.title}" />
+				<p:tooltip for="albumTitle" value="#{album.title}" />
 			</p:column>
 
 			<p:column headerText="#{messages.album_genre}" sortBy="#{album.genre.name}" filterBy="#{album.genre.name}">
@@ -63,45 +65,8 @@
 			<f:selectItems value="#{userSettingsBean.themes}" />
 		</p:themeSwitcher>
 
-		<p:dialog header="#{messages.album_detail}" widgetVar="albumDialog" modal="true" showEffect="fade" hideEffect="explode" resizable="false">
-			
-			<p:outputPanel id="albumDetail" style="text-align:center;">
+		<ui:include src="/WEB-INF/dialog.xhtml" />
 
-				<p:panelGrid columns="2" rendered="#{not empty albumLazyView.selectedAlbum}" columnClasses="label,value">
-					
-					<f:facet name="header">
-						<p:graphicImage	name="img/album_covers/#{albumLazyView.selectedAlbum.albumId}.jpg" />
-					</f:facet>
-
-					<h:outputText value="#{messages.album_id}:" />
-					<h:outputText value="#{albumLazyView.selectedAlbum.albumId}" />
-
-					<h:outputText value="#{messages.album_year}" />
-					<h:outputText value="#{albumLazyView.selectedAlbum.year}" />
-
-					<h:outputText value="#{messages.album_title}:" />
-					<h:outputText value="#{albumLazyView.selectedAlbum.title}" />
-
-					<h:outputText value="#{messages.album_artist}:" />
-					<h:outputText value="#{albumLazyView.selectedAlbum.artist.name}" />
-
-					<h:outputText value="#{messages.album_genre}:" />
-					<h:outputText value="#{albumLazyView.selectedAlbum.genre.name}" />
-
-					<p:commandButton action="#{albumActionBean.deleteAlbum(albumLazyView.selectedAlbum.albumId)}" value="#{messages.action_delete}">
-						<p:confirm header="Confirmation" message="#{messages.action_are_you_sure}" icon="ui-icon-alert" />
-					</p:commandButton>
-					
-					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-						<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-						<p:commandButton value="No"  type="button" styleClass="ui-confirmdialog-no"  icon="ui-icon-close" />
-					</p:confirmDialog>
-				
-				</p:panelGrid>
-
-			</p:outputPanel>
-
-		</p:dialog>
 	</h:form>
 </h:body>
 

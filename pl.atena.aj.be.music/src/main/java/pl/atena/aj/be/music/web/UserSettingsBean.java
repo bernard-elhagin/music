@@ -85,7 +85,7 @@ public class UserSettingsBean implements Serializable {
             availableThemes.add(new Theme(theme.getKey(), theme.getValue()));
         }
 
-        // set "Home" theme as default
-        theme = availableThemes.get(18);
+        // set "Hot-Sneaks" theme as default
+        theme = availableThemes.get(19);
     }
 }

@@ -18,7 +18,7 @@
 
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
-		<param-value>afterwork</param-value>
+		<param-value>hot-sneaks</param-value>
 	</context-param>
 
 	<welcome-file-list>

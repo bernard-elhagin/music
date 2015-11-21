@@ -39,13 +39,20 @@ public class AlbumAction implements Serializable {
 	public String deleteAlbum(Integer id) {
 		albumDao.delete(id);
 		
-		return "";
+		return "home";
     }
 	
 	public String addAlbum() {
-		return "";
+		
+		return "home";
 	}
 	
+	public String editAlbum(AlbumDTO album) {
+		albumDao.update(album);
+		
+		return "home";
+	}
+
 	public List<SelectItem> getGenres() {
 		return Genre.getAllValues();
 	}
