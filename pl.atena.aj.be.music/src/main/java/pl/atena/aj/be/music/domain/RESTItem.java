@@ -1,4 +1,5 @@
 package pl.atena.aj.be.music.domain;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
