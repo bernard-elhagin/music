@@ -30,27 +30,22 @@
 				</p:inplace>
 
 				<h:outputText value="#{messages.album_artist}:" />
-				<p:inplace id="changeArtist">
-					<p:inputText value="#{albumLazyView.selectedAlbum.artist.name}" />
-				</p:inplace>
+				<h:outputText value="#{albumLazyView.getArtistNameById(albumLazyView.selectedAlbum.artistId)}" />
 
 				<h:outputText value="#{messages.album_genre}:" />
 				<h:selectOneMenu value="#{albumLazyView.selectedAlbum.genre}">
 					<f:selectItems value="#{albumLazyView.genres}" var="genre" itemValue="#{genre}" itemLabel="#{genre.name}" />
 				</h:selectOneMenu>
 
-				<p:commandButton action="#{albumActionBean.deleteAlbum(albumLazyView.selectedAlbum.albumId)}" value="#{messages.action_delete}">
+				<p:commandButton action="#{albumLazyView.deleteAlbum(albumLazyView.selectedAlbum.albumId)}" value="#{messages.action_delete}">
 					<p:confirm header="Confirmation" message="#{messages.action_are_you_sure}" icon="ui-icon-alert" />
 				</p:commandButton>
 
-				<p:commandButton action="#{albumActionBean.editAlbum(albumLazyView.selectedAlbum)}"	value="#{messages.action_update}">
+				<p:commandButton action="#{albumLazyView.editAlbum(albumLazyView.selectedAlbum)}"	value="#{messages.action_update}">
 					<p:confirm header="Confirmation" message="#{messages.action_are_you_sure}" icon="ui-icon-alert" />
 				</p:commandButton>
 
-				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-					<p:commandButton value="#{messages.action_yes}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-					<p:commandButton value="#{messages.action_no}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-				</p:confirmDialog>
+				<ui:include src="/WEB-INF/confirmationDialog.xhtml" />
 
 			</p:panelGrid>
 		</p:outputPanel>

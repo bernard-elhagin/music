@@ -19,8 +19,8 @@
 				<p:inputText value="#{albumLazyView.newAlbum.title}" />
 
 				<h:outputText value="#{messages.album_artist}:" />
-				<h:selectOneMenu value="#{albumLazyView.newArtist}">
-					<f:selectItems value="#{albumLazyView.artists}" var="artist" itemValue="#{artist}" itemLabel="#{artist.name}" />
+				<h:selectOneMenu value="#{albumLazyView.newAlbum.artistId}">
+					<f:selectItems value="#{albumLazyView.allArtists}" var="artist" itemValue="#{artist.artistId}" itemLabel="#{artist.name}" />
 				</h:selectOneMenu>
 
 				<h:outputText value="#{messages.album_genre}:" />
@@ -28,7 +28,11 @@
 					<f:selectItems value="#{albumLazyView.genres}" var="genre" itemValue="#{genre}" itemLabel="#{genre.name}" />
 				</h:selectOneMenu>
 
-				<p:commandButton onclick="#{albumActionBean.addAlbum(albumLazyView.newAlbum)}" value="#{messages.action_add_album}" />
+				<p:commandButton action="#{albumLazyView.addAlbum(albumLazyView.newAlbum)}" value="#{messages.action_add_album}">
+					<p:confirm header="Confirmation" message="#{messages.action_are_you_sure}" icon="ui-icon-alert" />
+				</p:commandButton>
+
+				<ui:include src="/WEB-INF/confirmationDialog.xhtml" />
 
 			</p:panelGrid>
 		</p:outputPanel>

@@ -42,7 +42,8 @@ public class AlbumAction implements Serializable {
 		return "home";
     }
 	
-	public String addAlbum() {
+	public String addAlbum(AlbumDTO album) {
+		albumDao.create(album);
 		
 		return "home";
 	}

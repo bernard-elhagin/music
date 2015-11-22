@@ -58,4 +58,10 @@
 		WHERE art.id = #{id}
 	</delete>
  
+ 	<select id="getArtistDTOByName" parameterType="String" resultType="ArtistDTO">
+		SELECT *
+			<include refid="artistDTOFrom" />
+		WHERE art.name = #{name}
+	</select>
+ 
 </mapper>

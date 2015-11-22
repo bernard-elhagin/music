@@ -17,7 +17,7 @@
 		
 		<p:dataTable var="album" value="#{albumLazyView.lazyModel}"
 			paginator="true" rows="15" first="#{albumLazyView.pageNumber}"
-			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink} {Actions}"
+			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink} {AddAlbum} {AddArtist}"
 			rowsPerPageTemplate="5, 10, 15, 20" selectionMode="single"
 			selection="#{albumLazyView.selectedAlbum}" id="albumTable" lazy="true" style="margin-bottom: 20px">
 
@@ -25,8 +25,12 @@
 				#{messages.menu_list_of_albums}
 			</f:facet>
 
-			<f:facet name="{Actions}">
-				<p:commandButton action="addAlbum" value="#{messages.action_add_album}" style="font-size: 77%; float: right; margin-bottom: 2px;" />
+			<f:facet name="{AddAlbum}">
+				<p:commandButton onclick="PF('addAlbumDialog').show()" value="#{messages.action_add_album}" style="font-size: 77%; float: right; margin-bottom: 2px;" />
+			</f:facet>
+
+			<f:facet name="{AddArtist}">
+				<p:commandButton onclick="PF('addArtistDialog').show()" value="#{messages.action_add_artist}" style="font-size: 77%; float: right; margin-bottom: 2px;" />
 			</f:facet>
 
 			<p:ajax event="page" listener="#{albumLazyView.onPageChange}" />
@@ -38,9 +42,9 @@
 				<i class="fa fa-key fa-1x" /> <h:outputText value=" #{album.albumId}" />
 			</p:column>
 
-			<p:column headerText="#{messages.album_artist}" sortBy="#{album.artist.name}" filterBy="#{album.artist}" styleClass="truncate">
-				<i class="fa fa-microphone fa-1x" style="float: left; margin-right: 5px" /> <h:outputText id="artistName" value="#{album.artist.name}" />
-				<p:tooltip for="artistName" value="#{album.artist.name}" />
+			<p:column headerText="#{messages.album_artist}" sortBy="#{albumLazyView.getArtistNameById(album.artistId)}" filterBy="#{albumLazyView.getArtistNameById(album.artistId)}" styleClass="truncate">
+				<i class="fa fa-microphone fa-1x" style="float: left; margin-right: 5px" /> <h:outputText id="artistName" value="#{albumLazyView.getArtistNameById(album.artistId)}" />
+				<p:tooltip for="artistName" value="#{albumLazyView.getArtistNameById(album.artistId)}" />
 			</p:column>
 
 			<p:column headerText="#{messages.album_title}" sortBy="#{album.title}" filterBy="#{album.title}" styleClass="truncate">
@@ -68,6 +72,8 @@
 		</p:themeSwitcher>
 
 		<ui:include src="/WEB-INF/viewDeleteOrUpdateDialog.xhtml" />
+		<ui:include src="/WEB-INF/addAlbumDialog.xhtml" />
+		<ui:include src="/WEB-INF/addArtistDialog.xhtml" />
 
 	</h:form>
 </h:body>

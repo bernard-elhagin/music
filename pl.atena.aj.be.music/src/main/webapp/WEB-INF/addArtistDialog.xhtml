@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:m="http://bertold.com/music">
+
+	<p:dialog header="#{messages.action_add_artist}" widgetVar="addArtistDialog"
+		      modal="true" showEffect="fade" hideEffect="explode"
+		      resizable="false" closeOnEscape="true">
+
+		<p:outputPanel id="newArtistDetail" style="text-align:center;">
+			<p:panelGrid columns="2" columnClasses="label,value">
+
+				<h:outputText value="#{messages.album_artist}" />
+				<p:inputText value="#{albumLazyView.newArtist.name}" />
+
+				<p:commandButton action="#{albumLazyView.addArtist(albumLazyView.newArtist)}" value="#{messages.action_add_artist}">
+					<p:confirm header="Confirmation" message="#{messages.action_are_you_sure}" icon="ui-icon-alert" />
+				</p:commandButton>
+
+				<ui:include src="/WEB-INF/confirmationDialog.xhtml" />
+
+			</p:panelGrid>
+		</p:outputPanel>
+
+		<p:ajax event="close" update="albumTable" />
+
+	</p:dialog>
+</ui:composition>

@@ -1,6 +1,7 @@
 package pl.atena.aj.be.music.web;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -15,8 +16,10 @@ import org.primefaces.event.data.PageEvent;
 import org.primefaces.model.LazyDataModel;
 
 import pl.atena.aj.be.music.dao.AlbumDAO;
+import pl.atena.aj.be.music.dao.ArtistDAO;
 import pl.atena.aj.be.music.dao.LazyAlbumDataModel;
 import pl.atena.aj.be.music.domain.AlbumDTO;
+import pl.atena.aj.be.music.domain.ArtistDTO;
 import pl.atena.aj.be.music.domain.Genre;
 import pl.atena.aj.be.music.utils.MyBatisSQLSessionFactory;
  
@@ -30,15 +33,30 @@ public class AlbumLazyView implements Serializable {
      
     private AlbumDTO selectedAlbum;
     
+    private AlbumDTO newAlbum;
+    private ArtistDTO newArtist;
+    
+    private List<ArtistDTO> allArtists;
+    
     private int pageNumber;
     
     @ManagedProperty("#{albumService}")
-    private AlbumDAO albumDAO = new AlbumDAO(AlbumDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
-     
+    private AlbumDAO albumDao = new AlbumDAO(AlbumDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
+
+    @ManagedProperty("#{artistService}")
+    private ArtistDAO artistDao = new ArtistDAO(ArtistDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
+
     @PostConstruct
     public void init() {
-    	albumDAO = new AlbumDAO(AlbumDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
-        lazyModel = new LazyAlbumDataModel(albumDAO.getAll());
+    	albumDao  = new AlbumDAO(AlbumDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
+    	artistDao = new ArtistDAO(ArtistDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
+
+    	newAlbum  = new AlbumDTO();
+    	newArtist = new ArtistDTO();
+
+    	allArtists = artistDao.getAll();
+    	
+        lazyModel = new LazyAlbumDataModel(albumDao.getAll());
     }
  
     public LazyDataModel<AlbumDTO> getLazyModel() {
@@ -58,7 +76,7 @@ public class AlbumLazyView implements Serializable {
     }
      
     public void setService(AlbumDAO albumDAO) {
-        this.albumDAO = albumDAO;
+        this.albumDao = albumDAO;
     }
      
     public void onRowSelect(SelectEvent event) {
@@ -66,24 +84,90 @@ public class AlbumLazyView implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
-	public AlbumDAO getAlbumDao() {
-		return albumDAO;
+	public String deleteAlbum(Integer id) {
+		albumDao.delete(id);
+		init();
+
+		return "home";
+    }
+
+	public String addAlbum(AlbumDTO album) {
+		albumDao.create(album);
+		init();
+
+		return "home";
+	}
+	
+	public String editAlbum(AlbumDTO album) {
+		albumDao.update(album);
+		init();
+
+		return "home";
 	}
 
-	public void setAlbumDAO(AlbumDAO albumDAO) {
-		this.albumDAO = albumDAO;
+	public String addArtist(ArtistDTO artist) {
+		if(artistDao.getByName(artist.getName()) == null) {
+			artistDao.create(artist);
+			init();
+		}
+
+		return "home";
+	}
+
+	public AlbumDAO getAlbumDao() {
+		return albumDao;
+	}
+
+	public void setAlbumDao(AlbumDAO albumDAO) {
+		this.albumDao = albumDAO;
 	}
 	
 	public Genre[] getGenres() {
 		return Genre.values();
 		
 	}
-
+	
 	public int getPageNumber() {
 		return pageNumber;
 	}
 
 	public void setPageNumber(int pageNumber) {
 		this.pageNumber = pageNumber;
+	}
+
+	public AlbumDTO getNewAlbum() {
+		return newAlbum;
+	}
+
+	public void setNewAlbum(AlbumDTO newAlbum) {
+		this.newAlbum = newAlbum;
+	}
+	
+	public String getArtistNameById(int id) {
+		return artistDao.get(id).getName();
+	}
+
+	public ArtistDAO getArtistDao() {
+		return artistDao;
+	}
+
+	public void setArtistDao(ArtistDAO artistDao) {
+		this.artistDao = artistDao;
+	}
+
+	public ArtistDTO getNewArtist() {
+		return newArtist;
+	}
+
+	public void setNewArtist(ArtistDTO newArtist) {
+		this.newArtist = newArtist;
+	}
+
+	public List<ArtistDTO> getAllArtists() {
+		return allArtists;
+	}
+
+	public void setAllArtists(List<ArtistDTO> allArtists) {
+		this.allArtists = allArtists;
 	}
 }

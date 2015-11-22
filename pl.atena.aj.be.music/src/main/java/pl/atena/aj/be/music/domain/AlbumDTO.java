@@ -12,8 +12,8 @@ public class AlbumDTO implements Serializable {
 	/* Tytuł albumu */
 	private String title;
 	
-	/* Wykonawca */
-	private ArtistDTO artist;
+	/* ID wykonawcy */
+	private int artistId;
 
 	/* Gatunek albumu */
 	private Genre genre;
@@ -39,14 +39,6 @@ public class AlbumDTO implements Serializable {
 		this.title = title;
 	}
 
-	public ArtistDTO getArtist() {
-		return artist;
-	}
-
-	public void setArtist(ArtistDTO artist) {
-		this.artist = artist;
-	}
-
 	public Genre getGenre() {
 		return genre;
 	}
@@ -63,49 +55,17 @@ public class AlbumDTO implements Serializable {
 		this.year = year;
 	}
 
+	public int getArtistId() {
+		return artistId;
+	}
+
+	public void setArtistId(int artistId) {
+		this.artistId = artistId;
+	}
+
 	@Override
 	public String toString() {
-		return "AlbumDTO [albumId=" + albumId + ", title=" + title + ", artist=" + artist + ", genre=" + genre
+		return "AlbumDTO [albumId=" + albumId + ", title=" + title + ", artistId=" + artistId + ", genre=" + genre
 				+ ", year=" + year + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + albumId;
-		result = prime * result + ((artist == null) ? 0 : artist.hashCode());
-		result = prime * result + ((genre == null) ? 0 : genre.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		result = prime * result + year;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		AlbumDTO other = (AlbumDTO) obj;
-		if (albumId != other.albumId)
-			return false;
-		if (artist == null) {
-			if (other.artist != null)
-				return false;
-		} else if (!artist.equals(other.artist))
-			return false;
-		if (genre != other.genre)
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		if (year != other.year)
-			return false;
-		return true;
 	}
 }
