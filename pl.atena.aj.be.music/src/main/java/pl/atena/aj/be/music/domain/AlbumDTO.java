@@ -1,7 +1,6 @@
 package pl.atena.aj.be.music.domain;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class AlbumDTO implements Serializable {
 
@@ -21,9 +20,6 @@ public class AlbumDTO implements Serializable {
 	
 	/* Rok wydania */
 	private int year;
-	
-	/* Utwory */
-	private List<TrackDTO> tracks;
 	
 	public AlbumDTO() {	}
 	
@@ -51,14 +47,6 @@ public class AlbumDTO implements Serializable {
 		this.artist = artist;
 	}
 
-	public List<TrackDTO> getTracks() {
-		return tracks;
-	}
-
-	public void setTracks(List<TrackDTO> tracks) {
-		this.tracks = tracks;
-	}
-
 	public Genre getGenre() {
 		return genre;
 	}
@@ -78,6 +66,46 @@ public class AlbumDTO implements Serializable {
 	@Override
 	public String toString() {
 		return "AlbumDTO [albumId=" + albumId + ", title=" + title + ", artist=" + artist + ", genre=" + genre
-				+ ", year=" + year + ", tracks=" + tracks + "]";
+				+ ", year=" + year + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + albumId;
+		result = prime * result + ((artist == null) ? 0 : artist.hashCode());
+		result = prime * result + ((genre == null) ? 0 : genre.hashCode());
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + year;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AlbumDTO other = (AlbumDTO) obj;
+		if (albumId != other.albumId)
+			return false;
+		if (artist == null) {
+			if (other.artist != null)
+				return false;
+		} else if (!artist.equals(other.artist))
+			return false;
+		if (genre != other.genre)
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
+		if (year != other.year)
+			return false;
+		return true;
 	}
 }

@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:m="http://bertold.com/music">
+
+	<p:dialog header="#{messages.action_add_album}" widgetVar="addAlbumDialog"
+		      modal="true" showEffect="fade" hideEffect="explode"
+		      resizable="false" closeOnEscape="true">
+
+		<p:outputPanel id="newAlbumDetail" style="text-align:center;">
+			<p:panelGrid columns="2" columnClasses="label,value">
+
+				<h:outputText value="#{messages.album_year}" />
+				<p:inputText value="#{albumLazyView.newAlbum.year}" />
+
+				<h:outputText value="#{messages.album_title}:" />
+				<p:inputText value="#{albumLazyView.newAlbum.title}" />
+
+				<h:outputText value="#{messages.album_artist}:" />
+				<h:selectOneMenu value="#{albumLazyView.newArtist}">
+					<f:selectItems value="#{albumLazyView.artists}" var="artist" itemValue="#{artist}" itemLabel="#{artist.name}" />
+				</h:selectOneMenu>
+
+				<h:outputText value="#{messages.album_genre}:" />
+				<h:selectOneMenu value="#{albumLazyView.newAlbum.genre}">
+					<f:selectItems value="#{albumLazyView.genres}" var="genre" itemValue="#{genre}" itemLabel="#{genre.name}" />
+				</h:selectOneMenu>
+
+				<p:commandButton onclick="#{albumActionBean.addAlbum(albumLazyView.newAlbum)}" value="#{messages.action_add_album}" />
+
+			</p:panelGrid>
+		</p:outputPanel>
+
+		<p:ajax event="close" update="albumTable" />
+
+	</p:dialog>
+</ui:composition>

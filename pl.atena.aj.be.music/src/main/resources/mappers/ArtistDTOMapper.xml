@@ -26,14 +26,18 @@
 
 	<select id="getArtistDTO" parameterType="int" resultType="ArtistDTO" resultMap="ArtistDTOResult">
 		SELECT
-			<include refid="artistDTOColumns" />
+			<trim suffixOverrides=",">
+				<include refid="artistDTOColumns" />
+			</trim>
 			<include refid="artistDTOFrom" />
 		WHERE art.id = #{id}
 	</select>
 
 	<select id="getAllArtistDTO" resultMap="ArtistDTOResult">
-		SELECT 
-			<include refid="artistDTOColumns" />
+		SELECT
+			<trim suffixOverrides=",">
+				<include refid="artistDTOColumns" />
+			</trim>
 			<include refid="artistDTOFrom" />
 	</select>
 
