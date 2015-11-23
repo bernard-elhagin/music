@@ -37,11 +37,13 @@
 					<f:selectItems value="#{albumLazyView.genres}" var="genre" itemValue="#{genre}" itemLabel="#{genre.name}" />
 				</h:selectOneMenu>
 
-				<p:commandButton action="#{albumLazyView.deleteAlbum(albumLazyView.selectedAlbum.albumId)}" value="#{messages.action_delete}">
+				<p:commandButton action="#{albumLazyView.deleteAlbum(albumLazyView.selectedAlbum.albumId)}" value="#{messages.action_delete}"
+					oncomplete="PF('albumDialog').hide()">
 					<p:confirm header="Confirmation" message="#{messages.action_are_you_sure}" icon="ui-icon-alert" />
 				</p:commandButton>
 
-				<p:commandButton action="#{albumLazyView.editAlbum(albumLazyView.selectedAlbum)}"	value="#{messages.action_update}">
+				<p:commandButton action="#{albumLazyView.editAlbum(albumLazyView.selectedAlbum)}"	value="#{messages.action_update}"
+					oncomplete="PF('albumDialog').hide()">
 					<p:confirm header="Confirmation" message="#{messages.action_are_you_sure}" icon="ui-icon-alert" />
 				</p:commandButton>
 
