@@ -19,7 +19,7 @@
 				<p:inputText value="#{albumLazyView.newAlbum.title}" />
 
 				<h:outputText value="#{messages.album_artist}:" />
-				<h:selectOneMenu value="#{albumLazyView.newAlbum.artistId}">
+				<h:selectOneMenu value="#{albumLazyView.newAlbum.artistId}" style="width: 150px">
 					<f:selectItems value="#{albumLazyView.allArtists}" var="artist" itemValue="#{artist.artistId}" itemLabel="#{artist.name}" />
 				</h:selectOneMenu>
 
