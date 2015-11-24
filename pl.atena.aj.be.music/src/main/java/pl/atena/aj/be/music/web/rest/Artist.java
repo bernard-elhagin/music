@@ -2,18 +2,18 @@ package pl.atena.aj.be.music.web.rest;
 
 public class Artist extends Item {
     
-	private int id;
+	private String id;
     
 	private String name;
 
     public Artist() {
     }
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

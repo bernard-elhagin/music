@@ -3,53 +3,58 @@ package pl.atena.aj.be.music.web.rest;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 
 import pl.atena.aj.be.music.dao.AlbumDAO;
+import pl.atena.aj.be.music.dao.ArtistDAO;
+import pl.atena.aj.be.music.domain.AlbumDTO;
+import pl.atena.aj.be.music.domain.ArtistDTO;
+import pl.atena.aj.be.music.utils.MyBatisSQLSessionFactory;
 
 public class MusicWebService implements MusicLibrary {
 
-	@EJB
-	private AlbumDAO ad;
-
     private static Collection<Item> datasource = new ArrayList<>();
 
-    static {
-        Album album = new Album();
-        album.setId(1);
-        album.setName("The Wall");
-        
-        datasource.add(album);
-        
-        Artist artist = new Artist();
-        artist.setId(1);
-        artist.setName("Pink Floyd");
-        
-        datasource.add(artist);
-    }
-
+    @Inject
+    private AlbumDAO albumDao;
+    
+    @Inject
+    private ArtistDAO artistDao;
+    
     @Override
-    public Collection<Album> getAlbums() {
-        Collection<Album> albums = new ArrayList<>();
+    public Collection<Item> getAlbums() {
+        Collection<Item> albums = new ArrayList<>();
         
-        for (Item item : datasource) {
-            if (item instanceof Album) {
-                albums.add((Album) item);
-            }
+        albumDao = new AlbumDAO(AlbumDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
+        
+        ArrayList<AlbumDTO> allAlbumsDB = albumDao.getAll();
+
+        for(AlbumDTO a : allAlbumsDB) {
+        	Item item = new Item();
+        	item.setId(Integer.toString(a.getAlbumId()));
+        	item.setName(a.getTitle());
+        
+        	albums.add(item);
         }
 
         return albums;
     }
 
     @Override
-    public Collection<Artist> getArtists() {
-        Collection<Artist> artists = new ArrayList<>();
+    public Collection<Item> getArtists() {
+        Collection<Item> artists = new ArrayList<>();
         
-        for (Item item : datasource) {
-            if (item instanceof Artist) {
-                artists.add((Artist) item);
-            }
+        artistDao = new ArtistDAO(ArtistDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
+        
+        ArrayList<ArtistDTO> allArtistsDB = artistDao.getAll();
+
+        for(ArtistDTO a : allArtistsDB) {
+        	Item item = new Item();
+        	item.setId(Integer.toString(a.getArtistId()));
+        	item.setName(a.getName());
+        
+        	artists.add(item);
         }
 
         return artists;
@@ -61,68 +66,37 @@ public class MusicWebService implements MusicLibrary {
     }
 
     @Override
-    public Response getAlbum(int id) {
-        Album album = null;
+    public Response getAlbum(String idString) {
+    	int id = Integer.parseInt(idString);
+        Item album = new Item();
 
-        for (Item item : datasource) {
-            if (item instanceof Album) {
-                album = (Album) item;
-                
-                if (album.getId() == id) {
-                    return Response.status(200).entity(album).build();
-                }
-            }
+        albumDao = new AlbumDAO(AlbumDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
+        
+        if(albumDao.get(id) != null) {
+        	album.setId(idString);
+        	album.setName(albumDao.get(id).getTitle());
+        	
+        	return Response.status(200).entity(album).build();
         }
 
         return Response.status(404).entity("Nie ma takiego albumu").build();
     }
 
-    @Override
-    public Album addAlbum(int id, String title) {
-        Album album = new Album();
-        album.setId(id);
-        album.setName(title);
-        
-        datasource.add(album);
-        
-        return album;
-    }
+	@Override
+	public Album addAlbum(int id, String title) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    @Override
-    public Album updateAlbum(int id, String title) {
-        Album album = null;
-        
-        for (Item item : datasource) {
-            if (item instanceof Album) {
-                album = (Album) item;
-                
-                if (album.getId() == id) {
-                    album.setName(title);
-                    
-                    return album;
-                }
-            }
-        }
-        
-        return null;
-    }
+	@Override
+	public Album updateAlbum(int id, String title) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    @Override
-    public Response removeAlbum(int id) {
-        Album album = null;
-
-        for (Item item : datasource) {
-            if (item instanceof Album) {
-                album = (Album) item;
-                
-                if (album.getId() == id) {
-                    datasource.remove(album);
-                    
-                    return Response.status(200).entity(album).build();
-                }
-            }
-        }
-        
-        return Response.status(404).entity("Nie albumu o podanym id").build();
-    }
+	@Override
+	public Response removeAlbum(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

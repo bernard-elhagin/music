@@ -28,13 +28,13 @@ public interface MusicLibrary {
     @GET
     @Path("/albums")
     @ApiOperation(value = "Zwraca wszystkie albumy", notes = "Zwraca listę albumów", response = Album.class, responseContainer = "list")
-    public Collection<Album> getAlbums();
+    public Collection<Item> getAlbums();
 
     @GET
     @Path("/artists")
     @Produces("text/plain")
     @ApiOperation(value = "Zwraca wszystkich wykonawców", notes = "Zwraca liste wykonawców", response = Artist.class, responseContainer = "list")
-    public Collection<Artist> getArtists() ;
+    public Collection<Item> getArtists() ;
 
     @GET
     @Produces({ "application/xml" })
@@ -48,7 +48,7 @@ public interface MusicLibrary {
     public Response getAlbum(
             @ApiParam(value = "podaj id",required = false)
             @Size(min=1, max=3)
-            @PathParam("id") int id) ;
+            @PathParam("id") String id) ;
 
     @PUT
     @Path("/albums/{id}")

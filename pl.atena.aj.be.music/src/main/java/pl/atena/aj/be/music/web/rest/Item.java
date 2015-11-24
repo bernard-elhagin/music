@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Item {
 
     protected String name;
-    protected int id;
+    protected String id;
 
     public Item() {
         super();
@@ -21,11 +21,11 @@ public class Item {
 		this.name = name;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
