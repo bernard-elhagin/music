@@ -3,9 +3,15 @@ package pl.atena.aj.be.music.web.rest;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.ejb.EJB;
 import javax.ws.rs.core.Response;
 
+import pl.atena.aj.be.music.dao.AlbumDAO;
+
 public class MusicWebService implements MusicLibrary {
+
+	@EJB
+	private AlbumDAO ad;
 
     private static Collection<Item> datasource = new ArrayList<>();
 
@@ -45,6 +51,7 @@ public class MusicWebService implements MusicLibrary {
                 artists.add((Artist) item);
             }
         }
+
         return artists;
     }
 
