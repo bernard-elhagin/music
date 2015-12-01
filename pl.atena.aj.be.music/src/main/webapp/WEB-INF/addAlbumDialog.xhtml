@@ -13,22 +13,24 @@
 			<p:panelGrid columns="2" columnClasses="label,value">
 
 				<h:outputText value="#{messages.album_year}" />
-				<p:inputText value="#{albumLazyView.newAlbum.year}" />
+				<p:inputText value="#{albumController.newAlbum.year}" />
 
 				<h:outputText value="#{messages.album_title}:" />
-				<p:inputText value="#{albumLazyView.newAlbum.title}" />
+				<p:inputText value="#{albumController.newAlbum.title}">
+					<f:converter converterId="EmptyTitleConverter"/>
+				</p:inputText>
 
 				<h:outputText value="#{messages.album_artist}:" />
-				<h:selectOneMenu value="#{albumLazyView.newAlbum.artistId}" style="width: 150px">
-					<f:selectItems value="#{albumLazyView.allArtists}" var="artist" itemValue="#{artist.artistId}" itemLabel="#{artist.name}" />
+				<h:selectOneMenu value="#{albumController.newAlbum.artistId}" style="width: 150px">
+					<f:selectItems value="#{albumController.allArtists}" var="artist" itemValue="#{artist.artistId}" itemLabel="#{artist.name}" />
 				</h:selectOneMenu>
 
 				<h:outputText value="#{messages.album_genre}:" />
-				<h:selectOneMenu value="#{albumLazyView.newAlbum.genre}">
-					<f:selectItems value="#{albumLazyView.genres}" var="genre" itemValue="#{genre}" itemLabel="#{genre.name}" />
+				<h:selectOneMenu value="#{albumController.newAlbum.genre}">
+					<f:selectItems value="#{albumController.genres}" var="genre" itemValue="#{genre}" itemLabel="#{genre.name}" />
 				</h:selectOneMenu>
 
-				<p:commandButton action="#{albumLazyView.addAlbum(albumLazyView.newAlbum)}" value="#{messages.action_add_album}"
+				<p:commandButton action="#{albumController.addAlbum(albumController.newAlbum)}" value="#{messages.action_add_album}"
 					oncomplete="PF('addAlbumDialog').hide()">
 					<p:confirm header="Confirmation" message="#{messages.action_are_you_sure}" icon="ui-icon-alert" />
 				</p:commandButton>

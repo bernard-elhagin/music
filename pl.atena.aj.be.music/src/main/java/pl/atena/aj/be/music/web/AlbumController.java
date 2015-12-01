@@ -1,5 +1,6 @@
 package pl.atena.aj.be.music.web;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 
@@ -23,9 +24,9 @@ import pl.atena.aj.be.music.domain.ArtistDTO;
 import pl.atena.aj.be.music.domain.Genre;
 import pl.atena.aj.be.music.utils.MyBatisSQLSessionFactory;
  
-@ManagedBean(name="albumLazyView")
+@ManagedBean(name="albumController")
 @SessionScoped
-public class AlbumLazyView implements Serializable {
+public class AlbumController implements Serializable {
      
 	private static final long serialVersionUID = -7572869343047925778L;
 
@@ -45,6 +46,9 @@ public class AlbumLazyView implements Serializable {
 
     @ManagedProperty("#{artistService}")
     private ArtistDAO artistDao = new ArtistDAO(ArtistDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
+    
+    @ManagedProperty("#{album.albumId}")
+    private Integer albumId;
 
     @PostConstruct
     public void init() {
@@ -143,8 +147,8 @@ public class AlbumLazyView implements Serializable {
 		this.newAlbum = newAlbum;
 	}
 	
-	public String getArtistNameById(int id) {
-		return artistDao.get(id).getName();
+	public ArtistDTO getArtistById(int id) {
+		return artistDao.get(id);
 	}
 
 	public ArtistDAO getArtistDao() {
@@ -169,5 +173,19 @@ public class AlbumLazyView implements Serializable {
 
 	public void setAllArtists(List<ArtistDTO> allArtists) {
 		this.allArtists = allArtists;
+	}
+	
+	public boolean doesCoverExist(Integer albumId) {
+		File file = new File("resources/img/album_covers/" + Integer.toString(albumId) + ".jpg");
+System.out.println(file.toString());
+        return file.exists();
+	}
+
+	public Integer getAlbumId() {
+		return albumId;
+	}
+
+	public void setAlbumId(Integer albumId) {
+		this.albumId = albumId;
 	}
 }

@@ -40,15 +40,15 @@ public class LazyAlbumDataModel extends LazyDataModel<AlbumDTO> {
 	public List<AlbumDTO> getDatasource() {
 		return datasource;
 	}
-	
+
 	public int getDatasourceSize() {
 		return datasource.size();
 	}
-	
+
 	@Override
 	public List<AlbumDTO> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
-		
-		List<AlbumDTO> data = new ArrayList<AlbumDTO>();
+
+		List<AlbumDTO> data = new ArrayList<>();
 
 		// filter
 		for (AlbumDTO album : datasource) {
@@ -58,12 +58,12 @@ public class LazyAlbumDataModel extends LazyDataModel<AlbumDTO> {
 				for (Iterator<String> it = filters.keySet().iterator(); it.hasNext();) {
 					try {
 						String filterProperty = it.next();
-						
+
 						Object filterValue = filters.get(filterProperty);
-						
+
 						Field field = album.getClass().getDeclaredField(filterProperty);
 						field.setAccessible(true);
-						
+
 						String fieldValue = String.valueOf(field.get(album)).toLowerCase();
 
 						if (filterValue == null || fieldValue.startsWith(filterValue.toString().toLowerCase())) {

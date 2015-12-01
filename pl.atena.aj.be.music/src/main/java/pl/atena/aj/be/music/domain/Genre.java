@@ -1,6 +1,5 @@
 package pl.atena.aj.be.music.domain;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,11 +7,11 @@ import javax.faces.model.SelectItem;
 
 /**
  * Oficjalna lista gatunków dla standardu ID3 v2.3.0.
- * 
+ *
  * http://id3.org/id3v2.3.0
- * 
+ *
  */
-public enum Genre implements Serializable {
+public enum Genre {
 
 	A_CAPELLA("A capella"),
 	ACID("Acid"),
@@ -142,14 +141,14 @@ public enum Genre implements Serializable {
 	VOCAL("Vocal");
 
 	private String name;
-	
+
 	/* Na potrzeby JSF-owej listy rozwijanej */
 	private static List<SelectItem> allValues = fillValues();
 
 	private Genre(String name) {
 		this.name = name;
 	}
-	
+
 	public String getName() {
 		return name;
 	}

@@ -3,7 +3,6 @@ package pl.atena.aj.be.music.web;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
@@ -18,39 +17,35 @@ import pl.atena.aj.be.music.utils.MyBatisSQLSessionFactory;
 @ManagedBean
 @SessionScoped
 public class AlbumAction implements Serializable {
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 2461200801267762392L;
 
 	private AlbumDTO album = new AlbumDTO();
 
 	private int index = 0;
-	
-	SqlSessionFactory sf = MyBatisSQLSessionFactory.getSqlSessionFactory();
-	
-	private AlbumDAO albumDao = new AlbumDAO(AlbumDTO.class, sf);
 
-	@PostConstruct
-	public void init() {
-	}
+	SqlSessionFactory sf = MyBatisSQLSessionFactory.getSqlSessionFactory();
+
+	private AlbumDAO albumDao = new AlbumDAO(AlbumDTO.class, sf);
 
 	public String deleteAlbum(Integer id) {
 		albumDao.delete(id);
-		
+
 		return "home";
     }
-	
+
 	public String addAlbum(AlbumDTO album) {
 		albumDao.create(album);
-		
+
 		return "home";
 	}
-	
+
 	public String editAlbum(AlbumDTO album) {
 		albumDao.update(album);
-		
+
 		return "home";
 	}
 
@@ -61,7 +56,7 @@ public class AlbumAction implements Serializable {
 	public void createAlbum() {
 		albumDao.create(album);
 	}
-	
+
 	public AlbumDTO getAlbum() {
 		return album;
 	}

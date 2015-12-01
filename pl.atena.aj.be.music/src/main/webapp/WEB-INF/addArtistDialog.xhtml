@@ -13,9 +13,9 @@
 			<p:panelGrid columns="2" columnClasses="label,value">
 
 				<h:outputText value="#{messages.album_artist}" />
-				<p:inputText value="#{albumLazyView.newArtist.name}" />
+				<p:inputText value="#{albumController.newArtist.name}" />
 
-				<p:commandButton action="#{albumLazyView.addArtist(albumLazyView.newArtist)}" value="#{messages.action_add_artist}"
+				<p:commandButton action="#{albumController.addArtist(albumController.newArtist)}" value="#{messages.action_add_artist}"
 					oncomplete="PF('addArtistDialog').hide()">
 					<p:confirm header="Confirmation" message="#{messages.action_are_you_sure}" icon="ui-icon-alert" />
 				</p:commandButton>

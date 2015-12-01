@@ -15,11 +15,11 @@
 
 	<h:form id="form">
 		
-		<p:dataTable var="album" value="#{albumLazyView.lazyModel}"
-			paginator="true" rows="15" first="#{albumLazyView.pageNumber}"
+		<p:dataTable var="album" value="#{albumController.lazyModel}"
+			paginator="true" rows="15" first="#{albumController.pageNumber}"
 			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink} {AddAlbum} {AddArtist}"
 			rowsPerPageTemplate="5, 10, 15, 20" selectionMode="single"
-			selection="#{albumLazyView.selectedAlbum}" id="albumTable" lazy="true" style="margin-bottom: 20px">
+			selection="#{albumController.selectedAlbum}" id="albumTable" lazy="true" style="margin-bottom: 20px">
 
 			<f:facet name="header">
 				#{messages.menu_list_of_albums}
@@ -33,18 +33,18 @@
 				<p:commandButton onclick="PF('addArtistDialog').show()" value="#{messages.action_add_artist}" style="font-size: 77%; float: right; margin-bottom: 2px;" />
 			</f:facet>
 
-			<p:ajax event="page" listener="#{albumLazyView.onPageChange}" />
+			<p:ajax event="page" listener="#{albumController.onPageChange}" />
 
-			<p:ajax event="rowSelect" listener="#{albumLazyView.onRowSelect}"
+			<p:ajax event="rowSelect" listener="#{albumController.onRowSelect}"
 				    update=":form:albumDetail" oncomplete="PF('albumDialog').show()" />
 
 			<p:column headerText="#{messages.album_id}" sortBy="#{album.albumId}" filterBy="#{album.albumId}">
 				<i class="fa fa-key fa-1x" /> <h:outputText value=" #{album.albumId}" />
 			</p:column>
 
-			<p:column headerText="#{messages.album_artist}" sortBy="#{albumLazyView.getArtistNameById(album.artistId)}" filterBy="#{albumLazyView.getArtistNameById(album.artistId)}" styleClass="truncate">
-				<i class="fa fa-microphone fa-1x" style="float: left; margin-right: 5px" /> <h:outputText id="artistName" value="#{albumLazyView.getArtistNameById(album.artistId)}" />
-				<p:tooltip for="artistName" value="#{albumLazyView.getArtistNameById(album.artistId)}" />
+			<p:column headerText="#{messages.album_artist}" sortBy="#{albumController.getArtistById(album.artistId).name}" filterBy="#{albumController.getArtistById(album.artistId).name}" styleClass="truncate">
+				<i class="fa fa-microphone fa-1x" style="float: left; margin-right: 5px" /> <h:outputText id="artistName" value="#{albumController.getArtistById(album.artistId).name}" />
+				<p:tooltip for="artistName" value="#{albumController.getArtistById(album.artistId).name}" />
 			</p:column>
 
 			<p:column headerText="#{messages.album_title}" sortBy="#{album.title}" filterBy="#{album.title}" styleClass="truncate">
@@ -61,7 +61,7 @@
 			</p:column>
 
 			<f:facet name="footer">
-				#{messages.menu_count_of_albums} #{albumLazyView.lazyModel.getDatasourceSize()}
+				#{messages.menu_count_of_albums} #{albumController.lazyModel.getDatasourceSize()}
 			</f:facet>
 
 		</p:dataTable>

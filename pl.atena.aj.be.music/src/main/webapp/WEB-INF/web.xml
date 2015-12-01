@@ -20,11 +20,33 @@
 		<param-name>primefaces.THEME</param-name>
 		<param-value>hot-sneaks</param-value>
 	</context-param>
-
+  
+  	<context-param>
+    	<param-name>resteasy.scan</param-name>
+    	<param-value>true</param-value>
+  	</context-param>
+	
 	<welcome-file-list>
 		<welcome-file>faces/home.xhtml</welcome-file>
 	</welcome-file-list>
-
+    
+    <servlet>
+        <servlet-name>Jersey2Config</servlet-name>
+        <servlet-class>io.swagger.jaxrs.config.DefaultJaxrsConfig</servlet-class>
+    
+        <init-param>
+            <param-name>api.version</param-name>
+            <param-value>1.0.0</param-value>
+        </init-param>
+    
+        <init-param>
+            <param-name>swagger.api.basepath</param-name>
+            <param-value>http://localhost:8080/music/rest/music_library</param-value>
+        </init-param>
+    
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+	
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

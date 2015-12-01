@@ -40,7 +40,7 @@ public class UserSettingsBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        themes = new TreeMap<String, String>();
+        themes = new TreeMap<>();
         themes.put("Afterdark", "afterdark");
         themes.put("Afternoon", "afternoon");
         themes.put("Afterwork", "afterwork");
@@ -80,7 +80,7 @@ public class UserSettingsBean implements Serializable {
         themes.put("UI-Lightness", "ui-lightness");
         themes.put("Vader", "vader");
 
-        availableThemes = new ArrayList<Theme>();
+        availableThemes = new ArrayList<>();
         for (Map.Entry<String, String> theme : themes.entrySet()) {
             availableThemes.add(new Theme(theme.getKey(), theme.getValue()));
         }

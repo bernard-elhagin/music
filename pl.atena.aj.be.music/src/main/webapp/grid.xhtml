@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -13,30 +14,40 @@
 <h:body>
 
 	<h:form id="form">
-		<p:dataGrid var="album" value="#{albumLazyView.lazyModel.datasource}" columns="3" layout="grid"
-	        rows="12" paginator="true" id="albums"
-	        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		<p:dataGrid var="album" value="#{albumController.lazyModel.datasource}" columns="3" layout="grid"
+	        rows="12" paginator="true" id="albumTable"
+	        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {AddAlbum} {AddArtist}"
 	        rowsPerPageTemplate="6,12,16">
 			
 			<f:facet name="header">
 				#{messages.menu_list_of_albums}
 			</f:facet>
 
+			<f:facet name="{AddAlbum}">
+				<p:commandButton onclick="PF('addAlbumDialog').show()" value="#{messages.action_add_album}" style="font-size: 77%; float: right; margin-bottom: 2px;" />
+			</f:facet>
+
+			<f:facet name="{AddArtist}">
+				<p:commandButton onclick="PF('addArtistDialog').show()" value="#{messages.action_add_artist}" style="font-size: 77%; float: right; margin-bottom: 2px;" />
+			</f:facet>
+
 			<p:panel header="#{album.albumId}" style="text-align:center">
+				
 				<h:panelGrid columns="1" style="width:100%">
-					<p:graphicImage name="img/album_covers/#{album.albumId}.jpg" />
+
+					#{albumController.doesCoverExist(album.albumId)}
 
 					<h:outputText value="#{album.title}" />
 
 					<p:commandLink update=":form:albumDetail"
 						oncomplete="PF('albumDialog').show()" title="View Detail">
-						<h:outputText styleClass="ui-icon ui-icon-search"
-							style="margin:0 auto;" />
-						<f:setPropertyActionListener value="#{album}"
-							target="#{albumLazyView.selectedAlbum}" />
+						<h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
+						<f:setPropertyActionListener value="#{album}" target="#{albumController.selectedAlbum}" />
 					</p:commandLink>
 				</h:panelGrid>
+			
 			</p:panel>
+		
 		</p:dataGrid>
 
 		<p:themeSwitcher style="width:165px" effect="fade">
@@ -44,45 +55,10 @@
 			<f:selectItems value="#{userSettingsBean.themes}" />
 		</p:themeSwitcher>
 
-		<p:dialog header="#{messages.album_detail}" widgetVar="albumDialog" modal="true" showEffect="fade" hideEffect="explode" resizable="false">
-			
-			<p:outputPanel id="albumDetail" style="text-align:center;">
+		<ui:include src="/WEB-INF/viewDeleteOrUpdateDialog.xhtml" />
+		<ui:include src="/WEB-INF/addAlbumDialog.xhtml" />
+		<ui:include src="/WEB-INF/addArtistDialog.xhtml" />
 
-				<p:panelGrid columns="2" rendered="#{not empty albumLazyView.selectedAlbum}" columnClasses="label,value">
-					
-					<f:facet name="header">
-						<p:graphicImage	name="img/album_covers/#{albumLazyView.selectedAlbum.albumId}.jpg" />
-					</f:facet>
-
-					<h:outputText value="#{messages.album_id}:" />
-					<h:outputText value="#{albumLazyView.selectedAlbum.albumId}" />
-
-					<h:outputText value="#{messages.album_year}" />
-					<h:outputText value="#{albumLazyView.selectedAlbum.year}" />
-
-					<h:outputText value="#{messages.album_title}:" />
-					<h:outputText value="#{albumLazyView.selectedAlbum.title}" />
-
-					<h:outputText value="#{messages.album_artist}:" />
-					<h:outputText value="#{albumLazyView.selectedAlbum.artist.name}" />
-
-					<h:outputText value="#{messages.album_genre}:" />
-					<h:outputText value="#{albumLazyView.selectedAlbum.genre.name}" />
-
-					<p:commandButton action="#{albumActionBean.deleteAlbum(albumLazyView.selectedAlbum.albumId)}" value="#{messages.action_delete}">
-						<p:confirm header="Confirmation" message="#{messages.action_are_you_sure}" icon="ui-icon-alert" />
-					</p:commandButton>
-					
-					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-						<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-						<p:commandButton value="No"  type="button" styleClass="ui-confirmdialog-no"  icon="ui-icon-close" />
-					</p:confirmDialog>
-				
-				</p:panelGrid>
-
-			</p:outputPanel>
-
-		</p:dialog>
 	</h:form>
 </h:body>
 

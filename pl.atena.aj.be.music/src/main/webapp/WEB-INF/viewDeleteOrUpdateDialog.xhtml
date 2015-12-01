@@ -10,39 +10,39 @@
 		      resizable="false" closeOnEscape="true">
 
 		<p:outputPanel id="albumDetail" style="text-align:center;">
-			<p:panelGrid columns="2" rendered="#{not empty albumLazyView.selectedAlbum}" columnClasses="label,value">
+			<p:panelGrid columns="2" rendered="#{not empty albumController.selectedAlbum}" columnClasses="label,value">
 
 				<f:facet name="header">
-					<p:graphicImage	name="img/album_covers/#{albumLazyView.selectedAlbum.albumId}.jpg" />
+					<p:graphicImage	name="img/album_covers/#{albumController.selectedAlbum.albumId}.jpg" />
 				</f:facet>
 
 				<h:outputText value="#{messages.album_id}:" />
-				<h:outputText value="#{albumLazyView.selectedAlbum.albumId}" />
+				<h:outputText value="#{albumController.selectedAlbum.albumId}" />
 
 				<h:outputText value="#{messages.album_year}" />
 				<p:inplace id="changeYear">
-					<p:inputText value="#{albumLazyView.selectedAlbum.year}" />
+					<p:inputText value="#{albumController.selectedAlbum.year}" />
 				</p:inplace>
 
 				<h:outputText value="#{messages.album_title}:" />
 				<p:inplace id="changeTitle" styleClass="truncate">
-					<p:inputText value="#{albumLazyView.selectedAlbum.title}" />
+					<p:inputText value="#{albumController.selectedAlbum.title}" />
 				</p:inplace>
 
 				<h:outputText value="#{messages.album_artist}:" />
-				<h:outputText value="#{albumLazyView.getArtistNameById(albumLazyView.selectedAlbum.artistId)}" />
+				<h:outputText value="#{albumController.getArtistById(albumController.selectedAlbum.artistId).name}" />
 
 				<h:outputText value="#{messages.album_genre}:" />
-				<h:selectOneMenu value="#{albumLazyView.selectedAlbum.genre}">
-					<f:selectItems value="#{albumLazyView.genres}" var="genre" itemValue="#{genre}" itemLabel="#{genre.name}" />
+				<h:selectOneMenu value="#{albumController.selectedAlbum.genre}">
+					<f:selectItems value="#{albumController.genres}" var="genre" itemValue="#{genre}" itemLabel="#{genre.name}" />
 				</h:selectOneMenu>
 
-				<p:commandButton action="#{albumLazyView.deleteAlbum(albumLazyView.selectedAlbum.albumId)}" value="#{messages.action_delete}"
+				<p:commandButton action="#{albumController.deleteAlbum(albumController.selectedAlbum.albumId)}" value="#{messages.action_delete}"
 					oncomplete="PF('albumDialog').hide()">
 					<p:confirm header="Confirmation" message="#{messages.action_are_you_sure}" icon="ui-icon-alert" />
 				</p:commandButton>
 
-				<p:commandButton action="#{albumLazyView.editAlbum(albumLazyView.selectedAlbum)}"	value="#{messages.action_update}"
+				<p:commandButton action="#{albumController.editAlbum(albumController.selectedAlbum)}"	value="#{messages.action_update}"
 					oncomplete="PF('albumDialog').hide()">
 					<p:confirm header="Confirmation" message="#{messages.action_are_you_sure}" icon="ui-icon-alert" />
 				</p:commandButton>
