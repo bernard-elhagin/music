@@ -17,7 +17,7 @@
 		
 		<p:dataTable var="album" value="#{albumController.lazyModel}"
 			paginator="true" rows="15" first="#{albumController.pageNumber}"
-			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink} {AddAlbum} {AddArtist}"
+			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink} {AddAlbum} {AddArtist} {ThumbnailView}"
 			rowsPerPageTemplate="5, 10, 15, 20" selectionMode="single"
 			selection="#{albumController.selectedAlbum}" id="albumTable" lazy="true" style="margin-bottom: 20px">
 
@@ -31,6 +31,10 @@
 
 			<f:facet name="{AddArtist}">
 				<p:commandButton onclick="PF('addArtistDialog').show()" value="#{messages.action_add_artist}" style="font-size: 77%; float: right; margin-bottom: 2px;" />
+			</f:facet>
+
+			<f:facet name="{ThumbnailView}">
+				<p:commandButton action="grid" value="#{messages.flow_thumbnails}" style="font-size: 77%; float: right; margin-bottom: 2px;" />
 			</f:facet>
 
 			<p:ajax event="page" listener="#{albumController.onPageChange}" />

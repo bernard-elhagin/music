@@ -14,10 +14,10 @@
 <h:body>
 
 	<h:form id="form">
-		<p:dataGrid var="album" value="#{albumController.lazyModel.datasource}" columns="3" layout="grid"
-	        rows="12" paginator="true" id="albumTable"
-	        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {AddAlbum} {AddArtist}"
-	        rowsPerPageTemplate="6,12,16">
+		<p:dataGrid var="album" value="#{albumController.lazyModel.datasource}" columns="4" layout="grid"
+	        rows="16" paginator="true" id="albumTable"
+	        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {AddAlbum} {AddArtist} {HomeView}"
+	        rowsPerPageTemplate="6, 12, 16, 18">
 			
 			<f:facet name="header">
 				#{messages.menu_list_of_albums}
@@ -31,13 +31,18 @@
 				<p:commandButton onclick="PF('addArtistDialog').show()" value="#{messages.action_add_artist}" style="font-size: 77%; float: right; margin-bottom: 2px;" />
 			</f:facet>
 
+			<f:facet name="{HomeView}">
+				<p:commandButton action="home" value="#{messages.flow_home}" style="font-size: 77%; float: right; margin-bottom: 2px;" />
+			</f:facet>
+
 			<p:panel header="#{album.albumId}" style="text-align:center">
 				
 				<h:panelGrid columns="1" style="width:100%">
-
-					#{albumController.doesCoverExist(album.albumId)}
-
+					<p:graphicImage width="175" height="175" name="img/album_covers/#{album.albumId}.jpg" />
+					
+					<h:outputText value="#{albumController.getArtistById(album.artistId).name}" />
 					<h:outputText value="#{album.title}" />
+					<h:outputText value="#{album.year}" />
 
 					<p:commandLink update=":form:albumDetail"
 						oncomplete="PF('albumDialog').show()" title="View Detail">
