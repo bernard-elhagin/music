@@ -36,9 +36,15 @@
 			</f:facet>
 
 			<p:panel header="#{album.albumId}" style="text-align:center">
-				
+
 				<h:panelGrid columns="1" style="width:100%">
-					<p:graphicImage width="175" height="175" name="img/album_covers/#{album.albumId}.jpg" />
+					<ui:param name="albumId" value="#{album.albumId}" />
+					<c:if test="#{albumController.doesCoverExist(albumId)}">
+						<p:graphicImage width="175" height="175" name="img/album_covers/#{album.albumId}.jpg" />
+					</c:if>
+					<c:otherwise>
+						<p:graphicImage width="175" height="175" name="img/album_covers/default.jpg" />
+					</c:otherwise>
 					
 					<h:outputText value="#{albumController.getArtistById(album.artistId).name}" />
 					<h:outputText value="#{album.title}" />

@@ -10,6 +10,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.primefaces.component.datatable.DataTable;
 import org.primefaces.event.SelectEvent;
@@ -23,30 +25,30 @@ import pl.atena.aj.be.music.domain.AlbumDTO;
 import pl.atena.aj.be.music.domain.ArtistDTO;
 import pl.atena.aj.be.music.domain.Genre;
 import pl.atena.aj.be.music.utils.MyBatisSQLSessionFactory;
- 
+
 @ManagedBean(name="albumController")
 @SessionScoped
 public class AlbumController implements Serializable {
-     
+
 	private static final long serialVersionUID = -7572869343047925778L;
 
 	private LazyDataModel<AlbumDTO> lazyModel;
-     
+
     private AlbumDTO selectedAlbum;
-    
+
     private AlbumDTO newAlbum;
     private ArtistDTO newArtist;
-    
+
     private List<ArtistDTO> allArtists;
-    
+
     private int pageNumber;
-    
+
     @ManagedProperty("#{albumService}")
     private AlbumDAO albumDao = new AlbumDAO(AlbumDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
 
     @ManagedProperty("#{artistService}")
     private ArtistDAO artistDao = new ArtistDAO(ArtistDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
-    
+
     @ManagedProperty("#{album.albumId}")
     private Integer albumId;
 
@@ -59,30 +61,30 @@ public class AlbumController implements Serializable {
     	newArtist = new ArtistDTO();
 
     	allArtists = artistDao.getAll();
-    	
+
         lazyModel = new LazyAlbumDataModel(albumDao.getAll());
     }
- 
+
     public LazyDataModel<AlbumDTO> getLazyModel() {
         return lazyModel;
     }
- 
+
     public void onPageChange(PageEvent event) {
     	this.setPageNumber(((DataTable) event.getSource()).getFirst());
     }
-    
+
     public AlbumDTO getSelectedAlbum() {
         return selectedAlbum;
     }
- 
+
     public void setSelectedAlbum(AlbumDTO selectedAlbum) {
         this.selectedAlbum = selectedAlbum;
     }
-     
+
     public void setService(AlbumDAO albumDAO) {
         this.albumDao = albumDAO;
     }
-     
+
     public void onRowSelect(SelectEvent event) {
         FacesMessage msg = new FacesMessage("Selected Album", ((AlbumDTO) event.getObject()).getTitle());
         FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -101,7 +103,7 @@ public class AlbumController implements Serializable {
 
 		return "home";
 	}
-	
+
 	public String editAlbum(AlbumDTO album) {
 		albumDao.update(album);
 		init();
@@ -125,12 +127,12 @@ public class AlbumController implements Serializable {
 	public void setAlbumDao(AlbumDAO albumDAO) {
 		this.albumDao = albumDAO;
 	}
-	
+
 	public Genre[] getGenres() {
 		return Genre.values();
-		
+
 	}
-	
+
 	public int getPageNumber() {
 		return pageNumber;
 	}
@@ -146,7 +148,7 @@ public class AlbumController implements Serializable {
 	public void setNewAlbum(AlbumDTO newAlbum) {
 		this.newAlbum = newAlbum;
 	}
-	
+
 	public ArtistDTO getArtistById(int id) {
 		return artistDao.get(id);
 	}
@@ -174,11 +176,11 @@ public class AlbumController implements Serializable {
 	public void setAllArtists(List<ArtistDTO> allArtists) {
 		this.allArtists = allArtists;
 	}
-	
-	public boolean doesCoverExist(Integer albumId) {
-		File file = new File("resources/img/album_covers/" + Integer.toString(albumId) + ".jpg");
-System.out.println(file.toString());
-        return file.exists();
+
+	public boolean doesCoverExist(int albumId) {
+		ServletContext servletContext = ((HttpSession) (FacesContext.getCurrentInstance().getExternalContext().getSession(false))).getServletContext();
+		File cover = new File(servletContext.getRealPath("resources/img/album_covers/" + Integer.toString(albumId) + ".jpg"));
+		return cover.exists();
 	}
 
 	public Integer getAlbumId() {
