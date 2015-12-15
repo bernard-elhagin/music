@@ -17,7 +17,7 @@
 		<p:dataGrid var="album" value="#{albumController.lazyModel.datasource}" columns="4" layout="grid"
 	        rows="16" paginator="true" id="albumTable"
 	        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {AddAlbum} {AddArtist} {HomeView}"
-	        rowsPerPageTemplate="6, 12, 16, 18">
+	        rowsPerPageTemplate="4, 8, 12, 16">
 			
 			<f:facet name="header">
 				#{messages.menu_list_of_albums}
@@ -38,13 +38,7 @@
 			<p:panel header="#{album.albumId}" style="text-align:center">
 
 				<h:panelGrid columns="1" style="width:100%">
-					<ui:param name="albumId" value="#{album.albumId}" />
-					<c:if test="#{albumController.doesCoverExist(albumId)}">
-						<p:graphicImage width="175" height="175" name="img/album_covers/#{album.albumId}.jpg" />
-					</c:if>
-					<c:otherwise>
-						<p:graphicImage width="175" height="175" name="img/album_covers/default.jpg" />
-					</c:otherwise>
+					<p:graphicImage width="175" height="175" name="#{albumController.getCoverPath(album)}" />
 					
 					<h:outputText value="#{albumController.getArtistById(album.artistId).name}" />
 					<h:outputText value="#{album.title}" />

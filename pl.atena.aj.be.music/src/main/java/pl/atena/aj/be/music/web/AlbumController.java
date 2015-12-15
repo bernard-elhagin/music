@@ -8,8 +8,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
@@ -27,7 +27,7 @@ import pl.atena.aj.be.music.domain.Genre;
 import pl.atena.aj.be.music.utils.MyBatisSQLSessionFactory;
 
 @ManagedBean(name="albumController")
-@SessionScoped
+@ViewScoped
 public class AlbumController implements Serializable {
 
 	private static final long serialVersionUID = -7572869343047925778L;
@@ -49,8 +49,9 @@ public class AlbumController implements Serializable {
     @ManagedProperty("#{artistService}")
     private ArtistDAO artistDao = new ArtistDAO(ArtistDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
 
-    @ManagedProperty("#{album.albumId}")
-    private Integer albumId;
+    private final static String ROOT_COVER_PATH = "img/album_covers/";
+
+    private final static String DEFAULT_COVER_PATH = "img/album_covers/default.jpg";
 
     @PostConstruct
     public void init() {
@@ -177,17 +178,20 @@ public class AlbumController implements Serializable {
 		this.allArtists = allArtists;
 	}
 
-	public boolean doesCoverExist(int albumId) {
+	public String getCoverPath(AlbumDTO album) {
+		int albumId = album.getAlbumId();
+
 		ServletContext servletContext = ((HttpSession) (FacesContext.getCurrentInstance().getExternalContext().getSession(false))).getServletContext();
-		File cover = new File(servletContext.getRealPath("resources/img/album_covers/" + Integer.toString(albumId) + ".jpg"));
-		return cover.exists();
-	}
+		String coverPath = ROOT_COVER_PATH + Integer.toString(albumId) + ".jpg";
 
-	public Integer getAlbumId() {
-		return albumId;
-	}
+		String realPath = servletContext.getRealPath("resources/" + coverPath);
 
-	public void setAlbumId(Integer albumId) {
-		this.albumId = albumId;
+		if(realPath == null) {
+			return DEFAULT_COVER_PATH;
+		}
+
+		File cover = new File(realPath);
+
+		return cover.exists() ? coverPath : DEFAULT_COVER_PATH;
 	}
 }
