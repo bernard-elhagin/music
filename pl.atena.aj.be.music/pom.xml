@@ -178,6 +178,12 @@
             <!-- z wyzszymi wersjami nie działa -->
             <version>1.5</version>
         </dependency>
+		
+		<dependency>
+			<groupId>se.michaelthelin.spotify</groupId>
+			<artifactId>spotify-web-api-java</artifactId>
+			<version>1.5.0</version>
+		</dependency>
 
 	</dependencies>
 
