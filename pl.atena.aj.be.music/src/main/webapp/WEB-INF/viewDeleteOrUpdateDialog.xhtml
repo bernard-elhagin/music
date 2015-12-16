@@ -13,7 +13,7 @@
 			<p:panelGrid columns="2" rendered="#{not empty albumController.selectedAlbum}" columnClasses="label,value">
 
 				<f:facet name="header">
-					<p:graphicImage	name="img/album_covers/#{albumController.selectedAlbum.albumId}.jpg" />
+					<p:graphicImage name="#{albumController.getCoverPath(albumController.selectedAlbum)}" />
 				</f:facet>
 
 				<h:outputText value="#{messages.album_id}:" />

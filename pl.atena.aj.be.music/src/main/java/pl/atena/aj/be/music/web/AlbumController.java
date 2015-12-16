@@ -8,8 +8,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
@@ -27,7 +27,7 @@ import pl.atena.aj.be.music.domain.Genre;
 import pl.atena.aj.be.music.utils.MyBatisSQLSessionFactory;
 
 @ManagedBean(name="albumController")
-@ViewScoped
+@SessionScoped
 public class AlbumController implements Serializable {
 
 	private static final long serialVersionUID = -7572869343047925778L;
