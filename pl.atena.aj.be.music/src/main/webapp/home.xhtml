@@ -14,61 +14,67 @@
 <h:body>
 
 	<h:form id="form">
-		
-		<p:dataTable var="album" value="#{albumController.lazyModel}"
-			paginator="true" rows="15" first="#{albumController.pageNumber}"
-			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink} {AddAlbum} {AddArtist} {ThumbnailView}"
-			rowsPerPageTemplate="5, 10, 15, 20" selectionMode="single"
-			selection="#{albumController.selectedAlbum}" id="albumTable" lazy="true" style="margin-bottom: 20px">
 
-			<f:facet name="header">
-				#{messages.menu_list_of_albums}
-			</f:facet>
+		<h:panelGrid>
+			<p:dataTable var="album" value="#{albumController.lazyModel}"
+				paginator="true" rows="15" first="#{albumController.pageNumber}"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink} {AddAlbum} {AddArtist} {ThumbnailView}"
+				rowsPerPageTemplate="5, 10, 15, 20" selectionMode="single"
+				selection="#{albumController.selectedAlbum}" id="albumTable" lazy="true" style="margin-bottom: 20px">
+	
+				<f:facet name="header">
+					#{messages.menu_list_of_albums}
+				</f:facet>
+	
+				<f:facet name="{AddAlbum}">
+					<p:commandButton id="addAlbumButton" onclick="PF('addAlbumDialog').show()" value="#{messages.action_add_album}" style="font-size: 77%; float: right; margin-bottom: 2px;" />
+					<p:tooltip id="addAlbumButtonTooltip" for="addAlbumButton" value="#{messages.tooltip_add_album}" style="font-size: 75%;" />
+				</f:facet>
 
-			<f:facet name="{AddAlbum}">
-				<p:commandButton onclick="PF('addAlbumDialog').show()" value="#{messages.action_add_album}" style="font-size: 77%; float: right; margin-bottom: 2px;" />
-			</f:facet>
+				<f:facet name="{AddArtist}">
+					<p:commandButton id="addArtistButton" onclick="PF('addArtistDialog').show()" value="#{messages.action_add_artist}" style="font-size: 77%; float: right; margin-bottom: 2px;" />
+					<p:tooltip id="addArtistButtonTooltip" for="addArtistButton" value="#{messages.tooltip_add_artist}" style="font-size: 75%;" />
+				</f:facet>
+	
+				<f:facet name="{ThumbnailView}">
+					<p:commandButton id="gridViewButton" action="grid" value="#{messages.flow_thumbnails}" style="font-size: 77%; float: right; margin-bottom: 2px;" />
+					<p:tooltip id="gridViewButtonTooltip" for="gridViewButton" value="#{messages.tooltip_grid_view}" style="font-size: 75%;" />
+				</f:facet>
+	
+				<p:ajax event="page" listener="#{albumController.onPageChange}" />
+	
+				<p:ajax event="rowSelect" listener="#{albumController.onRowSelect}"
+					    update=":form:albumDetail" oncomplete="PF('albumDialog').show()" />
+	
+				<p:column headerText="#{messages.album_id}" sortBy="#{album.albumId}" filterBy="#{album.albumId}">
+					<i class="fa fa-key fa-1x" /> <h:outputText value=" #{album.albumId}" />
+				</p:column>
+	
+				<p:column headerText="#{messages.album_artist}" sortBy="#{albumController.getArtistById(album.artistId).name}" filterBy="#{albumController.getArtistById(album.artistId).name}" styleClass="truncate">
+					<i class="fa fa-microphone fa-1x" style="float: left; margin-right: 5px" /> <h:outputText id="artistName" value="#{albumController.getArtistById(album.artistId).name}" />
+					<p:tooltip for="artistName" value="#{albumController.getArtistById(album.artistId).name}" />
+				</p:column>
+	
+				<p:column headerText="#{messages.album_title}" sortBy="#{album.title}" filterBy="#{album.title}" styleClass="truncate">
+					<i class="fa fa-music fa-1x" style="float: left; margin-right: 5px" /> <h:outputText id="albumTitle" value=" #{album.title}" />
+					<p:tooltip for="albumTitle" value="#{album.title}" />
+				</p:column>
+	
+				<p:column headerText="#{messages.album_genre}" sortBy="#{album.genre.name}" filterBy="#{album.genre.name}">
+					<i class="fa fa-headphones fa-1x" /> <h:outputText value=" #{album.genre.name}" />
+				</p:column>
+			
+				<p:column headerText="#{messages.album_year}" sortBy="#{album.year}" filterBy="#{album.year}">
+					<i class="fa fa-calendar fa-1x" /> <h:outputText value=" #{album.year}" />
+				</p:column>
+	
+				<f:facet name="footer">
+					#{messages.menu_count_of_albums} #{albumController.lazyModel.getDatasourceSize()}
+				</f:facet>
+	
+			</p:dataTable>
 
-			<f:facet name="{AddArtist}">
-				<p:commandButton onclick="PF('addArtistDialog').show()" value="#{messages.action_add_artist}" style="font-size: 77%; float: right; margin-bottom: 2px;" />
-			</f:facet>
-
-			<f:facet name="{ThumbnailView}">
-				<p:commandButton action="grid" value="#{messages.flow_thumbnails}" style="font-size: 77%; float: right; margin-bottom: 2px;" />
-			</f:facet>
-
-			<p:ajax event="page" listener="#{albumController.onPageChange}" />
-
-			<p:ajax event="rowSelect" listener="#{albumController.onRowSelect}"
-				    update=":form:albumDetail" oncomplete="PF('albumDialog').show()" />
-
-			<p:column headerText="#{messages.album_id}" sortBy="#{album.albumId}" filterBy="#{album.albumId}">
-				<i class="fa fa-key fa-1x" /> <h:outputText value=" #{album.albumId}" />
-			</p:column>
-
-			<p:column headerText="#{messages.album_artist}" sortBy="#{albumController.getArtistById(album.artistId).name}" filterBy="#{albumController.getArtistById(album.artistId).name}" styleClass="truncate">
-				<i class="fa fa-microphone fa-1x" style="float: left; margin-right: 5px" /> <h:outputText id="artistName" value="#{albumController.getArtistById(album.artistId).name}" />
-				<p:tooltip for="artistName" value="#{albumController.getArtistById(album.artistId).name}" />
-			</p:column>
-
-			<p:column headerText="#{messages.album_title}" sortBy="#{album.title}" filterBy="#{album.title}" styleClass="truncate">
-				<i class="fa fa-music fa-1x" style="float: left; margin-right: 5px" /> <h:outputText id="albumTitle" value=" #{album.title}" />
-				<p:tooltip for="albumTitle" value="#{album.title}" />
-			</p:column>
-
-			<p:column headerText="#{messages.album_genre}" sortBy="#{album.genre.name}" filterBy="#{album.genre.name}">
-				<i class="fa fa-headphones fa-1x" /> <h:outputText value=" #{album.genre.name}" />
-			</p:column>
-		
-			<p:column headerText="#{messages.album_year}" sortBy="#{album.year}" filterBy="#{album.year}">
-				<i class="fa fa-calendar fa-1x" /> <h:outputText value=" #{album.year}" />
-			</p:column>
-
-			<f:facet name="footer">
-				#{messages.menu_count_of_albums} #{albumController.lazyModel.getDatasourceSize()}
-			</f:facet>
-
-		</p:dataTable>
+		</h:panelGrid>
 
 		<p:themeSwitcher style="width:165px" effect="fade">
 			<f:selectItem itemLabel="#{messages.flow_select_theme}" itemValue="" />

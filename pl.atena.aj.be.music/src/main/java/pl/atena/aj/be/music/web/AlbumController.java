@@ -7,7 +7,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
@@ -43,15 +42,11 @@ public class AlbumController implements Serializable {
 
     private int pageNumber;
 
-    @ManagedProperty("#{albumService}")
-    private AlbumDAO albumDao = new AlbumDAO(AlbumDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
-
-    @ManagedProperty("#{artistService}")
-    private ArtistDAO artistDao = new ArtistDAO(ArtistDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
+    private AlbumDAO albumDao;
+    private ArtistDAO artistDao;
 
     private final static String ROOT_COVER_PATH = "img/album_covers/";
-
-    private final static String DEFAULT_COVER_PATH = "img/album_covers/default.jpg";
+    private final static String DEFAULT_COVER_PATH = ROOT_COVER_PATH + "default.jpg";
 
     @PostConstruct
     public void init() {
@@ -121,14 +116,6 @@ public class AlbumController implements Serializable {
 		return "home";
 	}
 
-	public AlbumDAO getAlbumDao() {
-		return albumDao;
-	}
-
-	public void setAlbumDao(AlbumDAO albumDAO) {
-		this.albumDao = albumDAO;
-	}
-
 	public Genre[] getGenres() {
 		return Genre.values();
 
@@ -154,14 +141,6 @@ public class AlbumController implements Serializable {
 		return artistDao.get(id);
 	}
 
-	public ArtistDAO getArtistDao() {
-		return artistDao;
-	}
-
-	public void setArtistDao(ArtistDAO artistDao) {
-		this.artistDao = artistDao;
-	}
-
 	public ArtistDTO getNewArtist() {
 		return newArtist;
 	}
@@ -172,10 +151,6 @@ public class AlbumController implements Serializable {
 
 	public List<ArtistDTO> getAllArtists() {
 		return allArtists;
-	}
-
-	public void setAllArtists(List<ArtistDTO> allArtists) {
-		this.allArtists = allArtists;
 	}
 
 	public String getCoverPath(AlbumDTO album) {
