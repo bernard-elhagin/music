@@ -26,6 +26,7 @@ public class EmptyTitleConverter implements Converter {
 		try {
 			title = new AlbumTitle(value);
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 	        throw new ConverterException("Error converting title.");
 		}
 

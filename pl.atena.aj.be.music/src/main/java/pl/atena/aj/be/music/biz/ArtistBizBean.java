@@ -7,6 +7,7 @@ public class ArtistBizBean implements ArtistBiz {
 
 	private ArtistDAO artistDAO;
 
+	@Override
 	public ArtistDTO getById(int id) {
 		return artistDAO.get(id);
 	}

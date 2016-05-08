@@ -1,0 +1,7 @@
+Application name  musicDB
+
+API key 	      757d3b9331c25020e4b691cc8a2c1b03
+
+Shared secret 	  9692713616241bff7edb38f26a9f8665
+
+Registered to 	  dev_null

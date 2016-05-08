@@ -73,6 +73,7 @@ public class LazyAlbumDataModel extends LazyDataModel<AlbumDTO> {
 							break;
 						}
 					} catch (Exception e) {
+						System.out.println(e.getMessage());
 						match = false;
 					}
 				}
@@ -92,6 +93,7 @@ public class LazyAlbumDataModel extends LazyDataModel<AlbumDTO> {
 			try {
 				return data.subList(first, first + pageSize);
 			} catch (IndexOutOfBoundsException e) {
+				System.out.println(e.getMessage());
 				return data.subList(first, first + (dataSize % pageSize));
 			}
 		} else {

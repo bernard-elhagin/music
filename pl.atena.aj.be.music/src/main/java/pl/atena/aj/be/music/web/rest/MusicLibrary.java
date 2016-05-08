@@ -32,18 +32,16 @@ public interface MusicLibrary {
 
     @GET
     @Path("/artists")
-    @Produces("text/plain")
     @ApiOperation(value = "Zwraca wszystkich wykonawców", notes = "Zwraca liste wykonawców", response = Artist.class, responseContainer = "list")
     public Collection<Item> getArtists() ;
 
     @GET
-    @Produces({ "application/xml" })
     @Path("/items")
     @ApiOperation(value = "Zwraca wszystko datasource", notes = "Zwraca liste całej zawartości datasource", response = Item.class, responseContainer = "list" )
     public Collection<Item> getItems() ;
 
     @GET
-    @Path("/albums/{id}")
+    @Path("/album/{id}")
     @ApiOperation(value = "Zwraca album po id", notes = "Zwraca album lub błąd", response = Album.class)
     public Response getAlbum(
             @ApiParam(value = "podaj id",required = false)
@@ -51,7 +49,7 @@ public interface MusicLibrary {
             @PathParam("id") String id) ;
 
     @PUT
-    @Path("/albums/{id}")
+    @Path("/album/{id}")
     @ApiOperation(value = "Dodaje nowy album", notes = "Podaj id i title", response = Album.class)
     public Album addAlbum(
             @ApiParam(value = "podaj id", required = true)
@@ -62,7 +60,7 @@ public interface MusicLibrary {
             @QueryParam("title") String title) ;
 
     @POST
-    @Path("/albums/{id}")
+    @Path("/album/{id}")
     @ApiOperation(value = "Zmienia tytul", notes = "Podaj id i title", response = Album.class)
     public Album updateAlbum(
             @ApiParam(value = "podaj id", required = true)
@@ -72,7 +70,7 @@ public interface MusicLibrary {
             @FormParam("title") String title) ;
 
     @DELETE
-    @Path("/albums/{id}")
+    @Path("/album/{id}")
     @ApiOperation(value = "Usuwa album", notes = "Podaj id", response = Response.class)
     public Response removeAlbum(
             @ApiParam(value = "podaj id", required = true)

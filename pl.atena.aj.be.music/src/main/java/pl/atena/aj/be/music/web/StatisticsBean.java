@@ -49,7 +49,7 @@ public class StatisticsBean {
 		while (it.hasNext()) {
 			Map.Entry<String, Integer> pair = it.next();
 
-			pieModel.set((String) pair.getKey(), (Number) pair.getValue());
+			pieModel.set(pair.getKey(), pair.getValue());
 			it.remove();
 		}
 	}
@@ -62,11 +62,11 @@ public class StatisticsBean {
 
 			Integer currentCount = genreCount.get(genre);
 			currentCount = currentCount == null ? 0 : currentCount;
-			
+
 			genreCount.put(genre, currentCount + 1);
 		}
-		
-		Map<String, Integer> sortedMap = new TreeMap<String, Integer>(genreCount);
+
+		Map<String, Integer> sortedMap = new TreeMap<>(genreCount);
 		genreCount = sortedMap;
 	}
 
