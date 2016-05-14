@@ -157,7 +157,7 @@ public enum Genre {
 		return allValues;
 	}
 
-	public static List<SelectItem> fillValues() {
+	public synchronized static List<SelectItem> fillValues() {
 
 		/* Tworzymy listę tylko raz */
 		if (allValues == null) {
