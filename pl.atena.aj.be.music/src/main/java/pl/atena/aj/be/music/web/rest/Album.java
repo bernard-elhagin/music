@@ -2,8 +2,6 @@ package pl.atena.aj.be.music.web.rest;
 
 public class Album extends Item {
 
-	private String id;
-
 	private String title;
 
     public Album() {

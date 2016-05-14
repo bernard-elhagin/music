@@ -45,7 +45,7 @@
 
 		<init-param>
 			<param-name>swagger.api.basepath</param-name>
-			<param-value>http://localhost:8080/music/rest/music_library</param-value>
+			<param-value>http://localhost:8080/api</param-value>
 		</init-param>
 
 		<load-on-startup>2</load-on-startup>

@@ -1,12 +1,18 @@
 package pl.atena.aj.be.music.dao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK> {
+public abstract class MyBatisDAO<T, PK> implements BaseDAO<T, PK>, Serializable {
+
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 662150860926894486L;
 
 	private String NAMESPACE;
 
