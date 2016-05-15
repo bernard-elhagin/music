@@ -10,7 +10,7 @@ import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.jaxrs.listing.ApiListingResource;
 import io.swagger.jaxrs.listing.SwaggerSerializers;
 
-@ApplicationPath("/rest")
+@ApplicationPath("/v1")
 public class MusicService extends Application {
 
 	private Set<Class<?>> classes = new HashSet<>();
@@ -21,7 +21,8 @@ public class MusicService extends Application {
 	}
 
 	private void initClasses() {
-		classes.add(MusicWebService.class);
+		classes.add(AlbumService.class);
+		classes.add(ArtistService.class);
 
         //--- Swagger --------------------------------------------
         classes.add(ApiListingResource.class);
