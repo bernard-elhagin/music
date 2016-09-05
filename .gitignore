@@ -155,3 +155,4 @@ swagger-ui-2.1.4/test/specs/v1.2/petstore/pet.json
 swagger-ui-2.1.4/test/specs/v1.2/petstore/store.json
 swagger-ui-2.1.4/test/specs/v1.2/petstore/user.json
 swagger-ui-2.1.4/test/specs/v2/petstore.json
+*.un~
