@@ -6,8 +6,6 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
-import pl.atena.aj.be.music.domain.AlbumTitle;
-
 @FacesConverter("EmptyTitleConverter")
 public class EmptyTitleConverter implements Converter {
 

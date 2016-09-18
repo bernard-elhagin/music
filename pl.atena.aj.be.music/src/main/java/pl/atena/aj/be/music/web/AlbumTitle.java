@@ -1,4 +1,4 @@
-package pl.atena.aj.be.music.domain;
+package pl.atena.aj.be.music.web;
 
 import java.io.Serializable;
 
