@@ -9,6 +9,7 @@
 	<typeAliases>
 		<typeAlias type='pl.atena.aj.be.music.domain.AlbumDTO'  alias='AlbumDTO'  />
 		<typeAlias type='pl.atena.aj.be.music.domain.ArtistDTO' alias='ArtistDTO' />
+		<typeAlias type='pl.atena.aj.be.music.domain.TrackDTO'  alias='TrackDTO'  />
 		<typeAlias type='pl.atena.aj.be.music.domain.Genre'     alias='Genre'     />
 	</typeAliases>
 
@@ -33,6 +34,7 @@
 	<mappers>
 		<mapper resource='mappers/AlbumDTOMapper.xml'  />
 		<mapper resource='mappers/ArtistDTOMapper.xml' />
+		<mapper resource='mappers/TrackDTOMapper.xml'  />
 	</mappers>
 	
 </configuration>
