@@ -37,7 +37,8 @@ sub process_dir {
 
         my $output_name = "$_albumIds{$title}.jpg";
 
-        copy($cover, "$_output_dir/$output_name");
+		# Commented out to prevent accidentally carrying out
+        # copy($cover, "$_output_dir/$output_name");
     }
 }
 
