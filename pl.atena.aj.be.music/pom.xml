@@ -191,11 +191,11 @@
 			<version>2.1</version>
 		</dependency>
 
-		<!-- dependency>
+		<dependency>
 			<groupId>se.michaelthelin.spotify</groupId>
 			<artifactId>spotify-web-api-java</artifactId>
 			<version>1.5.0</version>
-		</dependency-->
+		</dependency>
 
 	</dependencies>
 
