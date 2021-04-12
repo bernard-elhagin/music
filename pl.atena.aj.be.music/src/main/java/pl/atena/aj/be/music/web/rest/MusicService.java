@@ -13,7 +13,7 @@ import io.swagger.jaxrs.listing.SwaggerSerializers;
 @ApplicationPath("/rest")
 public class MusicService extends Application {
 
-	private Set<Class<?>> classes = new HashSet<>();
+	private final Set<Class<?>> classes = new HashSet<>();
 
 	public MusicService() {
 		initClasses();

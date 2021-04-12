@@ -15,7 +15,7 @@ public class LazyAlbumDataModel extends LazyDataModel<AlbumDTO> {
 
 	private static final long serialVersionUID = 7098721153907894639L;
 
-	private List<AlbumDTO> datasource;
+	private final List<AlbumDTO> datasource;
 
 	public LazyAlbumDataModel(List<AlbumDTO> datasource) {
 		this.datasource = datasource;
@@ -55,9 +55,9 @@ public class LazyAlbumDataModel extends LazyDataModel<AlbumDTO> {
 			boolean match = true;
 
 			if (filters != null) {
-				for (Iterator<String> it = filters.keySet().iterator(); it.hasNext();) {
+				for (String s : filters.keySet()) {
 					try {
-						String filterProperty = it.next();
+						String filterProperty = s;
 
 						Object filterValue = filters.get(filterProperty);
 

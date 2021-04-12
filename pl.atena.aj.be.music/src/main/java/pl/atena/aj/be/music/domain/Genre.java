@@ -140,7 +140,7 @@ public enum Genre {
 	TRIP_HOP("Trip-Hop"),
 	VOCAL("Vocal");
 
-	private String name;
+	private final String name;
 
 	/* Na potrzeby JSF-owej listy rozwijanej */
 	private static List<SelectItem> allValues = fillValues();

@@ -9,7 +9,7 @@ public class AlbumTitle implements Serializable {
 	 */
 	private static final long serialVersionUID = -7223245430912857927L;
 
-	private String title;
+	private final String title;
 
 	public AlbumTitle(String title) {
 		super();

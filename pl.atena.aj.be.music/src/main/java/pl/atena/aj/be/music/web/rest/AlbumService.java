@@ -27,7 +27,7 @@ import pl.atena.aj.be.music.utils.MyBatisSQLSessionFactory;
 @Produces({ "application/json" })
 public class AlbumService {
 
-	AlbumDAO albumDao = new AlbumDAO(AlbumDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
+	final AlbumDAO albumDao = new AlbumDAO(AlbumDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
 	ArtistDAO artistDao = new ArtistDAO(ArtistDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
 
 	@GET
