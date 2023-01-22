@@ -21,14 +21,14 @@ import pl.atena.aj.be.music.utils.MyBatisSQLSessionFactory;
 @Produces({ "application/json" })
 public class ArtistService {
 
-	final ArtistDAO artistDao = new ArtistDAO(ArtistDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
+    final ArtistDAO artistDao = new ArtistDAO(ArtistDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
 
     @GET
     @Path("/all")
     @ApiOperation(value = "Zwraca wszystkich wykonawców", notes = "Zwraca liste wykonawców", response = ArtistDTO.class, responseContainer = "list")
     public Collection<ArtistDTO> getArtists() {
 
-    	return artistDao.getAll();
+        return artistDao.getAll();
     }
 
     @GET
@@ -39,12 +39,12 @@ public class ArtistService {
             @Size(min=1, max=3)
             @PathParam("id") String idString) {
 
-    	int id = Integer.parseInt(idString);
+        int id = Integer.parseInt(idString);
 
-    	ArtistDTO artist = artistDao.get(id);
+        ArtistDTO artist = artistDao.get(id);
 
-    	if( artist != null) {
-        	return Response.status(200).entity(artist).build();
+        if( artist != null) {
+            return Response.status(200).entity(artist).build();
         }
 
         return Response.status(404).entity("Nie ma takiego wykonawcy").build();

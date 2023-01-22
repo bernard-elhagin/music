@@ -27,70 +27,70 @@ import pl.atena.aj.be.music.utils.MyBatisSQLSessionFactory;
 @Produces({ "application/json" })
 public class AlbumService {
 
-	final AlbumDAO albumDao = new AlbumDAO(AlbumDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
-	ArtistDAO artistDao = new ArtistDAO(ArtistDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
+    final AlbumDAO albumDao = new AlbumDAO(AlbumDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
+    ArtistDAO artistDao = new ArtistDAO(ArtistDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
 
-	@GET
-	@Path("/all")
-	@ApiOperation(value = "Zwraca wszystkie albumy", notes = "Zwraca listę albumów", response = Album.class, responseContainer = "list")
-	public Collection<Album> getAlbums() {
+    @GET
+    @Path("/all")
+    @ApiOperation(value = "Zwraca wszystkie albumy", notes = "Zwraca listę albumów", response = Album.class, responseContainer = "list")
+    public Collection<Album> getAlbums() {
 
-		Collection<Album> result = new ArrayList<>();
+        Collection<Album> result = new ArrayList<>();
 
-		for (AlbumDTO albumDTO : albumDao.getAll()) {
-			Album album = new Album();
+        for (AlbumDTO albumDTO : albumDao.getAll()) {
+            Album album = new Album();
 
-			album.setTitle(albumDTO.getTitle());
+            album.setTitle(albumDTO.getTitle());
 
-			ArtistDTO artistDTO = artistDao.get(albumDTO.getArtistId());
-			Artist artist = new Artist();
+            ArtistDTO artistDTO = artistDao.get(albumDTO.getArtistId());
+            Artist artist = new Artist();
 
-			artist.setName(artistDTO.getName());
+            artist.setName(artistDTO.getName());
 
-			album.setArtist(artist);
+            album.setArtist(artist);
 
-			result.add(album);
-		}
+            result.add(album);
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	@GET
-	@Path("/album/{id}")
-	@ApiOperation(value = "Zwraca album po id", notes = "Zwraca album lub błąd", response = Album.class)
-	public Response getAlbum(
-			@ApiParam(value = "podaj id", required = false) @Size(min = 1, max = 3) @PathParam("id") String idString) {
-		int id = Integer.parseInt(idString);
+    @GET
+    @Path("/album/{id}")
+    @ApiOperation(value = "Zwraca album po id", notes = "Zwraca album lub błąd", response = Album.class)
+    public Response getAlbum(
+            @ApiParam(value = "podaj id", required = false) @Size(min = 1, max = 3) @PathParam("id") String idString) {
+        int id = Integer.parseInt(idString);
 
-		AlbumDTO albumDTO = albumDao.get(id);
+        AlbumDTO albumDTO = albumDao.get(id);
 
-		if (albumDTO != null) {
+        if (albumDTO != null) {
 
-			Album album = new Album();
-			album.setTitle(albumDTO.getTitle());
+            Album album = new Album();
+            album.setTitle(albumDTO.getTitle());
 
-			ArtistDTO artistDTO = artistDao.get(albumDTO.getArtistId());
-			Artist artist = new Artist();
+            ArtistDTO artistDTO = artistDao.get(albumDTO.getArtistId());
+            Artist artist = new Artist();
 
-			artist.setName(artistDTO.getName());
+            artist.setName(artistDTO.getName());
 
-			album.setArtist(artist);
+            album.setArtist(artist);
 
-			return Response.status(200).entity(album).build();
-		}
+            return Response.status(200).entity(album).build();
+        }
 
-		return Response.status(404).entity("Nie ma takiego albumu").build();
-	}
+        return Response.status(404).entity("Nie ma takiego albumu").build();
+    }
 
-	@PUT
-	@Path("/album/{id}")
-	@ApiOperation(value = "Dodaje nowy album", notes = "Podaj id i title", response = AlbumDTO.class)
-	public AlbumDTO addAlbum(
-			@ApiParam(value = "podaj id", required = true) @Size(min = 1, max = 3) @PathParam("id") int id,
-			@ApiParam(value = "podaj title", required = true) @NotNull @QueryParam("title") String title) {
-		AlbumDTO albumDTO = new AlbumDTO();
+    @PUT
+    @Path("/album/{id}")
+    @ApiOperation(value = "Dodaje nowy album", notes = "Podaj id i title", response = AlbumDTO.class)
+    public AlbumDTO addAlbum(
+            @ApiParam(value = "podaj id", required = true) @Size(min = 1, max = 3) @PathParam("id") int id,
+            @ApiParam(value = "podaj title", required = true) @NotNull @QueryParam("title") String title) {
+        AlbumDTO albumDTO = new AlbumDTO();
 
-		return null;
+        return null;
 
-	}
+    }
 }

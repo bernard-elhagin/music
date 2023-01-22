@@ -4,21 +4,21 @@ import java.io.Serializable;
 
 public class Theme implements Serializable {
 
-	private static final long serialVersionUID = 20141005L;
+    private static final long serialVersionUID = 20141005L;
 
-	private final String displayName;
-	private String name;
+    private final String displayName;
+    private String name;
 
-	public Theme(String displayName, String name) {
-		this.displayName = displayName;
-		this.name = name;
-	}
+    public Theme(String displayName, String name) {
+        this.displayName = displayName;
+        this.name = name;
+    }
 
-	public final String getDisplayName() {
-		return displayName;
-	}
+    public final String getDisplayName() {
+        return displayName;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 }

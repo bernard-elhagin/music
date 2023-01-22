@@ -13,23 +13,23 @@ import io.swagger.jaxrs.listing.SwaggerSerializers;
 @ApplicationPath("/rest")
 public class MusicService extends Application {
 
-	private final Set<Class<?>> classes = new HashSet<>();
+    private final Set<Class<?>> classes = new HashSet<>();
 
-	public MusicService() {
-		initClasses();
-		initSwagger();
-	}
+    public MusicService() {
+        initClasses();
+        initSwagger();
+    }
 
-	private void initClasses() {
-		classes.add(AlbumService.class);
-		classes.add(ArtistService.class);
+    private void initClasses() {
+        classes.add(AlbumService.class);
+        classes.add(ArtistService.class);
 
         //--- Swagger --------------------------------------------
         classes.add(ApiListingResource.class);
         classes.add(SwaggerSerializers.class);
-	}
+    }
 
-	private void initSwagger() {
+    private void initSwagger() {
         BeanConfig beanConfig = new BeanConfig();
 
         beanConfig.setTitle("music_library");
@@ -41,8 +41,8 @@ public class MusicService extends Application {
         beanConfig.setScan(true);
     }
 
-	@Override
-	public Set<Class<?>> getClasses() {
-		return classes;
-	}
+    @Override
+    public Set<Class<?>> getClasses() {
+        return classes;
+    }
 }

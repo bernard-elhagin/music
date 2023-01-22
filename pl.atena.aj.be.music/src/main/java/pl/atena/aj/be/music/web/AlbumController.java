@@ -29,9 +29,9 @@ import pl.atena.aj.be.music.utils.MyBatisSQLSessionFactory;
 @SessionScoped
 public class AlbumController implements Serializable {
 
-	private static final long serialVersionUID = -7572869343047925778L;
+    private static final long serialVersionUID = -7572869343047925778L;
 
-	private LazyDataModel<AlbumDTO> lazyModel;
+    private LazyDataModel<AlbumDTO> lazyModel;
 
     private AlbumDTO selectedAlbum;
 
@@ -50,13 +50,13 @@ public class AlbumController implements Serializable {
 
     @PostConstruct
     public void init() {
-    	albumDao  = new AlbumDAO(AlbumDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
-    	artistDao = new ArtistDAO(ArtistDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
+        albumDao  = new AlbumDAO(AlbumDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
+        artistDao = new ArtistDAO(ArtistDTO.class, MyBatisSQLSessionFactory.getSqlSessionFactory());
 
-    	newAlbum  = new AlbumDTO();
-    	newArtist = new ArtistDTO();
+        newAlbum  = new AlbumDTO();
+        newArtist = new ArtistDTO();
 
-    	allArtists = artistDao.getAll();
+        allArtists = artistDao.getAll();
 
         lazyModel = new LazyAlbumDataModel(albumDao.getAll());
     }
@@ -66,7 +66,7 @@ public class AlbumController implements Serializable {
     }
 
     public void onPageChange(PageEvent event) {
-    	this.setPageNumber(((DataTable) event.getSource()).getFirst());
+        this.setPageNumber(((DataTable) event.getSource()).getFirst());
     }
 
     public AlbumDTO getSelectedAlbum() {
@@ -86,87 +86,87 @@ public class AlbumController implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
-	public String deleteAlbum(Integer id) {
-		albumDao.delete(id);
-		init();
+    public String deleteAlbum(Integer id) {
+        albumDao.delete(id);
+        init();
 
-		return "home";
+        return "home";
     }
 
-	public String addAlbum(AlbumDTO album) {
-		albumDao.create(album);
-		init();
+    public String addAlbum(AlbumDTO album) {
+        albumDao.create(album);
+        init();
 
-		return "home";
-	}
+        return "home";
+    }
 
-	public String editAlbum(AlbumDTO album) {
-		albumDao.update(album);
-		init();
+    public String editAlbum(AlbumDTO album) {
+        albumDao.update(album);
+        init();
 
-		return "home";
-	}
+        return "home";
+    }
 
-	public String addArtist(ArtistDTO artist) {
-		if(artistDao.getByName(artist.getName()) == null) {
-			artistDao.create(artist);
-			init();
-		}
+    public String addArtist(ArtistDTO artist) {
+        if(artistDao.getByName(artist.getName()) == null) {
+            artistDao.create(artist);
+            init();
+        }
 
-		return "home";
-	}
+        return "home";
+    }
 
-	public Genre[] getGenres() {
-		return Genre.values();
+    public Genre[] getGenres() {
+        return Genre.values();
 
-	}
+    }
 
-	public int getPageNumber() {
-		return pageNumber;
-	}
+    public int getPageNumber() {
+        return pageNumber;
+    }
 
-	public void setPageNumber(int pageNumber) {
-		this.pageNumber = pageNumber;
-	}
+    public void setPageNumber(int pageNumber) {
+        this.pageNumber = pageNumber;
+    }
 
-	public AlbumDTO getNewAlbum() {
-		return newAlbum;
-	}
+    public AlbumDTO getNewAlbum() {
+        return newAlbum;
+    }
 
-	public void setNewAlbum(AlbumDTO newAlbum) {
-		this.newAlbum = newAlbum;
-	}
+    public void setNewAlbum(AlbumDTO newAlbum) {
+        this.newAlbum = newAlbum;
+    }
 
-	public ArtistDTO getArtistById(int id) {
-		return artistDao.get(id);
-	}
+    public ArtistDTO getArtistById(int id) {
+        return artistDao.get(id);
+    }
 
-	public ArtistDTO getNewArtist() {
-		return newArtist;
-	}
+    public ArtistDTO getNewArtist() {
+        return newArtist;
+    }
 
-	public void setNewArtist(ArtistDTO newArtist) {
-		this.newArtist = newArtist;
-	}
+    public void setNewArtist(ArtistDTO newArtist) {
+        this.newArtist = newArtist;
+    }
 
-	public List<ArtistDTO> getAllArtists() {
-		return allArtists;
-	}
+    public List<ArtistDTO> getAllArtists() {
+        return allArtists;
+    }
 
-	public String getCoverPath(AlbumDTO album) {
-		int albumId = album.getAlbumId();
+    public String getCoverPath(AlbumDTO album) {
+        int albumId = album.getAlbumId();
 
-		ServletContext servletContext = ((HttpSession) (FacesContext.getCurrentInstance().getExternalContext().getSession(false))).getServletContext();
-		String coverPath = ROOT_COVER_PATH + Integer.toString(albumId) + ".jpg";
+        ServletContext servletContext = ((HttpSession) (FacesContext.getCurrentInstance().getExternalContext().getSession(false))).getServletContext();
+        String coverPath = ROOT_COVER_PATH + Integer.toString(albumId) + ".jpg";
 
-		String realPath = servletContext.getRealPath("resources/" + coverPath);
+        String realPath = servletContext.getRealPath("resources/" + coverPath);
 
-		if(realPath == null) {
-			return DEFAULT_COVER_PATH;
-		}
+        if(realPath == null) {
+            return DEFAULT_COVER_PATH;
+        }
 
-		File cover = new File(realPath);
+        File cover = new File(realPath);
 
-		return cover.exists() ? coverPath : DEFAULT_COVER_PATH;
-	}
+        return cover.exists() ? coverPath : DEFAULT_COVER_PATH;
+    }
 }

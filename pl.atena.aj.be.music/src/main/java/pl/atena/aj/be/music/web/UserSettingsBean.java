@@ -18,7 +18,7 @@ public class UserSettingsBean implements Serializable {
 
     private static final long serialVersionUID = 2186468452141819234L;
 
-	private Map<String, String> themes; // for stateless theme switcher
+    private Map<String, String> themes; // for stateless theme switcher
     private List<Theme> availableThemes; // for stateful theme switcher
     private Theme theme; // selected theme
 

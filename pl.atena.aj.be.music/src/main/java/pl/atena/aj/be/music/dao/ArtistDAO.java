@@ -11,16 +11,16 @@ import pl.atena.aj.be.music.domain.ArtistDTO;
 @ApplicationScoped
 public class ArtistDAO extends MyBatisDAO<ArtistDTO, Integer> {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 5470827831213365851L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 5470827831213365851L;
 
-	public ArtistDAO(Class<ArtistDTO> type, SqlSessionFactory sqlFactory) {
-		super(type, sqlFactory);
-	}
+    public ArtistDAO(Class<ArtistDTO> type, SqlSessionFactory sqlFactory) {
+        super(type, sqlFactory);
+    }
 
-	public ArtistDAO() {
-		super();
-	}
+    public ArtistDAO() {
+        super();
+    }
 }
